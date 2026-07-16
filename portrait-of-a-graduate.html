@@ -34,21 +34,44 @@
   <svg class="pog-nest-diagram" viewBox="0 0 400 400" role="img" aria-labelledby="pog-nest-title pog-nest-desc">
     <title id="pog-nest-title">Nested Portrait diagram</title>
     <desc id="pog-nest-desc">The System Portrait surrounds and supports the Portrait of an Adult, which surrounds and supports the Portrait of a Graduate at the center.</desc>
-    <circle cx="200" cy="200" r="190" fill="var(--pog-sp)" fill-opacity="0.12" stroke="var(--pog-sp)" stroke-width="2"/>
-    <circle cx="200" cy="200" r="130" fill="var(--pog-ap)" fill-opacity="0.18" stroke="var(--pog-ap)" stroke-width="2"/>
-    <circle cx="200" cy="200" r="70" fill="var(--navy)"/>
-    <text x="200" y="38" text-anchor="middle" class="pog-nest-label" fill="var(--pog-sp)">SYSTEM PORTRAIT</text>
-    <text x="200" y="98" text-anchor="middle" class="pog-nest-label" fill="var(--pog-ap)">PORTRAIT OF AN ADULT</text>
-    <g transform="translate(186,168)">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5-10-5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg>
+    <defs>
+      <radialGradient id="pogGradSP" cx="50%" cy="38%" r="70%">
+        <stop offset="0%" stop-color="#3D5A80" stop-opacity="0.04"/>
+        <stop offset="100%" stop-color="#3D5A80" stop-opacity="0.20"/>
+      </radialGradient>
+      <radialGradient id="pogGradAP" cx="50%" cy="38%" r="70%">
+        <stop offset="0%" stop-color="#B36B00" stop-opacity="0.07"/>
+        <stop offset="100%" stop-color="#B36B00" stop-opacity="0.28"/>
+      </radialGradient>
+      <linearGradient id="pogGradGP" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#0E8A62"/>
+        <stop offset="100%" stop-color="#0B6E4F"/>
+      </linearGradient>
+      <path id="pogArcOuter" d="M 37 200 A 163 163 0 0 1 363 200" fill="none"/>
+      <path id="pogArcMiddle" d="M 100 200 A 100 100 0 0 1 300 200" fill="none"/>
+    </defs>
+
+    <circle cx="200" cy="200" r="190" fill="url(#pogGradSP)" stroke="#3D5A80" stroke-width="1.5"/>
+    <circle cx="200" cy="200" r="130" fill="url(#pogGradAP)" stroke="#B36B00" stroke-width="1.5"/>
+    <circle cx="200" cy="200" r="70" fill="url(#pogGradGP)"/>
+
+    <text class="pog-nest-label" fill="#3D5A80">
+      <textPath href="#pogArcOuter" startOffset="50%" text-anchor="middle">SYSTEM PORTRAIT</textPath>
+    </text>
+    <text class="pog-nest-label" fill="#B36B00">
+      <textPath href="#pogArcMiddle" startOffset="50%" text-anchor="middle">PORTRAIT OF AN ADULT</textPath>
+    </text>
+
+    <g transform="translate(185,166)">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5-10-5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg>
     </g>
-    <text x="200" y="222" text-anchor="middle" class="pog-nest-label pog-nest-label--center">PORTRAIT OF A GRADUATE</text>
+    <text x="200" y="214" text-anchor="middle" class="pog-nest-label pog-nest-label--center">PORTRAIT OF<tspan x="200" dy="14">A GRADUATE</tspan></text>
   </svg>
 
   <ul class="pog-nest-legend">
-    <li><span class="pog-nest-dot" style="background:var(--pog-sp)"></span> <strong>System Portrait</strong> — what the district provides</li>
-    <li><span class="pog-nest-dot" style="background:var(--pog-ap)"></span> <strong>Portrait of an Adult</strong> — what every adult models</li>
-    <li><span class="pog-nest-dot" style="background:var(--navy)"></span> <strong>Portrait of a Graduate</strong> — what every student becomes</li>
+    <li><span class="pog-nest-dot" style="background:#3D5A80"></span> <strong>System Portrait</strong> — what the district provides</li>
+    <li><span class="pog-nest-dot" style="background:#B36B00"></span> <strong>Portrait of an Adult</strong> — what every adult models</li>
+    <li><span class="pog-nest-dot" style="background:#0B6E4F"></span> <strong>Portrait of a Graduate</strong> — what every student becomes</li>
   </ul>
   <p class="pog-nest-caption">Each layer exists to support the one inside it: the system supports the adults, who support every graduate.</p>
 </div>
