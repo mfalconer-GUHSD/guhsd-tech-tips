@@ -73,11 +73,12 @@ const SIGNUP_EMAIL_HEADER = 'Email Address';
 const UNSUB_SHEET_ID = '1q-9Z9Qzxub-0QvKF_ickjmp9HcAmms0qP5aAdhfvJws';
 const UNSUB_EMAIL_HEADER = 'Email Address';
 
-// Always-included recipients regardless of the signup form (Google Group + individuals).
+// Always-included recipients regardless of the signup form (Google Group + individuals + you).
 const STATIC_RECIPIENTS = [
   'ghhs-certificated-staff@guhsd.net',
   'cgaeir@guhsd.net',
-  'agarcia@guhsd.net'
+  'agarcia@guhsd.net',
+  'mfalconer@guhsd.net'
 ];
 
 // Verified send dates for the 2026-27 school year, in order.
