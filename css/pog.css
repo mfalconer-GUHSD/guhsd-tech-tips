@@ -1,0 +1,182 @@
+/* ---------- Portrait of a Graduate page ---------- */
+
+.pog-intro {
+  max-width: var(--max-narrow);
+  margin: 0 auto;
+  padding: 0 22px 8px;
+  text-align: center;
+}
+
+/* ---------- Tabs ---------- */
+.pog-tabs {
+  max-width: var(--max-narrow);
+  margin: 28px auto 0;
+  padding: 0 22px;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.pog-tab {
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--gray-bg);
+  border: 1px solid var(--divider);
+  padding: 9px 16px;
+  border-radius: 980px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.pog-tab:hover { color: var(--text); }
+
+.pog-tab.is-active {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--white);
+}
+
+/* Each tab tints when active, matching its profile accent */
+.pog-tab[data-profile="AP"].is-active { background: var(--pog-ap); border-color: var(--pog-ap); }
+.pog-tab[data-profile="SP"].is-active { background: var(--pog-sp); border-color: var(--pog-sp); }
+
+.pog-profile-intro {
+  max-width: var(--max-narrow);
+  margin: 18px auto 0;
+  padding: 0 22px;
+  text-align: center;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+}
+
+.pog-profile-intro strong { color: var(--text); }
+
+/* ---------- Cards ---------- */
+:root {
+  --pog-ap: #B36B00;
+  --pog-sp: #3D5A80;
+}
+
+.pog-cards {
+  max-width: var(--max-narrow);
+  margin: 28px auto 0;
+  padding: 0 22px 72px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pog-card {
+  border: 1px solid var(--divider);
+  border-radius: 14px;
+  background: var(--white);
+  overflow: hidden;
+}
+
+.pog-card-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.pog-card-icon {
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--navy);
+  background: var(--gray-bg);
+}
+
+.pog-card-icon svg { width: 20px; height: 20px; }
+
+.pog-cards[data-active-profile="ap"] .pog-card-icon { color: var(--pog-ap); }
+.pog-cards[data-active-profile="sp"] .pog-card-icon { color: var(--pog-sp); }
+
+.pog-card-heading {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pog-card-code {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+}
+
+.pog-card-title {
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.pog-card-chevron {
+  flex: none;
+  font-size: 1.3rem;
+  color: var(--text-secondary);
+  transform: rotate(90deg);
+  transition: transform 0.2s ease;
+}
+
+.pog-card.is-open .pog-card-chevron {
+  transform: rotate(270deg);
+}
+
+.pog-card-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease;
+}
+
+.pog-card-list {
+  margin: 0;
+  padding: 0 18px 18px 66px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pog-card-list li {
+  position: relative;
+  font-size: 0.94rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.pog-card-list li::before {
+  content: '';
+  position: absolute;
+  left: -16px;
+  top: 8px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--divider);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pog-card-panel, .pog-card-chevron, .pog-tab { transition: none !important; }
+}
+
+@media (max-width: 560px) {
+  .pog-card-list { padding-left: 54px; }
+  .pog-card-trigger { padding: 14px; gap: 10px; }
+}
