@@ -1,4 +1,4 @@
-/* GUHSD Weekly Tech Tips — rendering + filtering
+/* GUHSD Tech Tips — rendering + filtering
    Data source: /data/tips-data.json
    Add new tips by editing that file — no code changes needed.
 
@@ -309,7 +309,7 @@ async function renderDetail() {
         `${formatWeekOf(tip.weekOf)}. <a href="index.html">Back to all tips</a>.</p>`;
       return;
     }
-    document.title = tip.title + ' — GUHSD Weekly Tech Tips';
+    document.title = tip.title + ' — GUHSD Tech Tips';
     mount.innerHTML = tipDetailMarkup(tip, data);
   } catch (e) {
     mount.innerHTML = `<p class="empty-state">Couldn't load this tip right now. Try refreshing.</p>`;
