@@ -62,6 +62,40 @@
   },
   "tips": [
     {
+      "id": "2026-09-21-brisk-translate",
+      "issueNumber": 6,
+      "weekOf": "2026-09-21",
+      "title": "Talk to Every Family in Their Own Language with Brisk",
+      "teaser": "Translate a note home, a newsletter, or feedback into a family's home language in one click.",
+      "tool": "brisk",
+      "video": {
+        "url": "https://www.youtube.com/watch?v=gB9-KJKaFy0",
+        "title": "Brisk Bites 29 — Translate Text Tool",
+        "channel": "Brisk Teaching",
+        "description": "A short Brisk Bites walkthrough of the Translate Text tool — select any text in a Google Doc, Slide, or webpage and get an instant translation into a family's home language, without leaving the page."
+      },
+      "whyItMatters": "A permission slip, a progress note, or written feedback lands very differently for a family who doesn't read English fluently. Brisk's translate tool turns any selected text into another language in seconds, right where you're already working — no separate app, no copy-pasting into a translator and losing formatting.",
+      "pogTags": ["GP2", "AP3", "AP5", "SP1", "SP7"],
+      "complianceNote": "PII-secure and approved for staff use. Brisk is not currently approved for direct student use in GUHSD."
+    },
+    {
+      "id": "2026-09-14-notebooklm-audio",
+      "issueNumber": 5,
+      "weekOf": "2026-09-14",
+      "title": "Turn Dense Reading Into a Podcast Your Students Will Actually Listen To",
+      "teaser": "Upload a unit's readings and get a two-host podcast discussion of the material — auditory review, on autopilot.",
+      "tool": "notebooklm",
+      "video": {
+        "url": "https://www.youtube.com/shorts/19dnzM5VeiU",
+        "title": "NotebookLM audio overviews! #notebookLM",
+        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
+        "description": "A quick vertical demo of NotebookLM's Audio Overview feature: upload your sources and NotebookLM generates a podcast-style conversation between two AI hosts summarizing the material, grounded only in what you gave it."
+      },
+      "whyItMatters": "Some students retain material better by listening than reading — this is especially true for multilingual learners and students who find dense text overwhelming. Upload your unit's readings and NotebookLM generates a podcast-style discussion of the content, which can now be generated in 80+ languages. Great for flipped-classroom pre-reading, a review before a test, or an alternate way into a tough text.",
+      "pogTags": ["GP1", "GP5", "AP7", "SP7"],
+      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Keep student-identifying records out of any uploaded source."
+    },
+    {
       "id": "2026-09-08-brisk-quiz",
       "issueNumber": 4,
       "weekOf": "2026-09-08",
