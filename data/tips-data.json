@@ -75,7 +75,7 @@
         "description": "A bite-sized Brisk Teaching PD video walking through the AI Quiz Generator — point the Brisk extension at a webpage, PDF, or YouTube video and generate a standards-aligned quiz with an answer key already built in."
       },
       "whyItMatters": "Skip writing a comprehension check from scratch. Point Brisk at the video or article you already assigned and get a ready-to-grade quiz — multiple choice, short answer, or open-ended, delivered to a Google Form or Doc — in under a minute. Handy for flipped-classroom check-ins, exit tickets, or catch-up work for an absent student.",
-      "pogTags": ["GP1", "AP7"],
+      "pogTags": ["GP1", "AP7", "SP7"],
       "complianceNote": "PII-secure and approved for staff use. Brisk is not currently approved for direct student use in GUHSD — assign the generated quiz through your own Google Form or Doc."
     },
     {
@@ -92,7 +92,7 @@
         "description": "A Google for Education walkthrough of how teachers use Gemini inside the Workspace tools they already have open — drafting materials, adjusting reading levels, and building differentiated versions of an assignment without leaving Docs or Slides."
       },
       "whyItMatters": "Every class has a range of readers. Ask Gemini to take one passage and generate a below-level, on-level, and extension version — same content, three entry points — in the time it used to take to rewrite one paragraph by hand. Students get material they can actually access; you get your prep period back.",
-      "pogTags": ["GP7", "AP1", "AP7"],
+      "pogTags": ["GP7", "AP1", "AP7", "SP7"],
       "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Keep prompts free of student names or identifying details."
     },
     {
@@ -109,7 +109,7 @@
         "description": "A guided tour of the Brisk Chrome extension inside a student's Google Doc — choosing a feedback style (Glows & Grows, rubric-based, or next-steps) and generating specific, actionable comments in place of a rubric score alone."
       },
       "whyItMatters": "Targeted feedback is one of the highest-leverage moves a teacher can make — and one of the most time-consuming to do well for 150 students. Brisk drafts specific, rubric-aligned comments in seconds so you can spend your energy on the students who need a real conversation, not retyping the same note for the fifth time.",
-      "pogTags": ["GP4", "AP6", "AP5"],
+      "pogTags": ["GP4", "AP6", "AP5", "SP7"],
       "complianceNote": "PII-secure and approved for staff use. Brisk is not currently approved for direct student use in GUHSD — the teacher remains the one giving feedback."
     },
     {
@@ -126,7 +126,7 @@
         "description": "A short demonstration of uploading course materials into NotebookLM and using its source-grounded chat to generate summaries and answer questions — with every answer citing back to the exact page it came from."
       },
       "whyItMatters": "Upload your unit's readings, slides, and notes, and NotebookLM only answers from what you gave it — no outside internet content, no invented facts. Students can ask it to quiz them or explain a confusing paragraph, and every answer links back to the source. It's a study partner that can't wander off-topic.",
-      "pogTags": ["GP1", "GP3", "AP2"],
+      "pogTags": ["GP1", "GP3", "AP2", "SP7"],
       "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Keep student-identifying records (IEPs, grades, behavior notes) out of any uploaded source."
     }
   ]
