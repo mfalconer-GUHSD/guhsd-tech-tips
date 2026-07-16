@@ -60,57 +60,68 @@
   --pog-sp: #3D5A80;
 }
 
-/* ---------- Three-panel visual (Graduate / Adult / System) ---------- */
-.pog-hero-panels {
+/* ---------- Nested diagram (System surrounds Adult surrounds Graduate) ---------- */
+.pog-nest-wrap {
   max-width: var(--max-narrow);
-  margin: 32px auto 0;
+  margin: 36px auto 0;
   padding: 0 22px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-}
-
-.pog-hero-panel {
-  border: 1px solid var(--divider);
-  border-radius: 14px;
-  padding: 22px 14px;
   text-align: center;
-  background: var(--white);
 }
 
-.pog-hero-icon {
-  width: 52px;
-  height: 52px;
-  margin: 0 auto 12px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--gray-bg);
+.pog-nest-diagram {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  margin: 0 auto;
+  display: block;
 }
 
-.pog-hero-icon svg { width: 26px; height: 26px; }
-
-.pog-hero-icon--gp { color: var(--navy); }
-.pog-hero-icon--ap { color: var(--pog-ap); }
-.pog-hero-icon--sp { color: var(--pog-sp); }
-
-.pog-hero-panel-title {
-  font-size: 0.94rem;
-  font-weight: 600;
-  color: var(--text);
-  margin: 0 0 4px;
-  letter-spacing: -0.01em;
+.pog-nest-label {
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
 }
 
-.pog-hero-panel-sub {
-  font-size: 0.82rem;
+.pog-nest-label--center {
+  fill: #ffffff;
+  font-size: 12px;
+}
+
+.pog-nest-legend {
+  list-style: none;
+  margin: 22px 0 10px;
+  padding: 0;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+  font-size: 0.9rem;
   color: var(--text-secondary);
-  margin: 0;
+}
+
+.pog-nest-legend strong { color: var(--text); }
+
+.pog-nest-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.pog-nest-caption {
+  max-width: 46ch;
+  margin: 10px auto 0;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  font-style: italic;
 }
 
 @media (max-width: 560px) {
-  .pog-hero-panels { grid-template-columns: 1fr; }
+  .pog-nest-diagram { max-width: 260px; }
+  .pog-nest-label { font-size: 11px; }
+  .pog-nest-label--center { font-size: 10px; }
 }
 
 .pog-cards {
