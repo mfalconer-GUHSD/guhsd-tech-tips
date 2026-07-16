@@ -1,19 +1,33 @@
 /**
- * GUHSD Weekly Tech Tips — Staff Email Digest (v3.1: school-calendar-aware)
+ * GUHSD Weekly Tech Tips — Staff Email Digest (v4: catch-up + reminders)
  *
- * Runs on a DAILY timer (not weekly — see below for why). Each day it
- * checks two things: (1) is today one of the pre-approved send dates for
- * the 2026-27 school year, and (2) has a new issue been published since
- * the last send. Only sends when both are true. On every other day it
- * does nothing.
+ * Runs on a DAILY timer. Each day it checks whether a scheduled send date
+ * has arrived (or already passed without sending) and whether new content
+ * is ready. It only actually emails staff when both are true.
  *
- * WHY DAILY, NOT WEEKLY:
- * Google's built-in weekly trigger can only fire on a fixed day every
- * single week — it has no way to skip Thanksgiving/Winter/Spring break
- * weeks or shift off a Monday holiday. So instead, the trigger fires
- * every day, and SEND_DATES (below) is the explicit, verified list of
- * dates tips actually go out. Adding this list is what encodes "skip
- * break weeks" and "shift holiday Mondays to Tuesday."
+ * REDUNDANCY #1 — CATCH-UP LOGIC:
+ * Earlier versions only sent if today was an EXACT match in SEND_DATES.
+ * That meant if you forgot to publish a tip by 7am on the scheduled day,
+ * it would silently wait for the NEXT scheduled date — potentially a
+ * multi-week gap nobody would notice. Now the script tracks the last
+ * FULFILLED send-date (lastSentDateKey) instead of just an issue number.
+ * Each day it finds the most recent scheduled date that is <= today. If
+ * that date hasn't been fulfilled yet AND a new issue exists, it sends —
+ * whether that's exactly on time or a few days late. It keeps checking
+ * every day until it catches up.
+ *
+ * REDUNDANCY #2 — MISSED-CONTENT REMINDER:
+ * If a scheduled date arrives (or has passed) with no new issue ready,
+ * the script emails YOU (not staff) a one-time reminder per due-date —
+ * "today was/is a scheduled day and nothing's published yet." It won't
+ * repeat that reminder every day for the same due-date, so it won't spam
+ * you, but it will remind again if a NEW due-date also passes unfulfilled.
+ *
+ * REDUNDANCY #3 — MANUAL OVERRIDE:
+ * Run `forceSendNow()` anytime to immediately send the latest issue to
+ * real recipients, bypassing the date check entirely. Useful if you want
+ * to push a late issue out right away instead of waiting for the next
+ * automatic daily check.
  *
  * SEND_DATES for 2026-27 (verified against GUHSD's adopted calendar):
  * - First Monday in session: Aug 17, 2026
@@ -25,28 +39,24 @@
  * - Washington/Presidents' Day (Mon Feb 15, 2027) -> shifted to Tue Feb 16
  * - Spring break (Mar 22 - Apr 2, 2027) -> both weeks skipped
  * - Memorial Day (Mon May 31, 2027) -> shifted to Tue Jun 1
- * - Last day of student attendance: Thu Jun 3, 2027 (no send after May 31/Jun 1)
- * If GUHSD updates next year's calendar, update SEND_DATES accordingly —
- * this list needs refreshing every school year.
+ * - Last day of student attendance: Thu Jun 3, 2027
+ * Update this list once GUHSD adopts the 2027-28 calendar.
  *
  * IMPORTANT — sendTestEmail is safe to run anytime:
- * It ONLY ever sends to your own account (Session.getActiveUser().getEmail()),
- * never to STATIC_RECIPIENTS or the signup list. That's intentional — a "test"
- * should never actually reach real staff, especially during summer break when
- * nobody should be getting these yet. Only checkAndSendDigest (the real
- * scheduled function) sends to actual recipients, and only on a SEND_DATES day.
+ * It ONLY ever sends to your own account, never to STATIC_RECIPIENTS or
+ * the signup list, and ignores dates entirely. forceSendNow() is the one
+ * that reaches real recipients on demand — use it deliberately.
  *
  * SETUP
  * 1. Go to https://script.google.com > New project (your guhsd.net account).
  * 2. Paste this entire file in, replacing whatever's there now.
- * 3. Run `sendTestEmail` once (function dropdown > Run) to authorize Gmail
- *    and Sheets access, and to confirm formatting. This only emails you.
- * 4. Set the real trigger: clock icon (Triggers) > + Add Trigger >
- *    function: checkAndSendDigest > Time-driven > Day timer > pick any
- *    time window (e.g. 6am-7am) > Save. (Day timer, NOT week timer —
- *    the script itself decides which days actually send.)
- * 5. Done. Publishing a new issue in tips-data.json before its scheduled
- *    SEND_DATES date is the only manual step from here on.
+ * 3. Run `sendTestEmail` once to authorize Gmail/Sheets access and check
+ *    formatting. This only emails you.
+ * 4. Trigger: clock icon > + Add Trigger > function: checkAndSendDigest >
+ *    Time-driven > Day timer > any time window > Save.
+ * 5. Done. Publish a new issue in tips-data.json before its scheduled
+ *    date, or a little late is fine too — the script will catch up and
+ *    remind you either way.
  */
 
 const DATA_URL = 'https://raw.githubusercontent.com/mfalconer-GUHSD/guhsd-tech-tips/main/data/tips-data.json';
@@ -54,28 +64,23 @@ const SITE_URL = 'https://mfalconer-guhsd.github.io/guhsd-tech-tips/';
 const FROM_NAME = 'Mr. Falconer — AI Tech Tips';
 const TIMEZONE = 'America/Los_Angeles';
 
-// The public forms staff use to manage their own subscription:
 const SIGNUP_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSflh2l3PXs2NGAHv6u-hGjKtv7XPMycD4LKFdD82O3FxRU_Rg/viewform?usp=publish-editor';
 const UNSUBSCRIBE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfEVWKtF0WgzySXhqXC0zeQNQlFlvSvH96vi9dVrbIH07-2TA/viewform?usp=publish-editor';
 
-// Signup form's response-spreadsheet ID:
 const SIGNUP_SHEET_ID = '1Ih6HpPXXAjzlpAWbEWmnHSww4GJnaqBGXesj7sX2Ins';
-const SIGNUP_EMAIL_HEADER = 'Email Address'; // must match the header text in that sheet
+const SIGNUP_EMAIL_HEADER = 'Email Address';
 
-// Unsubscribe form's response-spreadsheet ID:
 const UNSUB_SHEET_ID = '1q-9Z9Qzxub-0QvKF_ickjmp9HcAmms0qP5aAdhfvJws';
 const UNSUB_EMAIL_HEADER = 'Email Address';
 
 // Always-included recipients regardless of the signup form (Google Group + individuals).
-// These are only ever used by the REAL send (checkAndSendDigest) on a scheduled date —
-// sendTestEmail never touches this list.
 const STATIC_RECIPIENTS = [
   'ghhs-certificated-staff@guhsd.net',
   'cgaeir@guhsd.net',
   'agarcia@guhsd.net'
 ];
 
-// Verified send dates for the 2026-27 school year (see header comment for the logic behind these).
+// Verified send dates for the 2026-27 school year, in order.
 const SEND_DATES = [
   '2026-08-17', '2026-08-24', '2026-08-31', '2026-09-08',
   '2026-09-14', '2026-09-21', '2026-09-28',
@@ -89,10 +94,19 @@ const SEND_DATES = [
   '2027-05-03', '2027-05-10', '2027-05-17', '2027-05-24', '2027-06-01'
 ];
 
+// ---------- The daily check (this is what the trigger runs) ----------
 function checkAndSendDigest() {
   const today = Utilities.formatDate(new Date(), TIMEZONE, 'yyyy-MM-dd');
-  if (SEND_DATES.indexOf(today) === -1) {
-    Logger.log('Today (' + today + ') is not a scheduled send date. Skipping.');
+
+  const dueDate = getMostRecentDueDate(today);
+  if (!dueDate) {
+    Logger.log('No scheduled send date has arrived yet, or the school year is over. Skipping.');
+    return;
+  }
+
+  const lastSentDateKey = PropertiesService.getScriptProperties().getProperty('lastSentDateKey') || '';
+  if (dueDate <= lastSentDateKey) {
+    Logger.log('Most recent due date (' + dueDate + ') already fulfilled. Skipping.');
     return;
   }
 
@@ -100,11 +114,17 @@ function checkAndSendDigest() {
   if (!data) return;
 
   const latest = getLatestTip(data);
-  if (!latest) return;
+  if (!latest) {
+    Logger.log('No tips found in the data file at all. Skipping.');
+    return;
+  }
 
-  const lastSent = Number(PropertiesService.getScriptProperties().getProperty('lastIssueSent') || 0);
-  if (latest.issueNumber <= lastSent) {
-    Logger.log('No new issue since last send (last sent: #' + lastSent + ').');
+  const lastIssueSent = Number(PropertiesService.getScriptProperties().getProperty('lastIssueSent') || 0);
+  if (latest.issueNumber <= lastIssueSent) {
+    // Due date has arrived/passed but no new content exists yet — this is the
+    // exact gap this version is designed to catch. Remind once per due-date.
+    Logger.log('Due date ' + dueDate + ' has arrived but no new issue is published yet.');
+    maybeSendMissedContentReminder(dueDate, today);
     return;
   }
 
@@ -115,13 +135,73 @@ function checkAndSendDigest() {
   }
 
   sendDigestEmail(latest, data, recipients);
-  PropertiesService.getScriptProperties().setProperty('lastIssueSent', String(latest.issueNumber));
-  Logger.log('Sent issue #' + latest.issueNumber + ' to ' + recipients.length + ' recipient(s) on ' + today + '.');
+  const props = PropertiesService.getScriptProperties();
+  props.setProperty('lastIssueSent', String(latest.issueNumber));
+  props.setProperty('lastSentDateKey', dueDate);
+  const daysLate = daysBetween(dueDate, today);
+  Logger.log('Sent issue #' + latest.issueNumber + ' to ' + recipients.length + ' recipient(s). ' +
+    'Due date was ' + dueDate + (daysLate > 0 ? ' (' + daysLate + ' day(s) late — caught up)' : ' (on time)') + '.');
+}
+
+// Finds the latest SEND_DATES entry that is <= today. Returns null if none yet.
+function getMostRecentDueDate(todayStr) {
+  let mostRecent = null;
+  for (let i = 0; i < SEND_DATES.length; i++) {
+    if (SEND_DATES[i] <= todayStr) {
+      mostRecent = SEND_DATES[i];
+    } else {
+      break; // SEND_DATES is in ascending order, so we can stop early
+    }
+  }
+  return mostRecent;
+}
+
+function daysBetween(earlierStr, laterStr) {
+  const earlier = new Date(earlierStr + 'T00:00:00');
+  const later = new Date(laterStr + 'T00:00:00');
+  return Math.round((later - earlier) / 86400000);
+}
+
+// Sends ONE reminder to you per unfulfilled due-date — won't repeat daily for the same date.
+function maybeSendMissedContentReminder(dueDate, today) {
+  const props = PropertiesService.getScriptProperties();
+  const lastReminded = props.getProperty('lastReminderDueDate') || '';
+  if (lastReminded === dueDate) {
+    return; // already reminded about this specific due-date
+  }
+  const me = Session.getActiveUser().getEmail();
+  const daysLate = daysBetween(dueDate, today);
+  const subject = daysLate === 0
+    ? 'Reminder: today is a scheduled Tech Tips send date'
+    : 'Reminder: Tech Tips send date (' + dueDate + ') has passed with no new issue';
+  const body = 'Scheduled send date ' + dueDate + (daysLate > 0 ? ' (' + daysLate + ' day(s) ago)' : ' (today)') +
+    ' has no new issue in tips-data.json yet.\n\n' +
+    'Nothing has gone out to staff. As soon as you publish a new issue (increase issueNumber), ' +
+    'the next daily check will send it automatically — even if that\'s a few days from now.\n\n' +
+    'Site: ' + SITE_URL;
+  GmailApp.sendEmail(me, subject, body, { name: FROM_NAME });
+  props.setProperty('lastReminderDueDate', dueDate);
+  Logger.log('Sent missed-content reminder to ' + me + ' for due date ' + dueDate + '.');
+}
+
+// Manual override: sends the latest issue to REAL recipients right now, ignoring the
+// date/catch-up logic entirely. Use when you want to push a late issue immediately.
+function forceSendNow() {
+  const data = fetchData();
+  if (!data) return;
+  const latest = getLatestTip(data);
+  if (!latest) { Logger.log('No tips found in the data file.'); return; }
+  const recipients = getRecipientList();
+  if (!recipients.length) { Logger.log('No recipients found — nothing to send to.'); return; }
+  sendDigestEmail(latest, data, recipients);
+  const props = PropertiesService.getScriptProperties();
+  props.setProperty('lastIssueSent', String(latest.issueNumber));
+  props.setProperty('lastSentDateKey', Utilities.formatDate(new Date(), TIMEZONE, 'yyyy-MM-dd'));
+  Logger.log('Force-sent issue #' + latest.issueNumber + ' to ' + recipients.length + ' recipient(s).');
 }
 
 // Manually run this anytime to check formatting/authorization. ALWAYS sends only to your
-// own account — never to STATIC_RECIPIENTS or the signup list, and ignores SEND_DATES.
-// Safe to run during summer break or any other time without emailing real staff.
+// own account — never to STATIC_RECIPIENTS or the signup list, and ignores all date logic.
 function sendTestEmail() {
   const data = fetchData();
   if (!data) return;
