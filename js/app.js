@@ -5,10 +5,15 @@
    Pages:
    - index.html: every PUBLISHED tip, newest first, with tool/POG/search filters (#archive-issues)
    - tip.html?id=...: full detail for a single published tip (#tip-detail)
+   - pipeline.html: EVERY tip regardless of date, oldest-to-newest, with a status badge
+     (#pipeline-issues) — this is the personal "what have I already built" view. Not linked
+     from any nav; bookmark it directly. Not truly private (this is a public GitHub Pages
+     site), just unlisted — fine for previewing your own draft content, not for anything
+     actually sensitive.
 
-   IMPORTANT: a tip only appears once its weekOf date has arrived. This lets you draft
-   and save future issues in tips-data.json ahead of time without them leaking on the
-   public site before the scheduled email actually goes out. */
+   IMPORTANT: a tip only appears on index.html/tip.html once its weekOf date has arrived.
+   This lets you draft and save future issues in tips-data.json ahead of time without them
+   leaking on the public site before the scheduled email actually goes out. */
 
 const DATA_URL = 'data/tips-data.json';
 
@@ -24,7 +29,7 @@ function formatWeekOf(dateStr) {
   return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 }
 
-// A tip is visible once its scheduled date has arrived (local browser date).
+// A tip is visible on the public pages once its scheduled date has arrived (local browser date).
 function isPublished(tip) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -58,6 +63,27 @@ function tipTeaserMarkup(tip, data) {
     <div class="tip-teaser-links">
       <a class="yt-link" href="${tip.video.url}" target="_blank" rel="noopener">${ytIcon(22, 16)} Watch on YouTube</a>
       <a class="read-more" href="tip.html?id=${encodeURIComponent(tip.id)}">Read the full tip</a>
+    </div>
+  </article>`;
+}
+
+// ---------- Pipeline row (pipeline.html): compact, with a Sent/Scheduled badge ----------
+function tipPipelineRowMarkup(tip, data) {
+  const tool = data.tools[tip.tool];
+  const published = isPublished(tip);
+  const badge = published
+    ? `<span class="tag-yes">&#10003; Sent</span>`
+    : `<span class="tag-parent">&#9679; Scheduled — ${formatWeekOf(tip.weekOf)}</span>`;
+  return `
+  <article class="tip-teaser" id="${tip.id}">
+    <p class="tip-teaser-meta">
+      <span class="tip-teaser-tool">${escapeHtml(tool.name)}</span> · Issue No. ${tip.issueNumber} · ${formatWeekOf(tip.weekOf)} · ${badge}
+    </p>
+    <h3><a href="tip.html?id=${encodeURIComponent(tip.id)}">${escapeHtml(tip.title)}</a></h3>
+    <p class="teaser-copy">${escapeHtml(tip.teaser || tip.whyItMatters)}</p>
+    <div class="tip-teaser-links">
+      <a class="yt-link" href="${tip.video.url}" target="_blank" rel="noopener">${ytIcon(22, 16)} Watch on YouTube</a>
+      ${published ? `<a class="read-more" href="tip.html?id=${encodeURIComponent(tip.id)}">Read the full tip</a>` : ''}
     </div>
   </article>`;
 }
@@ -117,6 +143,10 @@ async function loadData() {
 
 function sortByIssueDesc(tips) {
   return [...tips].sort((a, b) => b.issueNumber - a.issueNumber);
+}
+
+function sortByIssueAsc(tips) {
+  return [...tips].sort((a, b) => a.issueNumber - b.issueNumber);
 }
 
 // ---------- The single main list (index.html): all published tips, newest first, filterable ----------
@@ -181,6 +211,30 @@ async function renderAllTips() {
   }
 }
 
+// ---------- Pipeline page (pipeline.html): every tip, oldest first, Sent/Scheduled badge ----------
+async function renderPipeline() {
+  const mount = document.getElementById('pipeline-issues');
+  if (!mount) return;
+  try {
+    const data = await loadData();
+    const ordered = sortByIssueAsc(data.tips);
+    const sentCount = ordered.filter(isPublished).length;
+
+    const summary = document.getElementById('pipeline-summary');
+    if (summary) {
+      summary.textContent = `${ordered.length} issue(s) built total — ${sentCount} already sent, ` +
+        `${ordered.length - sentCount} scheduled for later.`;
+    }
+
+    mount.innerHTML = ordered.length
+      ? ordered.map(t => tipPipelineRowMarkup(t, data)).join('')
+      : `<p class="empty-state">No tips built yet.</p>`;
+  } catch (e) {
+    mount.innerHTML = `<p class="empty-state">Couldn't load the tips right now. Try refreshing.</p>`;
+    console.error(e);
+  }
+}
+
 // ---------- Individual tip page ----------
 async function renderDetail() {
   const mount = document.getElementById('tip-detail');
@@ -208,5 +262,6 @@ async function renderDetail() {
 
 document.addEventListener('DOMContentLoaded', () => {
   renderAllTips();
+  renderPipeline();
   renderDetail();
 });
