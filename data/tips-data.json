@@ -57,6 +57,7 @@
       "issueNumber": 4,
       "weekOf": "2026-07-27",
       "title": "Turn Any YouTube Video Into an Instant Quiz with Brisk",
+      "teaser": "Point Brisk at a video or article and get a ready-to-grade quiz in under a minute.",
       "tool": "brisk",
       "video": {
         "url": "https://www.youtube.com/watch?v=I2JOuJJxBSU",
@@ -73,6 +74,7 @@
       "issueNumber": 3,
       "weekOf": "2026-07-20",
       "title": "Differentiate Any Reading in Three Prompts, Not Three Prep Periods",
+      "teaser": "One passage in, three reading levels out — in the time it took to rewrite one paragraph.",
       "tool": "gemini",
       "video": {
         "url": "https://www.youtube.com/watch?v=uq8FdkApuLk",
@@ -89,6 +91,7 @@
       "issueNumber": 2,
       "weekOf": "2026-07-13",
       "title": "Feedback That Lands: Skip the Generic 'Good Job' with Brisk",
+      "teaser": "Draft specific, rubric-aligned comments in seconds instead of retyping the same note all period.",
       "tool": "brisk",
       "video": {
         "url": "https://www.youtube.com/watch?v=RxGCOyuXsPA",
@@ -105,6 +108,7 @@
       "issueNumber": 1,
       "weekOf": "2026-07-06",
       "title": "Turn Any Unit Packet into a Study Partner with NotebookLM",
+      "teaser": "A study partner grounded only in the sources you upload — it can't wander off-topic.",
       "tool": "notebooklm",
       "video": {
         "url": "https://www.youtube.com/watch?v=S32G0w8YFlg",
