@@ -508,6 +508,52 @@ table.tool-table td a { font-weight: 600; }
   margin-top: 8px;
 }
 
+/* ---------- Gem callout ---------- */
+.gem-callout {
+  background: var(--gray-bg);
+  border: 1px solid var(--divider);
+  border-radius: 14px;
+  padding: 22px 24px;
+  margin-bottom: 40px;
+}
+
+.btn-teal {
+  display: inline-block;
+  background: var(--navy);
+  color: var(--white) !important;
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 10px 18px;
+  border-radius: 980px;
+  text-decoration: none !important;
+}
+.btn-teal:hover { background: var(--navy-deep); }
+
+/* ---------- Social links list ---------- */
+.social-links {
+  list-style: none;
+  margin: 0 0 12px;
+  padding: 0;
+}
+
+.social-links li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--divider);
+}
+.social-links li:last-child { border-bottom: none; }
+
+.social-links .tool-name {
+  font-weight: 600;
+  color: var(--text);
+  min-width: 140px;
+}
+
+.social-links a { font-size: 0.9rem; font-weight: 500; }
+
 /* ---------- Footer ---------- */
 footer.site-footer {
   border-top: 1px solid var(--divider);
@@ -525,4 +571,5 @@ footer.site-footer a { color: var(--text-secondary); text-decoration: underline;
   .video-card { padding: 20px; }
   .hero { padding: 72px 20px 60px; }
   table.tool-table { font-size: 0.84rem; }
+  .social-links li { flex-direction: column; gap: 6px; }
 }
