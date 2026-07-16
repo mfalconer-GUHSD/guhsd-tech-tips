@@ -1,0 +1,34 @@
+name: Weekly Tech Tips Monitor
+
+# Runs every Monday morning (Pacific-ish; GitHub Actions cron is UTC).
+# Free forever on public repos — no billing, no API key required.
+# Also runnable manually anytime from the Actions tab ("Run workflow").
+
+on:
+  schedule:
+    - cron: '0 14 * * 1'   # 14:00 UTC Monday ≈ 6-7am Pacific depending on DST
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Run weekly content-buffer and district-page checks
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 scripts/weekly_check.py
+
+      - name: Commit updated page-hash file, if it changed
+        run: |
+          git config user.name "guhsd-tech-tips-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/.ai-page-hash.txt
+          git diff --cached --quiet || git commit -m "Update AI@GUHSD page hash [automated]"
+          git push
