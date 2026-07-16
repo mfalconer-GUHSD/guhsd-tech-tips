@@ -1,45 +1,52 @@
 /**
- * GUHSD Weekly Tech Tips — Staff Email Digest (v2: self-serve signup)
- * Runs on a weekly timer. Checks the site's live data file for a new
- * issue and, if one has been published since the last send, emails a
- * short summary to everyone on the signup list (minus anyone who has
- * unsubscribed). If no new issue exists, it does nothing.
+ * GUHSD Weekly Tech Tips — Staff Email Digest (v3: school-calendar-aware)
  *
- * SETUP — signup form
- * 1. Go to forms.google.com > + Blank form. Title: "AI Tech Tips — Sign Up".
- * 2. Add one question: "Email address" (Short answer).
- * 3. Settings (gear icon) > Responses > turn on "Collect email addresses"
- *    AND, if available for your Workspace, restrict to your organization
- *    so only guhsd.net accounts can respond.
- * 4. Responses tab > click the green Sheets icon to create a linked
- *    spreadsheet. Open that spreadsheet, copy its ID from the URL:
- *    https://docs.google.com/spreadsheets/d/THIS_PART_IS_THE_ID/edit
- * 5. Paste that ID into SIGNUP_SHEET_ID below.
- * 6. Put the signup form's shareable link in your weekly email footer,
- *    on the website, in a staff bulletin, etc.
+ * Runs on a DAILY timer (not weekly — see below for why). Each day it
+ * checks two things: (1) is today one of the pre-approved send dates for
+ * the 2026-27 school year, and (2) has a new issue been published since
+ * the last send. Only sends when both are true. On every other day it
+ * does nothing.
  *
- * SETUP — unsubscribe form (optional but recommended)
- * Repeat the same steps with a form titled "AI Tech Tips — Unsubscribe",
- * and paste that spreadsheet's ID into UNSUB_SHEET_ID below. Leave it as
- * an empty string ('') if you'd rather skip this for now.
+ * WHY DAILY, NOT WEEKLY:
+ * Google's built-in weekly trigger can only fire on a fixed day every
+ * single week — it has no way to skip Thanksgiving/Winter/Spring break
+ * weeks or shift off a Monday holiday. So instead, the trigger fires
+ * every day, and SEND_DATES (below) is the explicit, verified list of
+ * dates tips actually go out. Adding this list is what encodes "skip
+ * break weeks" and "shift holiday Mondays to Tuesday."
  *
- * SETUP — the script itself
+ * SEND_DATES for 2026-27 (verified against GUHSD's adopted calendar):
+ * - First Monday in session: Aug 17, 2026
+ * - Labor Day (Mon Sep 7) -> shifted to Tue Sep 8
+ * - Thanksgiving week (Nov 23-27) -> skipped entirely
+ * - Winter break (Dec 21 - Jan 1) -> both weeks skipped
+ * - MLK Day (Mon Jan 18, 2027) -> shifted to Tue Jan 19
+ * - Lincoln Day (Mon Feb 8, 2027) -> shifted to Tue Feb 9
+ * - Washington/Presidents' Day (Mon Feb 15, 2027) -> shifted to Tue Feb 16
+ * - Spring break (Mar 22 - Apr 2, 2027) -> both weeks skipped
+ * - Memorial Day (Mon May 31, 2027) -> shifted to Tue Jun 1
+ * - Last day of student attendance: Thu Jun 3, 2027 (no send after May 31/Jun 1)
+ * If GUHSD updates next year's calendar, update SEND_DATES accordingly —
+ * this list needs refreshing every school year.
+ *
+ * SETUP
  * 1. Go to https://script.google.com > New project (your guhsd.net account).
  * 2. Paste this entire file in, replacing the placeholder code.
- * 3. Fill in SIGNUP_SHEET_ID (required) and UNSUB_SHEET_ID (optional) below.
- * 4. Run `sendTestEmail` once (function dropdown > Run) to authorize Gmail
+ * 3. Run `sendTestEmail` once (function dropdown > Run) to authorize Gmail
  *    and Sheets access, and to confirm formatting. This always sends,
- *    regardless of whether there's a "new" issue.
- * 5. Set the real trigger: clock icon (Triggers) > + Add Trigger >
- *    function: checkAndSendDigest > Time-driven > Week timer > pick a
- *    day/time > Save.
- * 6. Done. Publishing a new issue in tips-data.json is now the only
- *    manual step — signup, unsubscribe, and sending are all automatic.
+ *    regardless of date or "new issue" status.
+ * 4. Set the real trigger: clock icon (Triggers) > + Add Trigger >
+ *    function: checkAndSendDigest > Time-driven > Day timer > pick any
+ *    time window (e.g. 6am-7am) > Save. (Day timer, NOT week timer —
+ *    the script itself decides which days actually send.)
+ * 5. Done. Publishing a new issue in tips-data.json before its scheduled
+ *    SEND_DATES date is the only manual step from here on.
  */
 
 const DATA_URL = 'https://raw.githubusercontent.com/mfalconer-GUHSD/guhsd-tech-tips/main/data/tips-data.json';
 const SITE_URL = 'https://mfalconer-guhsd.github.io/guhsd-tech-tips/';
 const FROM_NAME = 'Mr. Falconer — AI Tech Tips';
+const TIMEZONE = 'America/Los_Angeles';
 
 // The public forms staff use to manage their own subscription:
 const SIGNUP_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSflh2l3PXs2NGAHv6u-hGjKtv7XPMycD4LKFdD82O3FxRU_Rg/viewform?usp=publish-editor';
@@ -53,10 +60,34 @@ const SIGNUP_EMAIL_HEADER = 'Email Address'; // must match the header text in th
 const UNSUB_SHEET_ID = '1q-9Z9Qzxub-0QvKF_ickjmp9HcAmms0qP5aAdhfvJws';
 const UNSUB_EMAIL_HEADER = 'Email Address';
 
-// Any extra addresses/groups always included regardless of signup, e.g. ['staff@yourschool.guhsd.net']:
-const STATIC_RECIPIENTS = [];
+// Always-included recipients regardless of the signup form (Google Group + individuals):
+const STATIC_RECIPIENTS = [
+  'ghhs-certificated-staff@guhsd.net',
+  'cgaeir@guhsd.net',
+  'agarcia@guhsd.net'
+];
+
+// Verified send dates for the 2026-27 school year (see header comment for the logic behind these).
+const SEND_DATES = [
+  '2026-08-17', '2026-08-24', '2026-08-31', '2026-09-08',
+  '2026-09-14', '2026-09-21', '2026-09-28',
+  '2026-10-05', '2026-10-12', '2026-10-19', '2026-10-26',
+  '2026-11-02', '2026-11-09', '2026-11-16', '2026-11-30',
+  '2026-12-07', '2026-12-14',
+  '2027-01-04', '2027-01-11', '2027-01-19', '2027-01-25',
+  '2027-02-01', '2027-02-09', '2027-02-16', '2027-02-22',
+  '2027-03-01', '2027-03-08', '2027-03-15',
+  '2027-04-05', '2027-04-12', '2027-04-19', '2027-04-26',
+  '2027-05-03', '2027-05-10', '2027-05-17', '2027-05-24', '2027-06-01'
+];
 
 function checkAndSendDigest() {
+  const today = Utilities.formatDate(new Date(), TIMEZONE, 'yyyy-MM-dd');
+  if (SEND_DATES.indexOf(today) === -1) {
+    Logger.log('Today (' + today + ') is not a scheduled send date. Skipping.');
+    return;
+  }
+
   const data = fetchData();
   if (!data) return;
 
@@ -77,10 +108,11 @@ function checkAndSendDigest() {
 
   sendDigestEmail(latest, data, recipients);
   PropertiesService.getScriptProperties().setProperty('lastIssueSent', String(latest.issueNumber));
-  Logger.log('Sent issue #' + latest.issueNumber + ' to ' + recipients.length + ' recipient(s).');
+  Logger.log('Sent issue #' + latest.issueNumber + ' to ' + recipients.length + ' recipient(s) on ' + today + '.');
 }
 
-// Manually run this once to test formatting/authorization before trusting the trigger.
+// Manually run this once to test formatting/authorization. Ignores SEND_DATES and the
+// "new issue" check — it always sends, so you can verify the email looks right anytime.
 function sendTestEmail() {
   const data = fetchData();
   if (!data) return;
