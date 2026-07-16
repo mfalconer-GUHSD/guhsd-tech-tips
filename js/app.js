@@ -27,7 +27,7 @@ function issueCardMarkup(tip, data) {
   const tool = data.tools[tip.tool];
   const pogTagsHtml = tip.pogTags.map(code => {
     const label = data.pogElements[code] || code;
-    return `<span class="pog-tag" title="${escapeHtml(label)}">${code}</span>`;
+    return `<span class="pog-tag"><span class="pog-code">${escapeHtml(code)}</span> — ${escapeHtml(label)}</span>`;
   }).join('');
 
   return `
@@ -55,7 +55,10 @@ function issueCardMarkup(tip, data) {
       ${escapeHtml(tip.whyItMatters)}
     </div>
 
-    <div class="pog-tags">${pogTagsHtml}</div>
+    <div class="why-block">
+      <span class="label">Portrait of a Graduate elements</span>
+      <div class="pog-tags">${pogTagsHtml}</div>
+    </div>
 
     <div class="issue-footer">
       <div class="stamp-row">
