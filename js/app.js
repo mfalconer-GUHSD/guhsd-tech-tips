@@ -3,8 +3,12 @@
    Add new tips by editing that file — no code changes needed.
 
    Pages:
-   - index.html: every tip, newest first, with tool/POG/search filters (#archive-issues)
-   - tip.html?id=...: full detail for a single tip (#tip-detail) */
+   - index.html: every PUBLISHED tip, newest first, with tool/POG/search filters (#archive-issues)
+   - tip.html?id=...: full detail for a single published tip (#tip-detail)
+
+   IMPORTANT: a tip only appears once its weekOf date has arrived. This lets you draft
+   and save future issues in tips-data.json ahead of time without them leaking on the
+   public site before the scheduled email actually goes out. */
 
 const DATA_URL = 'data/tips-data.json';
 
@@ -18,6 +22,14 @@ function escapeHtml(str) {
 function formatWeekOf(dateStr) {
   const d = new Date(dateStr + 'T00:00:00');
   return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+}
+
+// A tip is visible once its scheduled date has arrived (local browser date).
+function isPublished(tip) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const weekOf = new Date(tip.weekOf + 'T00:00:00');
+  return weekOf <= today;
 }
 
 // Recognizable YouTube badge (red rounded rect + white triangle), not a generic play icon.
@@ -107,7 +119,7 @@ function sortByIssueDesc(tips) {
   return [...tips].sort((a, b) => b.issueNumber - a.issueNumber);
 }
 
-// ---------- The single main list (index.html): all tips, newest first, filterable ----------
+// ---------- The single main list (index.html): all published tips, newest first, filterable ----------
 let ALL_TIPS_DATA = null;
 
 function populateFilters(data) {
@@ -136,7 +148,9 @@ function applyFilters() {
   const pogVal = document.getElementById('filter-pog').value;
   const searchVal = document.getElementById('filter-search').value.trim().toLowerCase();
 
-  const filtered = sortByIssueDesc(ALL_TIPS_DATA.tips).filter(tip => {
+  const published = ALL_TIPS_DATA.tips.filter(isPublished);
+
+  const filtered = sortByIssueDesc(published).filter(tip => {
     if (toolVal && tip.tool !== toolVal) return false;
     if (pogVal && !tip.pogTags.includes(pogVal)) return false;
     if (searchVal && !tip.title.toLowerCase().includes(searchVal) &&
@@ -177,6 +191,11 @@ async function renderDetail() {
     const tip = data.tips.find(t => t.id === id);
     if (!tip) {
       mount.innerHTML = `<p class="empty-state">Tip not found. <a href="index.html">Back to all tips</a>.</p>`;
+      return;
+    }
+    if (!isPublished(tip)) {
+      mount.innerHTML = `<p class="empty-state">This tip isn't published yet — check back on ` +
+        `${formatWeekOf(tip.weekOf)}. <a href="index.html">Back to all tips</a>.</p>`;
       return;
     }
     document.title = tip.title + ' — GUHSD Weekly Tech Tips';
