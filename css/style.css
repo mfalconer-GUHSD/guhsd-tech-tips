@@ -1,29 +1,25 @@
 /* ===================================================================
-   GUHSD Weekly Tech Tips — design tokens
-   Palette:  ink #1B2A4A (masthead navy) · gold #C89B3C (seal accent)
-             paper #F7F3EA (warm bulletin paper) · text #21201C
-             sage #4F6F52 (approved/compliance) · rust #9C4B3F (flag/caution)
-   Type:     Lora (display serif, masthead + headlines)
-             Inter (body/UI)
-             IBM Plex Mono (element codes, dates, tool tags)
+   GUHSD Weekly Tech Tips — Apple.com-inspired design system
+   Palette: GUHSD navy #003C71 (hero, nav) · interactive blue #0071e3 (links, CTAs)
+            gold #FFB81C (small accent only) · Apple-gray #F5F5F7 (alt sections)
+            near-black #1D1D1F (text) · secondary gray #6E6E73
+   Type:    System font stack (SF Pro on Apple devices, Inter as the
+            cross-platform substitute) — tight tracking, big display sizes.
    =================================================================== */
 
 :root {
-  --ink: #1B2A4A;
-  --ink-deep: #10192E;
-  --gold: #C89B3C;
-  --gold-soft: #E9D9B3;
-  --paper: #F7F3EA;
-  --paper-dim: #EFE9DA;
-  --text: #21201C;
-  --text-soft: #55524A;
-  --sage: #4F6F52;
-  --sage-soft: #DCE7DD;
-  --rust: #9C4B3F;
-  --rust-soft: #F3DEDA;
-  --rule: #D8D0BC;
-  --radius: 3px;
-  --max: 880px;
+  --navy: #003C71;
+  --navy-deep: #002A4F;
+  --blue: #0071E3;
+  --blue-dark: #0058B0;
+  --gold: #FFB81C;
+  --gray-bg: #F5F5F7;
+  --white: #FFFFFF;
+  --text: #1D1D1F;
+  --text-secondary: #6E6E73;
+  --divider: #D2D2D7;
+  --max: 980px;
+  --max-narrow: 692px;
 }
 
 * { box-sizing: border-box; }
@@ -32,10 +28,11 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  background: var(--paper);
+  background: var(--white);
   color: var(--text);
-  font-family: 'Inter', system-ui, sans-serif;
-  line-height: 1.55;
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Helvetica, Arial, sans-serif;
+  line-height: 1.47;
+  letter-spacing: -0.01em;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -44,222 +41,238 @@ body {
   html { scroll-behavior: auto; }
 }
 
-a { color: var(--ink); }
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
 a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
-  outline: 3px solid var(--gold);
-  outline-offset: 2px;
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
 }
 
-.mono {
-  font-family: 'IBM Plex Mono', ui-monospace, monospace;
-  letter-spacing: 0.02em;
+/* ---------- Nav ---------- */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--divider);
 }
 
-/* ---------- Masthead ---------- */
-.masthead {
-  background: var(--ink);
-  color: var(--paper);
-  border-bottom: 6px solid var(--gold);
-}
-
-.masthead-inner {
-  max-width: var(--max);
+.site-nav-inner {
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 28px 24px 22px;
-}
-
-.masthead-top {
+  padding: 0 22px;
+  height: 48px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: baseline;
   gap: 16px;
-  flex-wrap: wrap;
 }
 
-.masthead-eyebrow {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--gold-soft);
-  margin: 0 0 6px;
-}
-
-.masthead h1 {
-  font-family: 'Lora', Georgia, serif;
+.site-nav-brand {
+  font-size: 0.86rem;
   font-weight: 600;
-  font-size: clamp(1.9rem, 4vw, 2.8rem);
-  margin: 0;
-  letter-spacing: -0.01em;
-}
-
-.masthead nav {
-  display: flex;
-  gap: 22px;
-  font-size: 0.92rem;
-}
-
-.masthead nav a {
-  color: var(--paper);
-  text-decoration: none;
-  border-bottom: 2px solid transparent;
-  padding-bottom: 3px;
-}
-
-.masthead nav a:hover,
-.masthead nav a[aria-current="page"] {
-  border-bottom-color: var(--gold);
-}
-
-.masthead-sub {
-  margin-top: 14px;
-  font-size: 0.98rem;
-  color: var(--gold-soft);
-  max-width: 62ch;
-}
-
-/* ---------- Layout ---------- */
-main {
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 40px 24px 80px;
-}
-
-.section-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.74rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-soft);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 0 0 20px;
-}
-
-.section-label::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--rule);
-}
-
-/* ---------- Issue card ---------- */
-.issue {
-  background: #fff;
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  padding: 28px 30px;
-  margin-bottom: 28px;
-  position: relative;
-  box-shadow: 0 1px 0 rgba(27,42,74,0.03);
-}
-
-.issue-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 20px;
-  flex-wrap: wrap;
-  border-bottom: 1px dashed var(--rule);
-  padding-bottom: 14px;
-  margin-bottom: 16px;
-}
-
-.issue-number {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.76rem;
-  color: var(--text-soft);
-  letter-spacing: 0.06em;
-}
-
-.issue-number strong {
-  color: var(--ink);
-  font-size: 0.9rem;
-}
-
-.tool-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  border-radius: 999px;
-  border: 1px solid var(--ink);
-  color: var(--ink);
-  background: var(--gold-soft);
+  color: var(--text);
   white-space: nowrap;
 }
 
-.issue h2 {
-  font-family: 'Lora', Georgia, serif;
-  font-size: clamp(1.35rem, 2.4vw, 1.7rem);
-  line-height: 1.25;
-  margin: 0 0 14px;
-  color: var(--ink);
-}
-
-.video-block {
+.site-nav-links {
   display: flex;
-  gap: 16px;
-  background: var(--paper-dim);
-  border-radius: var(--radius);
-  padding: 14px 16px;
-  margin: 0 0 16px;
-  align-items: flex-start;
+  gap: 28px;
 }
 
-.video-block .play {
+.site-nav-links a {
+  color: var(--text);
+  font-size: 0.8rem;
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+.site-nav-links a:hover { opacity: 1; text-decoration: none; }
+.site-nav-links a[aria-current="page"] { opacity: 1; font-weight: 600; }
+
+/* ---------- Hero ---------- */
+.hero {
+  background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+  color: var(--white);
+  text-align: center;
+  padding: 96px 22px 84px;
+}
+
+.hero-eyebrow {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 14px;
+}
+
+.hero h1 {
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  margin: 0 0 18px;
+  line-height: 1.05;
+}
+
+.hero p {
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  font-weight: 400;
+  color: rgba(255,255,255,0.78);
+  max-width: 620px;
+  margin: 0 auto;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Intro / compliance banner ---------- */
+.intro-banner {
+  background: var(--gray-bg);
+  text-align: center;
+  padding: 22px 22px;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+}
+
+.intro-banner strong { color: var(--text); }
+.intro-banner a { font-weight: 500; }
+
+/* ---------- Section eyebrow ---------- */
+.section-eyebrow {
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  padding: 56px 22px 8px;
+}
+
+/* ---------- Tip sections ---------- */
+.tip {
+  padding: 40px 22px 72px;
+  text-align: center;
+}
+
+.tip:nth-of-type(even) { background: var(--gray-bg); }
+
+.tip-inner {
+  max-width: var(--max-narrow);
+  margin: 0 auto;
+}
+
+.tip-meta {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+.tip-tool {
+  color: var(--blue);
+  font-weight: 600;
+}
+
+.tip h2 {
+  font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0 0 28px;
+  color: var(--text);
+}
+
+/* ---------- Video card ---------- */
+.video-card {
+  display: block;
+  background: var(--white);
+  border: 1px solid var(--divider);
+  border-radius: 18px;
+  padding: 28px 30px;
+  margin: 0 0 28px;
+  text-align: left;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.video-card:hover {
+  text-decoration: none;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+  transform: translateY(-1px);
+}
+
+.video-card-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.play-badge {
   flex: none;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background: var(--rust);
+  background: var(--blue);
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.9rem;
+  font-size: 0.78rem;
 }
 
-.video-meta a.video-title {
+.video-card-title {
   font-weight: 600;
-  text-decoration: none;
-  color: var(--ink);
+  color: var(--text);
+  font-size: 1.02rem;
 }
-.video-meta a.video-title:hover { text-decoration: underline; }
 
-.video-meta .video-channel {
+.video-card-channel {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin-top: 1px;
+  font-weight: 400;
+}
+
+.video-card-desc {
+  font-size: 0.96rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ---------- Why it matters ---------- */
+.why-copy {
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  color: var(--text);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  margin: 0 0 32px;
+  text-align: left;
+}
+
+.why-copy .label {
   display: block;
   font-size: 0.78rem;
-  color: var(--text-soft);
-  margin-top: 2px;
-}
-
-.video-desc {
-  font-size: 0.94rem;
-  color: var(--text-soft);
-  margin-top: 8px;
-}
-
-.why-block {
-  margin: 0 0 18px;
-}
-
-.why-block .label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--sage);
-  display: block;
-  margin-bottom: 4px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
 }
 
-/* ---------- POG tags ---------- */
+/* ---------- POG chips ---------- */
+.pog-block { margin: 0 0 32px; text-align: left; }
+
+.pog-block .label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
 .pog-tags {
   display: flex;
   flex-wrap: wrap;
@@ -270,153 +283,106 @@ main {
   display: inline-flex;
   align-items: baseline;
   gap: 5px;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.82rem;
-  border: 1px solid var(--ink);
+  font-size: 0.84rem;
   color: var(--text);
-  background: var(--paper-dim);
-  padding: 5px 11px;
-  border-radius: 999px;
+  background: var(--gray-bg);
+  border: 1px solid var(--divider);
+  padding: 6px 12px;
+  border-radius: 980px;
   line-height: 1.3;
 }
 
+.tip:nth-of-type(even) .pog-tag { background: var(--white); }
+
 .pog-tag .pog-code {
-  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 700;
+  color: var(--blue-dark);
+}
+
+/* ---------- Footer of each tip: compliance + actions ---------- */
+.tip-footer {
+  text-align: left;
+  border-top: 1px solid var(--divider);
+  padding-top: 20px;
+}
+
+.compliance-line {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin: 0 0 14px;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
   font-weight: 600;
-  font-size: 0.74rem;
-  color: var(--ink);
-  letter-spacing: 0.02em;
+  padding: 3px 10px 3px 8px;
+  border-radius: 980px;
+  margin-bottom: 10px;
 }
 
-/* ---------- Compliance stamp (signature element) ---------- */
-.issue-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  border-top: 1px dashed var(--rule);
-  padding-top: 16px;
-}
-
-.stamp-row {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.stamp {
-  flex: none;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: 2.5px solid var(--sage);
-  color: var(--sage);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  transform: rotate(-8deg);
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.56rem;
-  line-height: 1.15;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  padding: 4px;
-}
-
-.stamp.caution {
-  border-color: var(--rust);
-  color: var(--rust);
-}
-
-.compliance-note {
-  font-size: 0.84rem;
-  color: var(--text-soft);
-  max-width: 46ch;
-}
+.status-pill.approved { background: #E6F4EA; color: #1E7A34; }
+.status-pill.limited { background: #FDECEA; color: #B3261E; }
 
 .action-links {
   display: flex;
-  gap: 10px;
   flex-wrap: wrap;
+  gap: 22px;
+  font-size: 0.94rem;
+  font-weight: 500;
 }
 
-.btn {
-  font-size: 0.86rem;
-  font-weight: 600;
-  text-decoration: none;
-  padding: 8px 14px;
-  border-radius: var(--radius);
-  border: 1.5px solid var(--ink);
-  color: var(--ink);
-  white-space: nowrap;
+.action-links a::after {
+  content: ' \203A';
 }
-
-.btn.primary {
-  background: var(--ink);
-  color: var(--paper);
-}
-.btn.primary:hover { background: var(--ink-deep); }
-.btn:not(.primary):hover { background: var(--gold-soft); }
-
-/* ---------- Compliance banner ---------- */
-.compliance-banner {
-  background: var(--sage-soft);
-  border: 1px solid var(--sage);
-  border-radius: var(--radius);
-  padding: 16px 20px;
-  font-size: 0.9rem;
-  margin-bottom: 32px;
-}
-
-.compliance-banner strong { color: var(--sage); }
-.compliance-banner a { color: var(--ink); font-weight: 600; }
 
 /* ---------- Archive controls ---------- */
 .archive-controls {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 22px 8px;
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  margin-bottom: 28px;
+  justify-content: center;
 }
 
 .archive-controls select,
 .archive-controls input {
-  font-family: 'Inter', sans-serif;
+  font-family: inherit;
   font-size: 0.9rem;
-  padding: 9px 12px;
-  border: 1.5px solid var(--ink);
-  border-radius: var(--radius);
-  background: #fff;
+  padding: 10px 14px;
+  border: 1px solid var(--divider);
+  border-radius: 980px;
+  background: var(--white);
   color: var(--text);
 }
 
-.archive-controls input { flex: 1; min-width: 180px; }
+.archive-controls input { flex: 1; min-width: 200px; max-width: 320px; }
 
 .empty-state {
   text-align: center;
-  padding: 60px 20px;
-  color: var(--text-soft);
-  font-family: 'Lora', serif;
-  font-style: italic;
+  padding: 72px 20px;
+  color: var(--text-secondary);
+  font-size: 1.05rem;
 }
 
 /* ---------- Footer ---------- */
 footer.site-footer {
-  border-top: 1px solid var(--rule);
-  padding: 28px 24px 40px;
+  border-top: 1px solid var(--divider);
+  padding: 32px 22px 48px;
   text-align: center;
-  font-size: 0.82rem;
-  color: var(--text-soft);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  background: var(--gray-bg);
 }
 
-footer.site-footer a { color: var(--ink); }
+footer.site-footer a { color: var(--text-secondary); text-decoration: underline; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 560px) {
-  .issue { padding: 20px 18px; }
-  .issue-footer { flex-direction: column; align-items: flex-start; }
-  .video-block { flex-direction: column; }
-  .pog-tag { font-size: 0.78rem; }
+  .video-card { padding: 20px; }
+  .hero { padding: 72px 20px 60px; }
 }
