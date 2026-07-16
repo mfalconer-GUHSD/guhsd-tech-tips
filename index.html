@@ -15,8 +15,7 @@
   <div class="site-nav-inner">
     <span class="site-nav-brand">AI@GUHSD</span>
     <div class="site-nav-links">
-      <a href="index.html" aria-current="page">This Week</a>
-      <a href="archive.html">Archive</a>
+      <a href="index.html" aria-current="page">Tech Tips</a>
       <a href="tools.html">Find a Tool</a>
     </div>
   </div>
@@ -50,15 +49,24 @@
   </div>
 </div>
 
-<p class="section-eyebrow">Latest issues</p>
-<div id="latest-issues">
-  <p class="empty-state">Loading this week's tips…</p>
+<div class="archive-controls">
+  <select id="filter-tool" aria-label="Filter by AI tool">
+    <option value="">All tools</option>
+  </select>
+  <select id="filter-pog" aria-label="Filter by Portrait of a Graduate element">
+    <option value="">All Portrait of a Graduate elements</option>
+  </select>
+  <input id="filter-search" type="search" placeholder="Search titles or descriptions…" aria-label="Search tips">
+</div>
+
+<p class="section-eyebrow">All issues, newest first</p>
+<div id="archive-issues">
+  <p class="empty-state">Loading tips…</p>
 </div>
 
 <footer class="site-footer">
   Curated by Mr. Falconer, Assistant Principal · Grossmont Union High School District<br>
   Questions about an AI tool? <a href="mailto:mfalconer@guhsd.net">mfalconer@guhsd.net</a> ·
-  <a href="archive.html">See all past tips</a> ·
   <a href="https://docs.google.com/forms/d/e/1FAIpQLSflh2l3PXs2NGAHv6u-hGjKtv7XPMycD4LKFdD82O3FxRU_Rg/viewform?usp=publish-editor" target="_blank" rel="noopener">Get emailed new tips</a>
 </footer>
 
