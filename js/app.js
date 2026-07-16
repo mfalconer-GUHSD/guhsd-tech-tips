@@ -3,17 +3,19 @@
    Add new tips by editing that file — no code changes needed.
 
    Pages:
-   - index.html: every PUBLISHED tip, newest first, with tool/search filters (#archive-issues)
-   - tip.html?id=...: full detail for a single published tip (#tip-detail)
-   - pipeline.html: EVERY tip regardless of date, newest/upcoming first, with a status badge
-     (#pipeline-issues) — this is the personal "what have I already built" view. Not linked
-     from any nav; bookmark it directly. Not truly private (this is a public GitHub Pages
-     site), just unlisted — fine for previewing your own draft content, not for anything
-     actually sensitive.
+   - index.html: every PUBLISHED tip, newest first, with tool/search filters (#archive-issues),
+     plus the 2025-26 legacy archive below it (#legacy-issues) — same search/tool filters apply
+     to both sections.
+   - tip.html?id=...: full detail for a single published tip (#tip-detail). Legacy tips don't
+     get a detail page — they link straight out to the video/more-info/get-started URLs.
+   - pipeline.html: EVERY current-year tip regardless of date, newest/upcoming first, with a
+     status badge (#pipeline-issues) — personal "what have I already built" view. Not linked
+     from any nav; bookmark it directly.
 
-   IMPORTANT: a tip only appears on index.html/tip.html once its weekOf date has arrived.
-   This lets you draft and save future issues in tips-data.json ahead of time without them
-   leaking on the public site before the scheduled email actually goes out. */
+   IMPORTANT: a current-year tip only appears on index.html/tip.html once its weekOf date has
+   arrived. This lets you draft and save future issues in tips-data.json ahead of time without
+   them leaking on the public site before the scheduled email actually goes out. Legacy tips
+   (data.legacyTips) are already all in the past, so they always show. */
 
 const DATA_URL = 'data/tips-data.json';
 
@@ -52,7 +54,14 @@ function statusPillMarkup(tool) {
   return `<span class="status-pill limited">&#9679; Staff use only</span>`;
 }
 
-// ---------- Compact preview card (the single main list) ----------
+function pogChipsMarkup(pogTags, pogElements) {
+  return pogTags.map(code => {
+    const label = pogElements[code] || code;
+    return `<span class="pog-tag"><span class="pog-code">${escapeHtml(code)}</span> — ${escapeHtml(label)}</span>`;
+  }).join('');
+}
+
+// ---------- Compact preview card (the single main list, current-year tips) ----------
 function tipTeaserMarkup(tip, data) {
   const tool = data.tools[tip.tool];
   return `
@@ -63,6 +72,27 @@ function tipTeaserMarkup(tip, data) {
     <div class="tip-teaser-links">
       <a class="yt-link" href="${tip.video.url}" target="_blank" rel="noopener">${ytIcon(22, 16)} Watch on YouTube</a>
       <a class="read-more" href="tip.html?id=${encodeURIComponent(tip.id)}">Read the full tip</a>
+    </div>
+  </article>`;
+}
+
+// ---------- Legacy tip card (2025-26 archive, shown on index.html and used for search) ----------
+function legacyTeaserMarkup(tip, data) {
+  const pogTagsHtml = pogChipsMarkup(tip.pogTags, data.pogElements);
+  const coreNote = tip.notCoreToolNote
+    ? `<p class="teaser-copy" style="margin-top:-6px;"><span class="tag-parent">${escapeHtml(tip.notCoreToolNote)}</span></p>`
+    : '';
+  return `
+  <article class="tip-teaser" id="${tip.id}">
+    <p class="tip-teaser-meta"><span class="tip-teaser-tool">${escapeHtml(tip.toolName)}</span> · ${escapeHtml(tip.dateLabel)} · <span class="tag-parent">2025–26 archive</span></p>
+    <h3>${escapeHtml(tip.title)}</h3>
+    <p class="teaser-copy">${escapeHtml(tip.description)}</p>
+    ${coreNote}
+    <div class="pog-tags" style="margin:4px 0 12px;">${pogTagsHtml}</div>
+    <div class="tip-teaser-links">
+      <a class="yt-link" href="${tip.videoUrl}" target="_blank" rel="noopener">${ytIcon(22, 16)} ${escapeHtml(tip.videoLabel || 'Watch on YouTube')}</a>
+      <a class="read-more" href="${tip.moreInfoUrl}" target="_blank" rel="noopener">More info</a>
+      <a class="read-more" href="${tip.getStartedUrl}" target="_blank" rel="noopener">Get started</a>
     </div>
   </article>`;
 }
@@ -91,10 +121,7 @@ function tipPipelineRowMarkup(tip, data) {
 // ---------- Full detail (tip.html) ----------
 function tipDetailMarkup(tip, data) {
   const tool = data.tools[tip.tool];
-  const pogTagsHtml = tip.pogTags.map(code => {
-    const label = data.pogElements[code] || code;
-    return `<span class="pog-tag"><span class="pog-code">${escapeHtml(code)}</span> — ${escapeHtml(label)}</span>`;
-  }).join('');
+  const pogTagsHtml = pogChipsMarkup(tip.pogTags, data.pogElements);
 
   return `
   <section class="tip">
@@ -149,7 +176,11 @@ function sortByIssueAsc(tips) {
   return [...tips].sort((a, b) => a.issueNumber - b.issueNumber);
 }
 
-// ---------- The single main list (index.html): all published tips, newest first, filterable ----------
+function sortByDateDesc(tips) {
+  return [...tips].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+}
+
+// ---------- The single main list (index.html): current tips + legacy archive, filterable ----------
 let ALL_TIPS_DATA = null;
 
 function populateFilters(data) {
@@ -170,8 +201,7 @@ function applyFilters() {
   const searchVal = document.getElementById('filter-search').value.trim().toLowerCase();
 
   const published = ALL_TIPS_DATA.tips.filter(isPublished);
-
-  const filtered = sortByIssueDesc(published).filter(tip => {
+  const filteredCurrent = sortByIssueDesc(published).filter(tip => {
     if (toolVal && tip.tool !== toolVal) return false;
     if (searchVal && !tip.title.toLowerCase().includes(searchVal) &&
         !tip.whyItMatters.toLowerCase().includes(searchVal)) return false;
@@ -179,9 +209,30 @@ function applyFilters() {
   });
 
   const mount = document.getElementById('archive-issues');
-  mount.innerHTML = filtered.length
-    ? filtered.map(t => tipTeaserMarkup(t, ALL_TIPS_DATA)).join('')
-    : `<p class="empty-state">No tips match those filters yet. Check back next week.</p>`;
+  if (mount) {
+    mount.innerHTML = filteredCurrent.length
+      ? filteredCurrent.map(t => tipTeaserMarkup(t, ALL_TIPS_DATA)).join('')
+      : `<p class="empty-state">No tips match those filters yet. Check back next week.</p>`;
+  }
+
+  const legacyMount = document.getElementById('legacy-issues');
+  if (legacyMount) {
+    const legacyTips = ALL_TIPS_DATA.legacyTips || [];
+    const filteredLegacy = sortByDateDesc(legacyTips).filter(tip => {
+      if (toolVal && tip.toolKey !== toolVal) return false;
+      if (searchVal && !tip.title.toLowerCase().includes(searchVal) &&
+          !tip.description.toLowerCase().includes(searchVal)) return false;
+      return true;
+    });
+    legacyMount.innerHTML = filteredLegacy.length
+      ? filteredLegacy.map(t => legacyTeaserMarkup(t, ALL_TIPS_DATA)).join('')
+      : `<p class="empty-state">No 2025–26 archive tips match those filters.</p>`;
+
+    const legacySection = document.getElementById('legacy-section');
+    if (legacySection) {
+      legacySection.style.display = filteredLegacy.length || (!toolVal && !searchVal) ? '' : 'none';
+    }
+  }
 }
 
 async function renderAllTips() {
@@ -200,7 +251,7 @@ async function renderAllTips() {
   }
 }
 
-// ---------- Pipeline page (pipeline.html): every tip, newest/upcoming first, Sent/Scheduled badge ----------
+// ---------- Pipeline page (pipeline.html): every current-year tip, newest/upcoming first ----------
 async function renderPipeline() {
   const mount = document.getElementById('pipeline-issues');
   if (!mount) return;
