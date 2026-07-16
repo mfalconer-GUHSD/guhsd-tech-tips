@@ -53,6 +53,22 @@
   },
   "tips": [
     {
+      "id": "2026-w31-brisk-quiz",
+      "issueNumber": 4,
+      "weekOf": "2026-07-27",
+      "title": "Turn Any YouTube Video Into an Instant Quiz with Brisk",
+      "tool": "brisk",
+      "video": {
+        "url": "https://www.youtube.com/watch?v=I2JOuJJxBSU",
+        "title": "Brisk Bites 3 — AI Quiz Generator",
+        "channel": "Brisk Teaching",
+        "description": "A bite-sized Brisk Teaching PD video walking through the AI Quiz Generator — point the Brisk extension at a webpage, PDF, or YouTube video and generate a standards-aligned quiz with an answer key already built in."
+      },
+      "whyItMatters": "Skip writing a comprehension check from scratch. Point Brisk at the video or article you already assigned and get a ready-to-grade quiz — multiple choice, short answer, or open-ended, delivered to a Google Form or Doc — in under a minute. Handy for flipped-classroom check-ins, exit tickets, or catch-up work for an absent student.",
+      "pogTags": ["GP1", "AP7"],
+      "complianceNote": "PII-secure and approved for staff use. Brisk is not currently approved for direct student use in GUHSD — assign the generated quiz through your own Google Form or Doc."
+    },
+    {
       "id": "2026-w29-gemini-differentiate",
       "issueNumber": 3,
       "weekOf": "2026-07-20",
