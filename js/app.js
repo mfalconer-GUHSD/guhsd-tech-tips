@@ -3,7 +3,7 @@
    Add new tips by editing that file — no code changes needed.
 
    Pages:
-   - index.html / archive.html: compact teaser cards (#latest-issues / #archive-issues)
+   - index.html: every tip, newest first, with tool/POG/search filters (#archive-issues)
    - tip.html?id=...: full detail for a single tip (#tip-detail) */
 
 const DATA_URL = 'data/tips-data.json';
@@ -35,7 +35,7 @@ function statusPillMarkup(tool) {
   return `<span class="status-pill limited">&#9679; Staff use only</span>`;
 }
 
-// ---------- Compact preview card (home + archive) ----------
+// ---------- Compact preview card (the single main list) ----------
 function tipTeaserMarkup(tip, data) {
   const tool = data.tools[tip.tool];
   return `
@@ -107,22 +107,8 @@ function sortByIssueDesc(tips) {
   return [...tips].sort((a, b) => b.issueNumber - a.issueNumber);
 }
 
-// ---------- Home page ----------
-async function renderHome() {
-  const mount = document.getElementById('latest-issues');
-  if (!mount) return;
-  try {
-    const data = await loadData();
-    const latest = sortByIssueDesc(data.tips).slice(0, 3);
-    mount.innerHTML = latest.map(t => tipTeaserMarkup(t, data)).join('');
-  } catch (e) {
-    mount.innerHTML = `<p class="empty-state">Couldn't load this week's tips right now. Try refreshing.</p>`;
-    console.error(e);
-  }
-}
-
-// ---------- Archive page ----------
-let ARCHIVE_DATA = null;
+// ---------- The single main list (index.html): all tips, newest first, filterable ----------
+let ALL_TIPS_DATA = null;
 
 function populateFilters(data) {
   const toolSelect = document.getElementById('filter-tool');
@@ -145,12 +131,12 @@ function populateFilters(data) {
 }
 
 function applyFilters() {
-  if (!ARCHIVE_DATA) return;
+  if (!ALL_TIPS_DATA) return;
   const toolVal = document.getElementById('filter-tool').value;
   const pogVal = document.getElementById('filter-pog').value;
   const searchVal = document.getElementById('filter-search').value.trim().toLowerCase();
 
-  const filtered = sortByIssueDesc(ARCHIVE_DATA.tips).filter(tip => {
+  const filtered = sortByIssueDesc(ALL_TIPS_DATA.tips).filter(tip => {
     if (toolVal && tip.tool !== toolVal) return false;
     if (pogVal && !tip.pogTags.includes(pogVal)) return false;
     if (searchVal && !tip.title.toLowerCase().includes(searchVal) &&
@@ -160,23 +146,23 @@ function applyFilters() {
 
   const mount = document.getElementById('archive-issues');
   mount.innerHTML = filtered.length
-    ? filtered.map(t => tipTeaserMarkup(t, ARCHIVE_DATA)).join('')
+    ? filtered.map(t => tipTeaserMarkup(t, ALL_TIPS_DATA)).join('')
     : `<p class="empty-state">No tips match those filters yet. Check back next week.</p>`;
 }
 
-async function renderArchive() {
+async function renderAllTips() {
   const mount = document.getElementById('archive-issues');
   if (!mount) return;
   try {
-    ARCHIVE_DATA = await loadData();
-    populateFilters(ARCHIVE_DATA);
+    ALL_TIPS_DATA = await loadData();
+    populateFilters(ALL_TIPS_DATA);
     applyFilters();
 
     ['filter-tool', 'filter-pog'].forEach(id =>
       document.getElementById(id).addEventListener('change', applyFilters));
     document.getElementById('filter-search').addEventListener('input', applyFilters);
   } catch (e) {
-    mount.innerHTML = `<p class="empty-state">Couldn't load the archive right now. Try refreshing.</p>`;
+    mount.innerHTML = `<p class="empty-state">Couldn't load the tips right now. Try refreshing.</p>`;
     console.error(e);
   }
 }
@@ -190,7 +176,7 @@ async function renderDetail() {
     const id = new URLSearchParams(location.search).get('id');
     const tip = data.tips.find(t => t.id === id);
     if (!tip) {
-      mount.innerHTML = `<p class="empty-state">Tip not found. <a href="archive.html">Back to the archive</a>.</p>`;
+      mount.innerHTML = `<p class="empty-state">Tip not found. <a href="index.html">Back to all tips</a>.</p>`;
       return;
     }
     document.title = tip.title + ' — GUHSD Weekly Tech Tips';
@@ -202,7 +188,6 @@ async function renderDetail() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  renderHome();
-  renderArchive();
+  renderAllTips();
   renderDetail();
 });
