@@ -1,0 +1,104 @@
+{
+  "district": {
+    "name": "Grossmont Union High School District",
+    "shortName": "GUHSD",
+    "complianceUrl": "https://www.guhsd.net/Departments/Business-Services/Educational-Technology-Services/Application-Support/Artificial-Intelligence-AI/index.html",
+    "policyUrl": "https://go.boarddocs.com/ca/guhsd/Board.nsf/goto?open&id=DMAQDC689D00",
+    "regulationUrl": "https://go.boarddocs.com/ca/guhsd/Board.nsf/goto?open&id=DN7RG36DD736",
+    "helpEmail": "help@guhsd.net"
+  },
+  "pogElements": {
+    "GP1": "Active in the Pursuit of Their Intellectual Future",
+    "GP2": "Community Minded Citizen and Globally Aware",
+    "GP3": "Creative Problem Solver & Critical Thinker",
+    "GP4": "Effective Communicator",
+    "GP5": "Healthy and Self-Aware",
+    "GP6": "Kind, Mature Adult",
+    "GP7": "Openminded, Lifelong Learner",
+    "GP8": "Responsible and Collaborative Team Player",
+    "AP1": "Adaptable, Lifelong Learner",
+    "AP2": "Analytical and Collaborative Educator",
+    "AP3": "Community Minded, Globally Aware",
+    "AP4": "Creates Safe Learning Environment for All Students",
+    "AP5": "Effective and Inclusive Communicator",
+    "AP6": "Patient and Compassionate Mentor",
+    "AP7": "Relevant and Future Focused",
+    "AP8": "Self-Aware Professional"
+  },
+  "tools": {
+    "gemini": {
+      "name": "Google Gemini",
+      "loginUrl": "https://gemini.google.com/",
+      "piiSecure": true,
+      "staffUse": true,
+      "studentUse": true,
+      "studentNote": "Approved with guhsd.net account"
+    },
+    "brisk": {
+      "name": "Brisk Teaching",
+      "loginUrl": "https://app.briskteaching.com/",
+      "piiSecure": true,
+      "staffUse": true,
+      "studentUse": false,
+      "studentNote": "Staff use only — not approved for direct student use"
+    },
+    "notebooklm": {
+      "name": "NotebookLM",
+      "loginUrl": "https://notebooklm.google.com/",
+      "piiSecure": true,
+      "staffUse": true,
+      "studentUse": true,
+      "studentNote": "Approved with guhsd.net account"
+    }
+  },
+  "tips": [
+    {
+      "id": "2026-w29-gemini-differentiate",
+      "issueNumber": 3,
+      "weekOf": "2026-07-20",
+      "title": "Differentiate Any Reading in Three Prompts, Not Three Prep Periods",
+      "tool": "gemini",
+      "video": {
+        "url": "https://www.youtube.com/watch?v=uq8FdkApuLk",
+        "title": "Using Gemini for Google Workspace as an Educator",
+        "channel": "Google for Education",
+        "description": "A Google for Education walkthrough of how teachers use Gemini inside the Workspace tools they already have open — drafting materials, adjusting reading levels, and building differentiated versions of an assignment without leaving Docs or Slides."
+      },
+      "whyItMatters": "Every class has a range of readers. Ask Gemini to take one passage and generate a below-level, on-level, and extension version — same content, three entry points — in the time it used to take to rewrite one paragraph by hand. Students get material they can actually access; you get your prep period back.",
+      "pogTags": ["GP7", "AP1", "AP7"],
+      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Keep prompts free of student names or identifying details."
+    },
+    {
+      "id": "2026-w29-brisk-feedback",
+      "issueNumber": 2,
+      "weekOf": "2026-07-13",
+      "title": "Feedback That Lands: Skip the Generic 'Good Job' with Brisk",
+      "tool": "brisk",
+      "video": {
+        "url": "https://www.youtube.com/watch?v=RxGCOyuXsPA",
+        "title": "How to Use Brisk: Brisk Teaching Overview",
+        "channel": "Brisk Teaching",
+        "description": "A guided tour of the Brisk Chrome extension inside a student's Google Doc — choosing a feedback style (Glows & Grows, rubric-based, or next-steps) and generating specific, actionable comments in place of a rubric score alone."
+      },
+      "whyItMatters": "Targeted feedback is one of the highest-leverage moves a teacher can make — and one of the most time-consuming to do well for 150 students. Brisk drafts specific, rubric-aligned comments in seconds so you can spend your energy on the students who need a real conversation, not retyping the same note for the fifth time.",
+      "pogTags": ["GP4", "AP6", "AP5"],
+      "complianceNote": "PII-secure and approved for staff use. Brisk is not currently approved for direct student use in GUHSD — the teacher remains the one giving feedback."
+    },
+    {
+      "id": "2026-w29-notebooklm-studyguide",
+      "issueNumber": 1,
+      "weekOf": "2026-07-06",
+      "title": "Turn Any Unit Packet into a Study Partner with NotebookLM",
+      "tool": "notebooklm",
+      "video": {
+        "url": "https://www.youtube.com/watch?v=S32G0w8YFlg",
+        "title": "An Introduction to Google NotebookLM",
+        "channel": "Higher education instructional technology channel",
+        "description": "A short demonstration of uploading course materials into NotebookLM and using its source-grounded chat to generate summaries and answer questions — with every answer citing back to the exact page it came from."
+      },
+      "whyItMatters": "Upload your unit's readings, slides, and notes, and NotebookLM only answers from what you gave it — no outside internet content, no invented facts. Students can ask it to quiz them or explain a confusing paragraph, and every answer links back to the source. It's a study partner that can't wander off-topic.",
+      "pogTags": ["GP1", "GP3", "AP2"],
+      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Keep student-identifying records (IEPs, grades, behavior notes) out of any uploaded source."
+    }
+  ]
+}
