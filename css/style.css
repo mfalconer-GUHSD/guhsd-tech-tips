@@ -176,8 +176,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   padding: 56px 22px 8px;
 }
 
-/* ---------- Compact teaser cards (home + archive) ---------- */
-#latest-issues, #archive-issues {
+/* ---------- Compact teaser cards (home + archive + pipeline) ---------- */
+#latest-issues, #archive-issues, #pipeline-issues {
   max-width: var(--max-narrow);
   margin: 0 auto;
   padding: 0 22px 60px;
