@@ -6,46 +6,41 @@
 <title>Archive — GUHSD Weekly Tech Tips</title>
 <meta name="description" content="Full archive of GUHSD weekly AI tech tips, filterable by tool and Portrait of a Graduate element.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<header class="masthead">
-  <div class="masthead-inner">
-    <div class="masthead-top">
-      <div>
-        <p class="masthead-eyebrow">AI@GUHSD · Educational Technology Services</p>
-        <h1>Tech Tips Archive</h1>
-      </div>
-      <nav aria-label="Site">
-        <a href="index.html">This Week</a>
-        <a href="archive.html" aria-current="page">Archive</a>
-      </nav>
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <span class="site-nav-brand">AI@GUHSD</span>
+    <div class="site-nav-links">
+      <a href="index.html">This Week</a>
+      <a href="archive.html" aria-current="page">Archive</a>
     </div>
-    <p class="masthead-sub">
-      Every tip we've published, searchable by AI tool or by Portrait of a Graduate element.
-    </p>
   </div>
+</nav>
+
+<header class="hero">
+  <p class="hero-eyebrow">Educational Technology Services</p>
+  <h1>Tech Tips Archive</h1>
+  <p>Every tip we've published, searchable by AI tool or by Portrait of a Graduate element.</p>
 </header>
 
-<main>
-  <p class="section-label">Filter the archive</p>
-  <div class="archive-controls">
-    <select id="filter-tool" aria-label="Filter by AI tool">
-      <option value="">All tools</option>
-    </select>
-    <select id="filter-pog" aria-label="Filter by Portrait of a Graduate element">
-      <option value="">All Portrait of a Graduate elements</option>
-    </select>
-    <input id="filter-search" type="search" placeholder="Search titles or descriptions…" aria-label="Search tips">
-  </div>
+<div class="archive-controls" style="margin-top:40px;">
+  <select id="filter-tool" aria-label="Filter by AI tool">
+    <option value="">All tools</option>
+  </select>
+  <select id="filter-pog" aria-label="Filter by Portrait of a Graduate element">
+    <option value="">All Portrait of a Graduate elements</option>
+  </select>
+  <input id="filter-search" type="search" placeholder="Search titles or descriptions…" aria-label="Search tips">
+</div>
 
-  <p class="section-label">All issues</p>
-  <div id="archive-issues">
-    <p class="empty-state">Loading archive…</p>
-  </div>
-</main>
+<p class="section-eyebrow">All issues</p>
+<div id="archive-issues">
+  <p class="empty-state">Loading archive…</p>
+</div>
 
 <footer class="site-footer">
   Grossmont Union High School District · Educational Technology Services<br>
