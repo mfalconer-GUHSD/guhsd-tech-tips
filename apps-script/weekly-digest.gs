@@ -41,6 +41,10 @@ const DATA_URL = 'https://raw.githubusercontent.com/mfalconer-GUHSD/guhsd-tech-t
 const SITE_URL = 'https://mfalconer-guhsd.github.io/guhsd-tech-tips/';
 const FROM_NAME = 'Mr. Falconer — AI Tech Tips';
 
+// The public forms staff use to manage their own subscription:
+const SIGNUP_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSflh2l3PXs2NGAHv6u-hGjKtv7XPMycD4LKFdD82O3FxRU_Rg/viewform?usp=publish-editor';
+const UNSUBSCRIBE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfEVWKtF0WgzySXhqXC0zeQNQlFlvSvH96vi9dVrbIH07-2TA/viewform?usp=publish-editor';
+
 // Paste your signup form's response-spreadsheet ID here (required):
 const SIGNUP_SHEET_ID = 'PASTE_YOUR_SIGNUP_SHEET_ID_HERE';
 const SIGNUP_EMAIL_HEADER = 'Email Address'; // must match the header text in that sheet
@@ -157,7 +161,7 @@ function sendDigestEmail(tip, data, recipients) {
         'Curated by Mr. Falconer, Assistant Principal &middot; Grossmont Union High School District<br>' +
         'Questions? <a href="mailto:mfalconer@guhsd.net">mfalconer@guhsd.net</a> &middot; ' +
         '<a href="' + SITE_URL + 'archive.html">See all past tips</a> &middot; ' +
-        '<a href="' + SITE_URL + '">Unsubscribe</a> anytime via the sign-up page' +
+        '<a href="' + UNSUBSCRIBE_FORM_URL + '">Unsubscribe</a>' +
       '</p>' +
     '</div>';
 
@@ -179,7 +183,8 @@ function onSignupSubmit(e) {
     GmailApp.sendEmail(email,
       'You\'re signed up for GUHSD AI Tech Tips',
       'You\'ll get a short email whenever a new weekly tip is published. ' +
-      'See past tips anytime at ' + SITE_URL + 'archive.html\n\n' +
+      'See past tips anytime at ' + SITE_URL + 'archive.html\n' +
+      'Want to stop? ' + UNSUBSCRIBE_FORM_URL + '\n\n' +
       '— Mr. Falconer, Assistant Principal',
       { name: FROM_NAME }
     );
