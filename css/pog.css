@@ -60,6 +60,59 @@
   --pog-sp: #3D5A80;
 }
 
+/* ---------- Three-panel visual (Graduate / Adult / System) ---------- */
+.pog-hero-panels {
+  max-width: var(--max-narrow);
+  margin: 32px auto 0;
+  padding: 0 22px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.pog-hero-panel {
+  border: 1px solid var(--divider);
+  border-radius: 14px;
+  padding: 22px 14px;
+  text-align: center;
+  background: var(--white);
+}
+
+.pog-hero-icon {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gray-bg);
+}
+
+.pog-hero-icon svg { width: 26px; height: 26px; }
+
+.pog-hero-icon--gp { color: var(--navy); }
+.pog-hero-icon--ap { color: var(--pog-ap); }
+.pog-hero-icon--sp { color: var(--pog-sp); }
+
+.pog-hero-panel-title {
+  font-size: 0.94rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 4px;
+  letter-spacing: -0.01em;
+}
+
+.pog-hero-panel-sub {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+@media (max-width: 560px) {
+  .pog-hero-panels { grid-template-columns: 1fr; }
+}
+
 .pog-cards {
   max-width: var(--max-narrow);
   margin: 28px auto 0;
