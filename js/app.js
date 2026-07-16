@@ -5,7 +5,7 @@
    Pages:
    - index.html: every PUBLISHED tip, newest first, with tool/POG/search filters (#archive-issues)
    - tip.html?id=...: full detail for a single published tip (#tip-detail)
-   - pipeline.html: EVERY tip regardless of date, oldest-to-newest, with a status badge
+   - pipeline.html: EVERY tip regardless of date, newest/upcoming first, with a status badge
      (#pipeline-issues) — this is the personal "what have I already built" view. Not linked
      from any nav; bookmark it directly. Not truly private (this is a public GitHub Pages
      site), just unlisted — fine for previewing your own draft content, not for anything
@@ -211,13 +211,13 @@ async function renderAllTips() {
   }
 }
 
-// ---------- Pipeline page (pipeline.html): every tip, oldest first, Sent/Scheduled badge ----------
+// ---------- Pipeline page (pipeline.html): every tip, newest/upcoming first, Sent/Scheduled badge ----------
 async function renderPipeline() {
   const mount = document.getElementById('pipeline-issues');
   if (!mount) return;
   try {
     const data = await loadData();
-    const ordered = sortByIssueAsc(data.tips);
+    const ordered = sortByIssueDesc(data.tips);
     const sentCount = ordered.filter(isPublished).length;
 
     const summary = document.getElementById('pipeline-summary');
