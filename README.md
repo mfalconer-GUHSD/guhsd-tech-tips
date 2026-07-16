@@ -43,10 +43,16 @@ existing entries inside the `"tips"` array, then update the fields:
     "description": "1-2 sentence description of what's in the video."
   },
   "whyItMatters": "1-3 sentences on the teacher/student benefit. Shown only on the tip's own page.",
-  "pogTags": ["GP4", "AP1"],      // any codes from the pogElements list below
+  "pogTags": ["GP4", "AP1", "SP7"], // any codes from pogElements: GP (Graduate), AP (Adult), SP (System)
   "complianceNote": "1 sentence reminder — PII, staff-only, parent consent, etc."
 }
 ```
+
+Only tag a code if the tip genuinely supports it — don't pad the list for coverage. In practice,
+most weekly tool tips will fit **SP7 (Supports Innovative Pedagogical Practices)** since that's
+what adopting a new AI tool generally is at the system level. The other SP codes (health,
+facilities, community partnerships, course offerings, etc.) will rarely apply to a tech tip —
+only add them when a tip is actually about that thing.
 
 Increase `issueNumber` by 1 each week. The homepage always shows the 3 highest issue numbers;
 everything lives permanently in the archive. Each tip automatically gets its own page at
