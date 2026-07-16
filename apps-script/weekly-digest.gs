@@ -1,5 +1,5 @@
 /**
- * GUHSD Weekly Tech Tips — Staff Email Digest (v3: school-calendar-aware)
+ * GUHSD Weekly Tech Tips — Staff Email Digest (v3.1: school-calendar-aware)
  *
  * Runs on a DAILY timer (not weekly — see below for why). Each day it
  * checks two things: (1) is today one of the pre-approved send dates for
@@ -29,12 +29,18 @@
  * If GUHSD updates next year's calendar, update SEND_DATES accordingly —
  * this list needs refreshing every school year.
  *
+ * IMPORTANT — sendTestEmail is safe to run anytime:
+ * It ONLY ever sends to your own account (Session.getActiveUser().getEmail()),
+ * never to STATIC_RECIPIENTS or the signup list. That's intentional — a "test"
+ * should never actually reach real staff, especially during summer break when
+ * nobody should be getting these yet. Only checkAndSendDigest (the real
+ * scheduled function) sends to actual recipients, and only on a SEND_DATES day.
+ *
  * SETUP
  * 1. Go to https://script.google.com > New project (your guhsd.net account).
- * 2. Paste this entire file in, replacing the placeholder code.
+ * 2. Paste this entire file in, replacing whatever's there now.
  * 3. Run `sendTestEmail` once (function dropdown > Run) to authorize Gmail
- *    and Sheets access, and to confirm formatting. This always sends,
- *    regardless of date or "new issue" status.
+ *    and Sheets access, and to confirm formatting. This only emails you.
  * 4. Set the real trigger: clock icon (Triggers) > + Add Trigger >
  *    function: checkAndSendDigest > Time-driven > Day timer > pick any
  *    time window (e.g. 6am-7am) > Save. (Day timer, NOT week timer —
@@ -60,7 +66,9 @@ const SIGNUP_EMAIL_HEADER = 'Email Address'; // must match the header text in th
 const UNSUB_SHEET_ID = '1q-9Z9Qzxub-0QvKF_ickjmp9HcAmms0qP5aAdhfvJws';
 const UNSUB_EMAIL_HEADER = 'Email Address';
 
-// Always-included recipients regardless of the signup form (Google Group + individuals):
+// Always-included recipients regardless of the signup form (Google Group + individuals).
+// These are only ever used by the REAL send (checkAndSendDigest) on a scheduled date —
+// sendTestEmail never touches this list.
 const STATIC_RECIPIENTS = [
   'ghhs-certificated-staff@guhsd.net',
   'cgaeir@guhsd.net',
@@ -111,17 +119,16 @@ function checkAndSendDigest() {
   Logger.log('Sent issue #' + latest.issueNumber + ' to ' + recipients.length + ' recipient(s) on ' + today + '.');
 }
 
-// Manually run this once to test formatting/authorization. Ignores SEND_DATES and the
-// "new issue" check — it always sends, so you can verify the email looks right anytime.
+// Manually run this anytime to check formatting/authorization. ALWAYS sends only to your
+// own account — never to STATIC_RECIPIENTS or the signup list, and ignores SEND_DATES.
+// Safe to run during summer break or any other time without emailing real staff.
 function sendTestEmail() {
   const data = fetchData();
   if (!data) return;
   const latest = getLatestTip(data);
   if (!latest) { Logger.log('No tips found in the data file.'); return; }
-  const recipients = getRecipientList();
-  if (!recipients.length) { Logger.log('No recipients found yet — that\'s okay for a first test.'); }
-  sendDigestEmail(latest, data, recipients.length ? recipients : [Session.getActiveUser().getEmail()]);
-  Logger.log('Test email sent for issue #' + latest.issueNumber);
+  sendDigestEmail(latest, data, [Session.getActiveUser().getEmail()]);
+  Logger.log('Test email sent to ' + Session.getActiveUser().getEmail() + ' only, for issue #' + latest.issueNumber);
 }
 
 function fetchData() {
