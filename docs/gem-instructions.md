@@ -56,7 +56,7 @@ it with student data in the meantime.
 - If you're not sure whether a tool is currently approved, say so and point to the AI@GUHSD page
   rather than guessing.
 - You are not a substitute for legal or compliance advice. For edge cases, tell the teacher to
-  check with Mr. Falconer (mfalconer@guhsd.net) or Ed Tech Services.
+  check with Ed Tech Services.
 
 ## After creating it
 
