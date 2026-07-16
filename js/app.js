@@ -16,11 +16,11 @@ function formatWeekOf(dateStr) {
   return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 }
 
-function stampMarkup(tool) {
+function statusPillMarkup(tool) {
   if (tool.studentUse) {
-    return `<div class="stamp" title="Staff &amp; student approved">STAFF<br>+<br>STUDENT</div>`;
+    return `<span class="status-pill approved">&#10003; Approved for staff &amp; students</span>`;
   }
-  return `<div class="stamp caution" title="${escapeHtml(tool.studentNote)}">STAFF<br>ONLY</div>`;
+  return `<span class="status-pill limited">&#9679; Staff use only</span>`;
 }
 
 function issueCardMarkup(tip, data) {
@@ -31,46 +31,42 @@ function issueCardMarkup(tip, data) {
   }).join('');
 
   return `
-  <article class="issue" id="${tip.id}">
-    <div class="issue-head">
-      <div class="issue-number">
-        <strong>Issue No. ${tip.issueNumber}</strong> · Week of ${formatWeekOf(tip.weekOf)}
+  <section class="tip" id="${tip.id}">
+    <div class="tip-inner">
+      <p class="tip-meta"><span class="tip-tool">${escapeHtml(tool.name)}</span> · Issue No. ${tip.issueNumber} · Week of ${formatWeekOf(tip.weekOf)}</p>
+      <h2>${escapeHtml(tip.title)}</h2>
+
+      <a class="video-card" href="${tip.video.url}" target="_blank" rel="noopener">
+        <div class="video-card-top">
+          <span class="play-badge" aria-hidden="true">&#9654;</span>
+          <span>
+            <span class="video-card-title">${escapeHtml(tip.video.title)}</span>
+            <span class="video-card-channel">${escapeHtml(tip.video.channel)} · watch on YouTube</span>
+          </span>
+        </div>
+        <p class="video-card-desc">${escapeHtml(tip.video.description)}</p>
+      </a>
+
+      <p class="why-copy">
+        <span class="label">Why it matters</span>
+        ${escapeHtml(tip.whyItMatters)}
+      </p>
+
+      <div class="pog-block">
+        <span class="label">Portrait of a Graduate elements</span>
+        <div class="pog-tags">${pogTagsHtml}</div>
       </div>
-      <span class="tool-tag">${escapeHtml(tool.name)}</span>
-    </div>
 
-    <h2>${escapeHtml(tip.title)}</h2>
-
-    <a class="video-block" href="${tip.video.url}" target="_blank" rel="noopener">
-      <span class="play" aria-hidden="true">&#9654;</span>
-      <span class="video-meta">
-        <span class="video-title">${escapeHtml(tip.video.title)}</span>
-        <span class="video-channel">${escapeHtml(tip.video.channel)} · watch on YouTube</span>
-        <span class="video-desc">${escapeHtml(tip.video.description)}</span>
-      </span>
-    </a>
-
-    <div class="why-block">
-      <span class="label">Why it matters</span>
-      ${escapeHtml(tip.whyItMatters)}
-    </div>
-
-    <div class="why-block">
-      <span class="label">Portrait of a Graduate elements</span>
-      <div class="pog-tags">${pogTagsHtml}</div>
-    </div>
-
-    <div class="issue-footer">
-      <div class="stamp-row">
-        ${stampMarkup(tool)}
-        <p class="compliance-note">${escapeHtml(tip.complianceNote)}</p>
-      </div>
-      <div class="action-links">
-        <a class="btn primary" href="${tool.loginUrl}" target="_blank" rel="noopener">Log in to ${escapeHtml(tool.name)}</a>
-        <a class="btn" href="${data.district.complianceUrl}" target="_blank" rel="noopener">District AI guidance</a>
+      <div class="tip-footer">
+        ${statusPillMarkup(tool)}
+        <p class="compliance-line">${escapeHtml(tip.complianceNote)}</p>
+        <div class="action-links">
+          <a href="${tool.loginUrl}" target="_blank" rel="noopener">Log in to ${escapeHtml(tool.name)}</a>
+          <a href="${data.district.complianceUrl}" target="_blank" rel="noopener">District AI guidance</a>
+        </div>
       </div>
     </div>
-  </article>`;
+  </section>`;
 }
 
 async function loadData() {
