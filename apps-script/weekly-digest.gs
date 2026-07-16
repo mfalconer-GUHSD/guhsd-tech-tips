@@ -1,5 +1,5 @@
 /**
- * GUHSD Weekly Tech Tips — Staff Email Digest (v5.2: staff suggestions in the nudge)
+ * GUHSD Weekly Tech Tips — Staff Email Digest (v5.1: full research prompt)
  *
  * Runs on a DAILY timer. Each day it checks whether a scheduled send date
  * has arrived (or already passed without sending) and whether new content
@@ -11,10 +11,13 @@
  * itself. Nothing free can watch the internet for tool updates without a
  * human (or a paid API) in the loop. What it DOES do: emails you every week
  * with (a) what's currently published, (b) which upcoming scheduled dates
- * still need content, (c) any staff suggestions submitted since the last
- * check, and (d) a complete, ready-to-paste prompt for a Claude conversation
- * that covers the entire workflow — research, drafting, verification, and
- * publishing, prioritizing staff suggestions first.
+ * still need content, and (c) a complete, ready-to-paste prompt for a
+ * Claude conversation that covers the entire workflow — research, drafting,
+ * verification, and publishing. It's a nudge with the whole playbook
+ * attached, not a researcher itself.
+ *
+ * Staff suggestions for tech tips are handled separately via Google Form
+ * notifications directly — not pulled into this script. Keep it simple.
  *
  * REDUNDANCY #1 — CATCH-UP LOGIC:
  * The script tracks the last FULFILLED send-date (lastSentDateKey) rather
@@ -35,8 +38,7 @@
  *
  * REDUNDANCY #4 — WEEKLY RESEARCH NUDGE:
  * `weeklyResearchReminder()`, on its own weekly trigger, emails you a
- * status snapshot, any staff suggestions, plus the full prompt to paste
- * into Claude.
+ * status snapshot plus the full prompt to paste into Claude.
  *
  * SEND_DATES for 2026-27 (verified against GUHSD's adopted calendar):
  * - First Monday in session: Aug 17, 2026 (this is Issue #1)
@@ -77,20 +79,12 @@ const TIMEZONE = 'America/Los_Angeles';
 
 const SIGNUP_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSflh2l3PXs2NGAHv6u-hGjKtv7XPMycD4LKFdD82O3FxRU_Rg/viewform?usp=publish-editor';
 const UNSUBSCRIBE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfEVWKtF0WgzySXhqXC0zeQNQlFlvSvH96vi9dVrbIH07-2TA/viewform?usp=publish-editor';
-const SUGGESTION_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdqGmnZZopehRcXwUj5gQ9Hk9gUF6NpgJ4jmqcLdE-G4p8SUg/viewform?usp=header';
 
 const SIGNUP_SHEET_ID = '1Ih6HpPXXAjzlpAWbEWmnHSww4GJnaqBGXesj7sX2Ins';
 const SIGNUP_EMAIL_HEADER = 'Email Address';
 
 const UNSUB_SHEET_ID = '1q-9Z9Qzxub-0QvKF_ickjmp9HcAmms0qP5aAdhfvJws';
 const UNSUB_EMAIL_HEADER = 'Email Address';
-
-// Staff "Suggest a Tech Tip" form's response spreadsheet:
-const SUGGESTIONS_SHEET_ID = '1EX6dBaZmk61mLrTj4ImMhT7mLNPw6LluEsPUQc-8v00';
-const SUGGESTIONS_TOPIC_HEADER = 'Topic';
-const SUGGESTIONS_VIDEO_HEADER = 'Video Link';
-const SUGGESTIONS_DESC_HEADER = 'One sentence description of video';
-const SUGGESTIONS_MOREINFO_HEADER = 'Link for teachers to get more information';
 
 // Always-included recipients regardless of the signup form (Google Group + individuals + you).
 const STATIC_RECIPIENTS = [
@@ -161,48 +155,14 @@ function checkAndSendDigest() {
     'Due date was ' + dueDate + (daysLate > 0 ? ' (' + daysLate + ' day(s) late — caught up)' : ' (on time)') + '.');
 }
 
-// Reads staff-submitted tip suggestions. Returns an array of objects, oldest first.
-// Safe if the sheet is empty or the ID isn't set — just returns [].
-function readSuggestions() {
-  if (!SUGGESTIONS_SHEET_ID) return [];
-  try {
-    const sheet = SpreadsheetApp.openById(SUGGESTIONS_SHEET_ID).getSheets()[0];
-    const values = sheet.getDataRange().getValues();
-    if (values.length < 2) return [];
-    const headerRow = values[0].map(h => String(h).trim().toLowerCase());
-    const topicCol = headerRow.indexOf(SUGGESTIONS_TOPIC_HEADER.toLowerCase());
-    const videoCol = headerRow.indexOf(SUGGESTIONS_VIDEO_HEADER.toLowerCase());
-    const descCol = headerRow.indexOf(SUGGESTIONS_DESC_HEADER.toLowerCase());
-    const moreCol = headerRow.indexOf(SUGGESTIONS_MOREINFO_HEADER.toLowerCase());
-
-    if (topicCol === -1) {
-      Logger.log('Suggestions sheet: "' + SUGGESTIONS_TOPIC_HEADER + '" column not found.');
-      return [];
-    }
-
-    return values.slice(1)
-      .filter(row => row[topicCol] && String(row[topicCol]).trim())
-      .map(row => ({
-        topic: String(row[topicCol] || '').trim(),
-        video: videoCol > -1 ? String(row[videoCol] || '').trim() : '',
-        description: descCol > -1 ? String(row[descCol] || '').trim() : '',
-        moreInfo: moreCol > -1 ? String(row[moreCol] || '').trim() : ''
-      }));
-  } catch (e) {
-    Logger.log('Error reading suggestions sheet: ' + e);
-    return [];
-  }
-}
-
 // ---------- The weekly research nudge (this is what Trigger #2 runs) ----------
 // Honest limitation: this does NOT do research itself. It emails you a status
-// snapshot, staff suggestions, plus a complete, ready-to-paste prompt for an
-// actual Claude conversation that covers the whole workflow end to end.
+// snapshot plus a complete, ready-to-paste prompt for an actual Claude
+// conversation that covers the whole workflow end to end.
 function weeklyResearchReminder() {
   const data = fetchData();
   const me = Session.getActiveUser().getEmail();
   const latest = data ? getLatestTip(data) : null;
-  const suggestions = readSuggestions();
 
   let statusLine;
   let upcomingLine;
@@ -216,27 +176,6 @@ function weeklyResearchReminder() {
   } else {
     statusLine = 'No tips are published in tips-data.json yet.';
     upcomingLine = 'Upcoming scheduled dates: ' + SEND_DATES.slice(0, 4).join(', ') + '.';
-  }
-
-  let suggestionsBlock = '';
-  let suggestionsForPrompt = '';
-  if (suggestions.length) {
-    const lines = suggestions.map((s, i) => {
-      let line = (i + 1) + '. ' + s.topic;
-      if (s.video) line += '\n   Video: ' + s.video;
-      if (s.description) line += '\n   Description: ' + s.description;
-      if (s.moreInfo) line += '\n   More info: ' + s.moreInfo;
-      return line;
-    });
-    suggestionsBlock = '\nStaff-submitted suggestions waiting to be considered (' + suggestions.length + '):\n' +
-      lines.join('\n\n') + '\n';
-    suggestionsForPrompt = '\n\nSTAFF SUGGESTIONS TO PRIORITIZE FIRST (from the suggestion form):\n' +
-      lines.join('\n\n') +
-      '\n\nUse these as the primary source for upcoming issues where they fit a tool we cover. ' +
-      'If a suggestion names a tool outside Gemini/Brisk/NotebookLM, still consider it, but note ' +
-      'in the compliance note whether it is district-approved before drafting.';
-  } else {
-    suggestionsBlock = '\nNo staff suggestions submitted since the last check.\n';
   }
 
   const fullPrompt =
@@ -255,28 +194,22 @@ function weeklyResearchReminder() {
     'tool\'s PII/staff/student approval status in tools.html still matches the real district list.\n\n' +
     '4. PUBLISH: Add the new issue(s) to data/tips-data.json in the GitHub repo (issueNumber ' +
     'continuing from the last one, weekOf matching the scheduled date below), keeping the ' +
-    'existing issues intact.' +
-    suggestionsForPrompt +
-    '\n\nCurrent status: ' + statusLine + ' ' + upcomingLine;
+    'existing issues intact.\n\n' +
+    'Current status: ' + statusLine + ' ' + upcomingLine;
 
-  const subject = suggestions.length
-    ? 'Weekly check-in: ' + suggestions.length + ' staff suggestion(s) + research updates'
-    : 'Weekly check-in: research updates for upcoming Tech Tips';
-
+  const subject = 'Weekly check-in: research updates for upcoming Tech Tips';
   const body =
-    statusLine + '\n' + upcomingLine + '\n' +
-    suggestionsBlock + '\n' +
+    statusLine + '\n' + upcomingLine + '\n\n' +
     '=== PASTE THIS ENTIRE PROMPT INTO A CLAUDE CONVERSATION ===\n\n' +
     fullPrompt +
     '\n\n=== END PROMPT ===\n\n' +
     'Reminder: this email is just a nudge — it does not do the research itself. ' +
     'Open a conversation with Claude and paste the prompt above to actually run the check ' +
     'and draft new issues.\n\n' +
-    'Site: ' + SITE_URL + '\n' +
-    'Suggestion form (share with staff): ' + SUGGESTION_FORM_URL;
+    'Site: ' + SITE_URL;
 
   GmailApp.sendEmail(me, subject, body, { name: FROM_NAME });
-  Logger.log('Sent weekly research reminder to ' + me + ' with ' + suggestions.length + ' suggestion(s).');
+  Logger.log('Sent weekly research reminder to ' + me + '.');
 }
 
 // Finds the latest SEND_DATES entry that is <= today. Returns null if none yet.
