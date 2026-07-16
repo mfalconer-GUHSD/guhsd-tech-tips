@@ -1,0 +1,410 @@
+/* ===================================================================
+   GUHSD Weekly Tech Tips — design tokens
+   Palette:  ink #1B2A4A (masthead navy) · gold #C89B3C (seal accent)
+             paper #F7F3EA (warm bulletin paper) · text #21201C
+             sage #4F6F52 (approved/compliance) · rust #9C4B3F (flag/caution)
+   Type:     Lora (display serif, masthead + headlines)
+             Inter (body/UI)
+             IBM Plex Mono (element codes, dates, tool tags)
+   =================================================================== */
+
+:root {
+  --ink: #1B2A4A;
+  --ink-deep: #10192E;
+  --gold: #C89B3C;
+  --gold-soft: #E9D9B3;
+  --paper: #F7F3EA;
+  --paper-dim: #EFE9DA;
+  --text: #21201C;
+  --text-soft: #55524A;
+  --sage: #4F6F52;
+  --sage-soft: #DCE7DD;
+  --rust: #9C4B3F;
+  --rust-soft: #F3DEDA;
+  --rule: #D8D0BC;
+  --radius: 3px;
+  --max: 880px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+
+a { color: var(--ink); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.mono {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  letter-spacing: 0.02em;
+}
+
+/* ---------- Masthead ---------- */
+.masthead {
+  background: var(--ink);
+  color: var(--paper);
+  border-bottom: 6px solid var(--gold);
+}
+
+.masthead-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 28px 24px 22px;
+}
+
+.masthead-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.masthead-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+  margin: 0 0 6px;
+}
+
+.masthead h1 {
+  font-family: 'Lora', Georgia, serif;
+  font-weight: 600;
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.masthead nav {
+  display: flex;
+  gap: 22px;
+  font-size: 0.92rem;
+}
+
+.masthead nav a {
+  color: var(--paper);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 3px;
+}
+
+.masthead nav a:hover,
+.masthead nav a[aria-current="page"] {
+  border-bottom-color: var(--gold);
+}
+
+.masthead-sub {
+  margin-top: 14px;
+  font-size: 0.98rem;
+  color: var(--gold-soft);
+  max-width: 62ch;
+}
+
+/* ---------- Layout ---------- */
+main {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+.section-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 20px;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+/* ---------- Issue card ---------- */
+.issue {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 28px 30px;
+  margin-bottom: 28px;
+  position: relative;
+  box-shadow: 0 1px 0 rgba(27,42,74,0.03);
+}
+
+.issue-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+  border-bottom: 1px dashed var(--rule);
+  padding-bottom: 14px;
+  margin-bottom: 16px;
+}
+
+.issue-number {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.76rem;
+  color: var(--text-soft);
+  letter-spacing: 0.06em;
+}
+
+.issue-number strong {
+  color: var(--ink);
+  font-size: 0.9rem;
+}
+
+.tool-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  background: var(--gold-soft);
+  white-space: nowrap;
+}
+
+.issue h2 {
+  font-family: 'Lora', Georgia, serif;
+  font-size: clamp(1.35rem, 2.4vw, 1.7rem);
+  line-height: 1.25;
+  margin: 0 0 14px;
+  color: var(--ink);
+}
+
+.video-block {
+  display: flex;
+  gap: 16px;
+  background: var(--paper-dim);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin: 0 0 16px;
+  align-items: flex-start;
+}
+
+.video-block .play {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--rust);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+.video-meta a.video-title {
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--ink);
+}
+.video-meta a.video-title:hover { text-decoration: underline; }
+
+.video-meta .video-channel {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--text-soft);
+  margin-top: 2px;
+}
+
+.video-desc {
+  font-size: 0.94rem;
+  color: var(--text-soft);
+  margin-top: 8px;
+}
+
+.why-block {
+  margin: 0 0 18px;
+}
+
+.why-block .label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--sage);
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* ---------- POG tags ---------- */
+.pog-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 18px;
+}
+
+.pog-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  padding: 3px 8px;
+  border-radius: 999px;
+  cursor: help;
+}
+
+/* ---------- Compliance stamp (signature element) ---------- */
+.issue-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  border-top: 1px dashed var(--rule);
+  padding-top: 16px;
+}
+
+.stamp-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.stamp {
+  flex: none;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2.5px solid var(--sage);
+  color: var(--sage);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transform: rotate(-8deg);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.56rem;
+  line-height: 1.15;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 4px;
+}
+
+.stamp.caution {
+  border-color: var(--rust);
+  color: var(--rust);
+}
+
+.compliance-note {
+  font-size: 0.84rem;
+  color: var(--text-soft);
+  max-width: 46ch;
+}
+
+.action-links {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  font-size: 0.86rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--ink);
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.btn.primary {
+  background: var(--ink);
+  color: var(--paper);
+}
+.btn.primary:hover { background: var(--ink-deep); }
+.btn:not(.primary):hover { background: var(--gold-soft); }
+
+/* ---------- Compliance banner ---------- */
+.compliance-banner {
+  background: var(--sage-soft);
+  border: 1px solid var(--sage);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  font-size: 0.9rem;
+  margin-bottom: 32px;
+}
+
+.compliance-banner strong { color: var(--sage); }
+.compliance-banner a { color: var(--ink); font-weight: 600; }
+
+/* ---------- Archive controls ---------- */
+.archive-controls {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.archive-controls select,
+.archive-controls input {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  padding: 9px 12px;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius);
+  background: #fff;
+  color: var(--text);
+}
+
+.archive-controls input { flex: 1; min-width: 180px; }
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-soft);
+  font-family: 'Lora', serif;
+  font-style: italic;
+}
+
+/* ---------- Footer ---------- */
+footer.site-footer {
+  border-top: 1px solid var(--rule);
+  padding: 28px 24px 40px;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-soft);
+}
+
+footer.site-footer a { color: var(--ink); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 560px) {
+  .issue { padding: 20px 18px; }
+  .issue-footer { flex-direction: column; align-items: flex-start; }
+  .video-block { flex-direction: column; }
+}
