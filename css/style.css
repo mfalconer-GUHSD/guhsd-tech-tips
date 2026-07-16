@@ -1,18 +1,18 @@
 /* ===================================================================
    GUHSD Weekly Tech Tips — Apple.com-inspired design system
-   Palette: GUHSD navy #003C71 (hero, nav) · interactive blue #0071e3 (links, CTAs)
-            gold #FFB81C (small accent only) · Apple-gray #F5F5F7 (alt sections)
+   Palette: GUHSD teal #0B6E4F (nav, hero) · deep teal-green #054A35
+            interactive accent #00897B (links, CTAs) · Apple-gray #F5F5F7
             near-black #1D1D1F (text) · secondary gray #6E6E73
    Type:    System font stack (SF Pro on Apple devices, Inter as the
             cross-platform substitute) — tight tracking, big display sizes.
    =================================================================== */
 
 :root {
-  --navy: #003C71;
-  --navy-deep: #002A4F;
-  --blue: #0071E3;
-  --blue-dark: #0058B0;
-  --gold: #FFB81C;
+  --navy: #0B6E4F;
+  --navy-deep: #054A35;
+  --blue: #00897B;
+  --blue-dark: #00695C;
+  --gold: #9AF0C6;
   --gray-bg: #F5F5F7;
   --white: #FFFFFF;
   --text: #1D1D1F;
@@ -53,10 +53,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   position: sticky;
   top: 0;
   z-index: 20;
-  background: rgba(255,255,255,0.8);
+  background: rgba(11,110,79,0.92);
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
-  border-bottom: 1px solid var(--divider);
+  border-bottom: 1px solid rgba(255,255,255,0.15);
 }
 
 .site-nav-inner {
@@ -73,7 +73,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .site-nav-brand {
   font-size: 0.86rem;
   font-weight: 600;
-  color: var(--text);
+  color: var(--white);
   white-space: nowrap;
 }
 
@@ -83,10 +83,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 
 .site-nav-links a {
-  color: var(--text);
+  color: var(--white);
   font-size: 0.8rem;
   font-weight: 400;
-  opacity: 0.8;
+  opacity: 0.82;
 }
 
 .site-nav-links a:hover { opacity: 1; text-decoration: none; }
@@ -115,12 +115,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   letter-spacing: -0.03em;
   margin: 0 0 18px;
   line-height: 1.05;
+  color: var(--white);
 }
 
 .hero p {
   font-size: clamp(1.05rem, 2vw, 1.3rem);
   font-weight: 400;
-  color: rgba(255,255,255,0.78);
+  color: rgba(255,255,255,0.82);
   max-width: 620px;
   margin: 0 auto;
   letter-spacing: -0.01em;
@@ -212,7 +213,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: var(--blue);
+  background: var(--navy);
   color: #fff;
   display: flex;
   align-items: center;
