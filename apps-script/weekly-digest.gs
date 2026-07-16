@@ -1,5 +1,5 @@
 /**
- * GUHSD Weekly Tech Tips — Staff Email Digest (v5: catch-up + reminders + research nudge)
+ * GUHSD Weekly Tech Tips — Staff Email Digest (v5.1: full research prompt)
  *
  * Runs on a DAILY timer. Each day it checks whether a scheduled send date
  * has arrived (or already passed without sending) and whether new content
@@ -11,9 +11,10 @@
  * itself. Nothing free can watch the internet for tool updates without a
  * human (or a paid API) in the loop. What it DOES do: emails you every week
  * with (a) what's currently published, (b) which upcoming scheduled dates
- * still need content, and (c) a ready-to-paste prompt for a Claude
- * conversation to actually do the research and drafting. It's a nudge, not
- * a researcher.
+ * still need content, and (c) a complete, ready-to-paste prompt for a
+ * Claude conversation that covers the entire workflow — research, drafting,
+ * verification, and publishing. It's a nudge with the whole playbook
+ * attached, not a researcher itself.
  *
  * REDUNDANCY #1 — CATCH-UP LOGIC:
  * The script tracks the last FULFILLED send-date (lastSentDateKey) rather
@@ -34,12 +35,10 @@
  *
  * REDUNDANCY #4 — WEEKLY RESEARCH NUDGE:
  * `weeklyResearchReminder()`, on its own weekly trigger, emails you a
- * standing prompt to bring to Claude, plus a status snapshot (what's
- * published, what's still unfilled) so you're never guessing where things
- * stand.
+ * status snapshot plus the full prompt to paste into Claude.
  *
  * SEND_DATES for 2026-27 (verified against GUHSD's adopted calendar):
- * - First Monday in session: Aug 17, 2026
+ * - First Monday in session: Aug 17, 2026 (this is Issue #1)
  * - Labor Day (Mon Sep 7) -> shifted to Tue Sep 8
  * - Thanksgiving week (Nov 23-27) -> skipped entirely
  * - Winter break (Dec 21 - Jan 1) -> both weeks skipped
@@ -155,7 +154,8 @@ function checkAndSendDigest() {
 
 // ---------- The weekly research nudge (this is what Trigger #2 runs) ----------
 // Honest limitation: this does NOT check the internet itself. It emails you a
-// status snapshot plus a ready-to-paste prompt for an actual Claude conversation.
+// status snapshot plus a complete, ready-to-paste prompt for an actual Claude
+// conversation that covers the whole workflow end to end.
 function weeklyResearchReminder() {
   const data = fetchData();
   const me = Session.getActiveUser().getEmail();
@@ -175,15 +175,34 @@ function weeklyResearchReminder() {
     upcomingLine = 'Upcoming scheduled dates: ' + SEND_DATES.slice(0, 4).join(', ') + '.';
   }
 
+  const fullPrompt =
+    'I run the GUHSD Weekly Tech Tips site (repo: mfalconer-GUHSD/guhsd-tech-tips). ' +
+    'Please do our full weekly workflow:\n\n' +
+    '1. RESEARCH: Check for recent updates to Google Gemini, Brisk Teaching, and NotebookLM ' +
+    '(new features, changed workflows). Also check whether GUHSD has approved any new AI ' +
+    'tools since we last covered the compliance table (see tools.html and the AI@GUHSD page).\n\n' +
+    '2. DRAFT: Based on what you find, draft the next tip issue(s) needed to fill the ' +
+    'unfilled scheduled dates below. Each issue needs: a captivating title, a one-sentence ' +
+    'teaser, a real YouTube video (search and verify it is genuinely 5 minutes or under — ' +
+    'do not guess), a short video description, a 2-4 sentence "why it matters," Portrait of ' +
+    'a Graduate tags (GP/AP/SP codes — only tag what genuinely fits, SP7 usually applies), ' +
+    'and a compliance note matching that tool\'s current approval status.\n\n' +
+    '3. VERIFY: Double check the video is still live, still short enough, and that the ' +
+    'tool\'s PII/staff/student approval status in tools.html still matches the real district list.\n\n' +
+    '4. PUBLISH: Add the new issue(s) to data/tips-data.json in the GitHub repo (issueNumber ' +
+    'continuing from the last one, weekOf matching the scheduled date below), keeping the ' +
+    'existing issues intact.\n\n' +
+    'Current status: ' + statusLine + ' ' + upcomingLine;
+
   const subject = 'Weekly check-in: research updates for upcoming Tech Tips';
   const body =
     statusLine + '\n' + upcomingLine + '\n\n' +
-    'Suggested prompt to paste into a Claude conversation:\n\n' +
-    '"Research any recent updates to Gemini, Brisk Teaching, and NotebookLM, and check ' +
-    'whether GUHSD has approved any new AI tools since we last checked. Then draft the ' +
-    'next tech tip issue(s), verifying video links, runtimes, and compliance status as usual."\n\n' +
+    '=== PASTE THIS ENTIRE PROMPT INTO A CLAUDE CONVERSATION ===\n\n' +
+    fullPrompt +
+    '\n\n=== END PROMPT ===\n\n' +
     'Reminder: this email is just a nudge — it does not do the research itself. ' +
-    'Open a conversation with Claude to actually run the check and draft new issues.\n\n' +
+    'Open a conversation with Claude and paste the prompt above to actually run the check ' +
+    'and draft new issues.\n\n' +
     'Site: ' + SITE_URL;
 
   GmailApp.sendEmail(me, subject, body, { name: FROM_NAME });
@@ -197,7 +216,7 @@ function getMostRecentDueDate(todayStr) {
     if (SEND_DATES[i] <= todayStr) {
       mostRecent = SEND_DATES[i];
     } else {
-      break; // SEND_DATES is in ascending order, so we can stop early
+      break;
     }
   }
   return mostRecent;
@@ -326,7 +345,7 @@ function sendDigestEmail(tip, data, recipients) {
       '<p style="font-size:13px;color:#888;border-top:1px solid #ddd;padding-top:14px;">' +
         'Curated by Mr. Falconer, Assistant Principal &middot; Grossmont Union High School District<br>' +
         'Questions? <a href="mailto:mfalconer@guhsd.net">mfalconer@guhsd.net</a> &middot; ' +
-        '<a href="' + SITE_URL + 'archive.html">See all past tips</a> &middot; ' +
+        '<a href="' + SITE_URL + '">See all previous tips</a> &middot; ' +
         '<a href="' + UNSUBSCRIBE_FORM_URL + '">Unsubscribe</a>' +
       '</p>' +
     '</div>';
@@ -349,7 +368,7 @@ function onSignupSubmit(e) {
     GmailApp.sendEmail(email,
       'You\'re signed up for GUHSD AI Tech Tips',
       'You\'ll get a short email whenever a new weekly tip is published. ' +
-      'See past tips anytime at ' + SITE_URL + 'archive.html\n' +
+      'See past tips anytime at ' + SITE_URL + '\n' +
       'Want to stop? ' + UNSUBSCRIBE_FORM_URL + '\n\n' +
       '— Mr. Falconer, Assistant Principal',
       { name: FROM_NAME }
