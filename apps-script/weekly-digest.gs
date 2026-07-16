@@ -1,33 +1,42 @@
 /**
- * GUHSD Weekly Tech Tips — Staff Email Digest (v4: catch-up + reminders)
+ * GUHSD Weekly Tech Tips — Staff Email Digest (v5: catch-up + reminders + research nudge)
  *
  * Runs on a DAILY timer. Each day it checks whether a scheduled send date
  * has arrived (or already passed without sending) and whether new content
  * is ready. It only actually emails staff when both are true.
  *
+ * A SEPARATE WEEKLY TRIGGER (see setup step 5) runs weeklyResearchReminder(),
+ * which is the honest, free version of "autonomously check for better tips."
+ * IMPORTANT LIMITATION, stated plainly: this reminder does NOT do research
+ * itself. Nothing free can watch the internet for tool updates without a
+ * human (or a paid API) in the loop. What it DOES do: emails you every week
+ * with (a) what's currently published, (b) which upcoming scheduled dates
+ * still need content, and (c) a ready-to-paste prompt for a Claude
+ * conversation to actually do the research and drafting. It's a nudge, not
+ * a researcher.
+ *
  * REDUNDANCY #1 — CATCH-UP LOGIC:
- * Earlier versions only sent if today was an EXACT match in SEND_DATES.
- * That meant if you forgot to publish a tip by 7am on the scheduled day,
- * it would silently wait for the NEXT scheduled date — potentially a
- * multi-week gap nobody would notice. Now the script tracks the last
- * FULFILLED send-date (lastSentDateKey) instead of just an issue number.
- * Each day it finds the most recent scheduled date that is <= today. If
- * that date hasn't been fulfilled yet AND a new issue exists, it sends —
- * whether that's exactly on time or a few days late. It keeps checking
- * every day until it catches up.
+ * The script tracks the last FULFILLED send-date (lastSentDateKey) rather
+ * than just an issue number. Each day it finds the most recent scheduled
+ * date that is <= today. If that date hasn't been fulfilled yet AND a new
+ * issue exists, it sends — on time or a few days late. It keeps checking
+ * every day until it catches up, so a missed date is never permanent.
  *
  * REDUNDANCY #2 — MISSED-CONTENT REMINDER:
- * If a scheduled date arrives (or has passed) with no new issue ready,
- * the script emails YOU (not staff) a one-time reminder per due-date —
- * "today was/is a scheduled day and nothing's published yet." It won't
- * repeat that reminder every day for the same due-date, so it won't spam
- * you, but it will remind again if a NEW due-date also passes unfulfilled.
+ * If a scheduled date arrives (or has passed) with no new issue ready, the
+ * script emails YOU (not staff) a one-time reminder per due-date. Won't
+ * repeat daily for the same date, but reminds again if a new date also
+ * passes unfulfilled.
  *
  * REDUNDANCY #3 — MANUAL OVERRIDE:
  * Run `forceSendNow()` anytime to immediately send the latest issue to
- * real recipients, bypassing the date check entirely. Useful if you want
- * to push a late issue out right away instead of waiting for the next
- * automatic daily check.
+ * real recipients, bypassing the date check entirely.
+ *
+ * REDUNDANCY #4 — WEEKLY RESEARCH NUDGE:
+ * `weeklyResearchReminder()`, on its own weekly trigger, emails you a
+ * standing prompt to bring to Claude, plus a status snapshot (what's
+ * published, what's still unfilled) so you're never guessing where things
+ * stand.
  *
  * SEND_DATES for 2026-27 (verified against GUHSD's adopted calendar):
  * - First Monday in session: Aug 17, 2026
@@ -42,21 +51,23 @@
  * - Last day of student attendance: Thu Jun 3, 2027
  * Update this list once GUHSD adopts the 2027-28 calendar.
  *
- * IMPORTANT — sendTestEmail is safe to run anytime:
- * It ONLY ever sends to your own account, never to STATIC_RECIPIENTS or
- * the signup list, and ignores dates entirely. forceSendNow() is the one
- * that reaches real recipients on demand — use it deliberately.
+ * IMPORTANT — sendTestEmail is safe to run anytime: it ONLY ever sends to
+ * your own account, never STATIC_RECIPIENTS or the signup list, and
+ * ignores dates entirely. forceSendNow() is the one that reaches real
+ * recipients on demand — use it deliberately.
  *
  * SETUP
  * 1. Go to https://script.google.com > New project (your guhsd.net account).
  * 2. Paste this entire file in, replacing whatever's there now.
  * 3. Run `sendTestEmail` once to authorize Gmail/Sheets access and check
  *    formatting. This only emails you.
- * 4. Trigger: clock icon > + Add Trigger > function: checkAndSendDigest >
- *    Time-driven > Day timer > any time window > Save.
- * 5. Done. Publish a new issue in tips-data.json before its scheduled
- *    date, or a little late is fine too — the script will catch up and
- *    remind you either way.
+ * 4. Trigger #1 (the real sender): clock icon > + Add Trigger > function:
+ *    checkAndSendDigest > Time-driven > Day timer > any time window > Save.
+ * 5. Trigger #2 (the research nudge): clock icon > + Add Trigger > function:
+ *    weeklyResearchReminder > Time-driven > Week timer > pick a day (e.g.
+ *    Wednesday) > any time window > Save.
+ * 6. Done. Publish new issues in tips-data.json as the weekly nudge
+ *    prompts you — the send/catch-up/reminder logic handles the rest.
  */
 
 const DATA_URL = 'https://raw.githubusercontent.com/mfalconer-GUHSD/guhsd-tech-tips/main/data/tips-data.json';
@@ -95,7 +106,7 @@ const SEND_DATES = [
   '2027-05-03', '2027-05-10', '2027-05-17', '2027-05-24', '2027-06-01'
 ];
 
-// ---------- The daily check (this is what the trigger runs) ----------
+// ---------- The daily check (this is what Trigger #1 runs) ----------
 function checkAndSendDigest() {
   const today = Utilities.formatDate(new Date(), TIMEZONE, 'yyyy-MM-dd');
 
@@ -122,8 +133,6 @@ function checkAndSendDigest() {
 
   const lastIssueSent = Number(PropertiesService.getScriptProperties().getProperty('lastIssueSent') || 0);
   if (latest.issueNumber <= lastIssueSent) {
-    // Due date has arrived/passed but no new content exists yet — this is the
-    // exact gap this version is designed to catch. Remind once per due-date.
     Logger.log('Due date ' + dueDate + ' has arrived but no new issue is published yet.');
     maybeSendMissedContentReminder(dueDate, today);
     return;
@@ -142,6 +151,43 @@ function checkAndSendDigest() {
   const daysLate = daysBetween(dueDate, today);
   Logger.log('Sent issue #' + latest.issueNumber + ' to ' + recipients.length + ' recipient(s). ' +
     'Due date was ' + dueDate + (daysLate > 0 ? ' (' + daysLate + ' day(s) late — caught up)' : ' (on time)') + '.');
+}
+
+// ---------- The weekly research nudge (this is what Trigger #2 runs) ----------
+// Honest limitation: this does NOT check the internet itself. It emails you a
+// status snapshot plus a ready-to-paste prompt for an actual Claude conversation.
+function weeklyResearchReminder() {
+  const data = fetchData();
+  const me = Session.getActiveUser().getEmail();
+  const latest = data ? getLatestTip(data) : null;
+
+  let statusLine;
+  let upcomingLine;
+  if (latest) {
+    statusLine = 'Content is currently published through Issue #' + latest.issueNumber +
+      ' (week of ' + latest.weekOf + ').';
+    const upcoming = SEND_DATES.filter(d => d > latest.weekOf).slice(0, 4);
+    upcomingLine = upcoming.length
+      ? 'Next scheduled dates without content yet: ' + upcoming.join(', ') + '.'
+      : 'All remaining scheduled dates for this year have content — nice work.';
+  } else {
+    statusLine = 'No tips are published in tips-data.json yet.';
+    upcomingLine = 'Upcoming scheduled dates: ' + SEND_DATES.slice(0, 4).join(', ') + '.';
+  }
+
+  const subject = 'Weekly check-in: research updates for upcoming Tech Tips';
+  const body =
+    statusLine + '\n' + upcomingLine + '\n\n' +
+    'Suggested prompt to paste into a Claude conversation:\n\n' +
+    '"Research any recent updates to Gemini, Brisk Teaching, and NotebookLM, and check ' +
+    'whether GUHSD has approved any new AI tools since we last checked. Then draft the ' +
+    'next tech tip issue(s), verifying video links, runtimes, and compliance status as usual."\n\n' +
+    'Reminder: this email is just a nudge — it does not do the research itself. ' +
+    'Open a conversation with Claude to actually run the check and draft new issues.\n\n' +
+    'Site: ' + SITE_URL;
+
+  GmailApp.sendEmail(me, subject, body, { name: FROM_NAME });
+  Logger.log('Sent weekly research reminder to ' + me + '.');
 }
 
 // Finds the latest SEND_DATES entry that is <= today. Returns null if none yet.
@@ -168,7 +214,7 @@ function maybeSendMissedContentReminder(dueDate, today) {
   const props = PropertiesService.getScriptProperties();
   const lastReminded = props.getProperty('lastReminderDueDate') || '';
   if (lastReminded === dueDate) {
-    return; // already reminded about this specific due-date
+    return;
   }
   const me = Session.getActiveUser().getEmail();
   const daysLate = daysBetween(dueDate, today);
@@ -186,7 +232,7 @@ function maybeSendMissedContentReminder(dueDate, today) {
 }
 
 // Manual override: sends the latest issue to REAL recipients right now, ignoring the
-// date/catch-up logic entirely. Use when you want to push a late issue immediately.
+// date/catch-up logic entirely.
 function forceSendNow() {
   const data = fetchData();
   if (!data) return;
@@ -202,7 +248,7 @@ function forceSendNow() {
 }
 
 // Manually run this anytime to check formatting/authorization. ALWAYS sends only to your
-// own account — never to STATIC_RECIPIENTS or the signup list, and ignores all date logic.
+// own account — never STATIC_RECIPIENTS or the signup list, and ignores all date logic.
 function sendTestEmail() {
   const data = fetchData();
   if (!data) return;
