@@ -62,9 +62,9 @@
   },
   "tips": [
     {
-      "id": "2026-w31-brisk-quiz",
+      "id": "2026-09-08-brisk-quiz",
       "issueNumber": 4,
-      "weekOf": "2026-07-27",
+      "weekOf": "2026-09-08",
       "title": "Turn Any YouTube Video Into an Instant Quiz with Brisk",
       "teaser": "Point Brisk at a video or article and get a ready-to-grade quiz in under a minute.",
       "tool": "brisk",
@@ -79,9 +79,9 @@
       "complianceNote": "PII-secure and approved for staff use. Brisk is not currently approved for direct student use in GUHSD — assign the generated quiz through your own Google Form or Doc."
     },
     {
-      "id": "2026-w29-gemini-differentiate",
+      "id": "2026-08-31-gemini-differentiate",
       "issueNumber": 3,
-      "weekOf": "2026-07-20",
+      "weekOf": "2026-08-31",
       "title": "Differentiate Any Reading in Three Prompts, Not Three Prep Periods",
       "teaser": "One passage in, three reading levels out — in the time it took to rewrite one paragraph.",
       "tool": "gemini",
@@ -96,9 +96,9 @@
       "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Keep prompts free of student names or identifying details."
     },
     {
-      "id": "2026-w29-brisk-feedback",
+      "id": "2026-08-24-brisk-feedback",
       "issueNumber": 2,
-      "weekOf": "2026-07-13",
+      "weekOf": "2026-08-24",
       "title": "Feedback That Lands: Skip the Generic 'Good Job' with Brisk",
       "teaser": "Draft specific, rubric-aligned comments in seconds instead of retyping the same note all period.",
       "tool": "brisk",
@@ -113,9 +113,9 @@
       "complianceNote": "PII-secure and approved for staff use. Brisk is not currently approved for direct student use in GUHSD — the teacher remains the one giving feedback."
     },
     {
-      "id": "2026-w29-notebooklm-studyguide",
+      "id": "2026-08-17-notebooklm-studyguide",
       "issueNumber": 1,
-      "weekOf": "2026-07-06",
+      "weekOf": "2026-08-17",
       "title": "Turn Any Unit Packet into a Study Partner with NotebookLM",
       "teaser": "A study partner grounded only in the sources you upload — it can't wander off-topic.",
       "tool": "notebooklm",
