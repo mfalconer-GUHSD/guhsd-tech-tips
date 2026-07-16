@@ -8,6 +8,7 @@
      to both sections.
    - tip.html?id=...: full detail for a single published tip (#tip-detail). Legacy tips don't
      get a detail page — they link straight out to the video/more-info/get-started URLs.
+   - 2025-26-archive.html: every legacy tip, no filters, newest first (#legacy-archive-issues).
    - pipeline.html: EVERY current-year tip regardless of date, newest/upcoming first, with a
      status badge (#pipeline-issues) — personal "what have I already built" view. Not linked
      from any nav; bookmark it directly.
@@ -76,7 +77,7 @@ function tipTeaserMarkup(tip, data) {
   </article>`;
 }
 
-// ---------- Legacy tip card (2025-26 archive, shown on index.html and used for search) ----------
+// ---------- Legacy tip card (2025-26 archive: shown on index.html search AND the standalone archive page) ----------
 function legacyTeaserMarkup(tip, data) {
   const pogTagsHtml = pogChipsMarkup(tip.pogTags, data.pogElements);
   const coreNote = tip.notCoreToolNote
@@ -251,6 +252,22 @@ async function renderAllTips() {
   }
 }
 
+// ---------- Standalone legacy archive page (2025-26-archive.html): all legacy tips, no filters ----------
+async function renderLegacyArchivePage() {
+  const mount = document.getElementById('legacy-archive-issues');
+  if (!mount) return;
+  try {
+    const data = await loadData();
+    const legacyTips = sortByDateDesc(data.legacyTips || []);
+    mount.innerHTML = legacyTips.length
+      ? legacyTips.map(t => legacyTeaserMarkup(t, data)).join('')
+      : `<p class="empty-state">No archived tips found.</p>`;
+  } catch (e) {
+    mount.innerHTML = `<p class="empty-state">Couldn't load the archive right now. Try refreshing.</p>`;
+    console.error(e);
+  }
+}
+
 // ---------- Pipeline page (pipeline.html): every current-year tip, newest/upcoming first ----------
 async function renderPipeline() {
   const mount = document.getElementById('pipeline-issues');
@@ -302,6 +319,7 @@ async function renderDetail() {
 
 document.addEventListener('DOMContentLoaded', () => {
   renderAllTips();
+  renderLegacyArchivePage();
   renderPipeline();
   renderDetail();
 });
