@@ -23,7 +23,16 @@
     "AP5": "Effective and Inclusive Communicator",
     "AP6": "Patient and Compassionate Mentor",
     "AP7": "Relevant and Future Focused",
-    "AP8": "Self-Aware Professional"
+    "AP8": "Self-Aware Professional",
+    "SP1": "Communicative and Collaborative Community Partner",
+    "SP2": "Effective, Forward-Thinking District",
+    "SP3": "Prepares Students for Their Future",
+    "SP4": "Prioritizes Health",
+    "SP5": "Promotes a Welcoming and Inclusive Culture",
+    "SP6": "Robust, Diverse, Versatile Course Offerings",
+    "SP7": "Supports Innovative Pedagogical Practices",
+    "SP8": "Updated and Well-Maintained Facilities",
+    "SP9": "Values Alternative Pathways"
   },
   "tools": {
     "gemini": {
