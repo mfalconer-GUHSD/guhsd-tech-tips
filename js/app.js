@@ -1,6 +1,10 @@
 /* GUHSD Weekly Tech Tips — rendering + filtering
    Data source: /data/tips-data.json
-   Add new tips by editing that file — no code changes needed. */
+   Add new tips by editing that file — no code changes needed.
+
+   Pages:
+   - index.html / archive.html: compact teaser cards (#latest-issues / #archive-issues)
+   - tip.html?id=...: full detail for a single tip (#tip-detail) */
 
 const DATA_URL = 'data/tips-data.json';
 
@@ -16,6 +20,14 @@ function formatWeekOf(dateStr) {
   return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 }
 
+// Recognizable YouTube badge (red rounded rect + white triangle), not a generic play icon.
+function ytIcon(w, h) {
+  return `<svg class="yt-icon" width="${w}" height="${h}" viewBox="0 0 28 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect width="28" height="20" rx="5" fill="#FF0000"/>
+    <path d="M11.5 6.3L19 10l-7.5 3.7V6.3z" fill="#fff"/>
+  </svg>`;
+}
+
 function statusPillMarkup(tool) {
   if (tool.studentUse) {
     return `<span class="status-pill approved">&#10003; Approved for staff &amp; students</span>`;
@@ -23,7 +35,23 @@ function statusPillMarkup(tool) {
   return `<span class="status-pill limited">&#9679; Staff use only</span>`;
 }
 
-function issueCardMarkup(tip, data) {
+// ---------- Compact preview card (home + archive) ----------
+function tipTeaserMarkup(tip, data) {
+  const tool = data.tools[tip.tool];
+  return `
+  <article class="tip-teaser" id="${tip.id}">
+    <p class="tip-teaser-meta"><span class="tip-teaser-tool">${escapeHtml(tool.name)}</span> · Issue No. ${tip.issueNumber} · ${formatWeekOf(tip.weekOf)}</p>
+    <h3><a href="tip.html?id=${encodeURIComponent(tip.id)}">${escapeHtml(tip.title)}</a></h3>
+    <p class="teaser-copy">${escapeHtml(tip.teaser || tip.whyItMatters)}</p>
+    <div class="tip-teaser-links">
+      <a class="yt-link" href="${tip.video.url}" target="_blank" rel="noopener">${ytIcon(22, 16)} Watch on YouTube</a>
+      <a class="read-more" href="tip.html?id=${encodeURIComponent(tip.id)}">Read the full tip</a>
+    </div>
+  </article>`;
+}
+
+// ---------- Full detail (tip.html) ----------
+function tipDetailMarkup(tip, data) {
   const tool = data.tools[tip.tool];
   const pogTagsHtml = tip.pogTags.map(code => {
     const label = data.pogElements[code] || code;
@@ -31,14 +59,14 @@ function issueCardMarkup(tip, data) {
   }).join('');
 
   return `
-  <section class="tip" id="${tip.id}">
+  <section class="tip">
     <div class="tip-inner">
       <p class="tip-meta"><span class="tip-tool">${escapeHtml(tool.name)}</span> · Issue No. ${tip.issueNumber} · Week of ${formatWeekOf(tip.weekOf)}</p>
       <h2>${escapeHtml(tip.title)}</h2>
 
       <a class="video-card" href="${tip.video.url}" target="_blank" rel="noopener">
         <div class="video-card-top">
-          <span class="play-badge" aria-hidden="true">&#9654;</span>
+          ${ytIcon(40, 29)}
           <span>
             <span class="video-card-title">${escapeHtml(tip.video.title)}</span>
             <span class="video-card-channel">${escapeHtml(tip.video.channel)} · watch on YouTube</span>
@@ -86,7 +114,7 @@ async function renderHome() {
   try {
     const data = await loadData();
     const latest = sortByIssueDesc(data.tips).slice(0, 3);
-    mount.innerHTML = latest.map(t => issueCardMarkup(t, data)).join('');
+    mount.innerHTML = latest.map(t => tipTeaserMarkup(t, data)).join('');
   } catch (e) {
     mount.innerHTML = `<p class="empty-state">Couldn't load this week's tips right now. Try refreshing.</p>`;
     console.error(e);
@@ -132,7 +160,7 @@ function applyFilters() {
 
   const mount = document.getElementById('archive-issues');
   mount.innerHTML = filtered.length
-    ? filtered.map(t => issueCardMarkup(t, ARCHIVE_DATA)).join('')
+    ? filtered.map(t => tipTeaserMarkup(t, ARCHIVE_DATA)).join('')
     : `<p class="empty-state">No tips match those filters yet. Check back next week.</p>`;
 }
 
@@ -153,7 +181,28 @@ async function renderArchive() {
   }
 }
 
+// ---------- Individual tip page ----------
+async function renderDetail() {
+  const mount = document.getElementById('tip-detail');
+  if (!mount) return;
+  try {
+    const data = await loadData();
+    const id = new URLSearchParams(location.search).get('id');
+    const tip = data.tips.find(t => t.id === id);
+    if (!tip) {
+      mount.innerHTML = `<p class="empty-state">Tip not found. <a href="archive.html">Back to the archive</a>.</p>`;
+      return;
+    }
+    document.title = tip.title + ' — GUHSD Weekly Tech Tips';
+    mount.innerHTML = tipDetailMarkup(tip, data);
+  } catch (e) {
+    mount.innerHTML = `<p class="empty-state">Couldn't load this tip right now. Try refreshing.</p>`;
+    console.error(e);
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   renderHome();
   renderArchive();
+  renderDetail();
 });
