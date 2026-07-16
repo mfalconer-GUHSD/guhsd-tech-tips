@@ -3,7 +3,7 @@
    Add new tips by editing that file — no code changes needed.
 
    Pages:
-   - index.html: every PUBLISHED tip, newest first, with tool/POG/search filters (#archive-issues)
+   - index.html: every PUBLISHED tip, newest first, with tool/search filters (#archive-issues)
    - tip.html?id=...: full detail for a single published tip (#tip-detail)
    - pipeline.html: EVERY tip regardless of date, newest/upcoming first, with a status badge
      (#pipeline-issues) — this is the personal "what have I already built" view. Not linked
@@ -154,8 +154,7 @@ let ALL_TIPS_DATA = null;
 
 function populateFilters(data) {
   const toolSelect = document.getElementById('filter-tool');
-  const pogSelect = document.getElementById('filter-pog');
-  if (!toolSelect || !pogSelect) return;
+  if (!toolSelect) return;
 
   Object.entries(data.tools).forEach(([key, tool]) => {
     const opt = document.createElement('option');
@@ -163,26 +162,17 @@ function populateFilters(data) {
     opt.textContent = tool.name;
     toolSelect.appendChild(opt);
   });
-
-  Object.entries(data.pogElements).forEach(([code, label]) => {
-    const opt = document.createElement('option');
-    opt.value = code;
-    opt.textContent = `${code} — ${label}`;
-    pogSelect.appendChild(opt);
-  });
 }
 
 function applyFilters() {
   if (!ALL_TIPS_DATA) return;
   const toolVal = document.getElementById('filter-tool').value;
-  const pogVal = document.getElementById('filter-pog').value;
   const searchVal = document.getElementById('filter-search').value.trim().toLowerCase();
 
   const published = ALL_TIPS_DATA.tips.filter(isPublished);
 
   const filtered = sortByIssueDesc(published).filter(tip => {
     if (toolVal && tip.tool !== toolVal) return false;
-    if (pogVal && !tip.pogTags.includes(pogVal)) return false;
     if (searchVal && !tip.title.toLowerCase().includes(searchVal) &&
         !tip.whyItMatters.toLowerCase().includes(searchVal)) return false;
     return true;
@@ -202,8 +192,7 @@ async function renderAllTips() {
     populateFilters(ALL_TIPS_DATA);
     applyFilters();
 
-    ['filter-tool', 'filter-pog'].forEach(id =>
-      document.getElementById(id).addEventListener('change', applyFilters));
+    document.getElementById('filter-tool').addEventListener('change', applyFilters);
     document.getElementById('filter-search').addEventListener('input', applyFilters);
   } catch (e) {
     mount.innerHTML = `<p class="empty-state">Couldn't load the tips right now. Try refreshing.</p>`;
