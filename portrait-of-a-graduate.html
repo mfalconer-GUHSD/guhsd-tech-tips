@@ -30,28 +30,27 @@
   <p>The knowledge, skills, and mindsets GUHSD aspires to build in every graduate, every adult, and the system itself. Tap an element to see what it actually means.</p>
 </header>
 
-<div class="pog-hero-panels">
-  <div class="pog-hero-panel">
-    <div class="pog-hero-icon pog-hero-icon--gp">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5-10-5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg>
-    </div>
-    <p class="pog-hero-panel-title">Portrait of a Graduate</p>
-    <p class="pog-hero-panel-sub">What every student becomes</p>
-  </div>
-  <div class="pog-hero-panel">
-    <div class="pog-hero-icon pog-hero-icon--ap">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
-    </div>
-    <p class="pog-hero-panel-title">Portrait of an Adult</p>
-    <p class="pog-hero-panel-sub">What every adult models</p>
-  </div>
-  <div class="pog-hero-panel">
-    <div class="pog-hero-icon pog-hero-icon--sp">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M10 21v-6h4v6"/></svg>
-    </div>
-    <p class="pog-hero-panel-title">System Portrait</p>
-    <p class="pog-hero-panel-sub">What the district provides</p>
-  </div>
+<div class="pog-nest-wrap">
+  <svg class="pog-nest-diagram" viewBox="0 0 400 400" role="img" aria-labelledby="pog-nest-title pog-nest-desc">
+    <title id="pog-nest-title">Nested Portrait diagram</title>
+    <desc id="pog-nest-desc">The System Portrait surrounds and supports the Portrait of an Adult, which surrounds and supports the Portrait of a Graduate at the center.</desc>
+    <circle cx="200" cy="200" r="190" fill="var(--pog-sp)" fill-opacity="0.12" stroke="var(--pog-sp)" stroke-width="2"/>
+    <circle cx="200" cy="200" r="130" fill="var(--pog-ap)" fill-opacity="0.18" stroke="var(--pog-ap)" stroke-width="2"/>
+    <circle cx="200" cy="200" r="70" fill="var(--navy)"/>
+    <text x="200" y="38" text-anchor="middle" class="pog-nest-label" fill="var(--pog-sp)">SYSTEM PORTRAIT</text>
+    <text x="200" y="98" text-anchor="middle" class="pog-nest-label" fill="var(--pog-ap)">PORTRAIT OF AN ADULT</text>
+    <g transform="translate(186,168)">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5-10-5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg>
+    </g>
+    <text x="200" y="222" text-anchor="middle" class="pog-nest-label pog-nest-label--center">PORTRAIT OF A GRADUATE</text>
+  </svg>
+
+  <ul class="pog-nest-legend">
+    <li><span class="pog-nest-dot" style="background:var(--pog-sp)"></span> <strong>System Portrait</strong> — what the district provides</li>
+    <li><span class="pog-nest-dot" style="background:var(--pog-ap)"></span> <strong>Portrait of an Adult</strong> — what every adult models</li>
+    <li><span class="pog-nest-dot" style="background:var(--navy)"></span> <strong>Portrait of a Graduate</strong> — what every student becomes</li>
+  </ul>
+  <p class="pog-nest-caption">Each layer exists to support the one inside it: the system supports the adults, who support every graduate.</p>
 </div>
 
 <p class="pog-intro" id="pog-profile-intro"></p>
