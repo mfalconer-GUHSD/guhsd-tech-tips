@@ -45,12 +45,12 @@ const FROM_NAME = 'Mr. Falconer — AI Tech Tips';
 const SIGNUP_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSflh2l3PXs2NGAHv6u-hGjKtv7XPMycD4LKFdD82O3FxRU_Rg/viewform?usp=publish-editor';
 const UNSUBSCRIBE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfEVWKtF0WgzySXhqXC0zeQNQlFlvSvH96vi9dVrbIH07-2TA/viewform?usp=publish-editor';
 
-// Paste your signup form's response-spreadsheet ID here (required):
-const SIGNUP_SHEET_ID = 'PASTE_YOUR_SIGNUP_SHEET_ID_HERE';
+// Signup form's response-spreadsheet ID:
+const SIGNUP_SHEET_ID = '1Ih6HpPXXAjzlpAWbEWmnHSww4GJnaqBGXesj7sX2Ins';
 const SIGNUP_EMAIL_HEADER = 'Email Address'; // must match the header text in that sheet
 
-// Paste your unsubscribe form's response-spreadsheet ID here (optional):
-const UNSUB_SHEET_ID = ''; // leave blank ('') to skip unsubscribe filtering
+// Unsubscribe form's response-spreadsheet ID:
+const UNSUB_SHEET_ID = '1q-9Z9Qzxub-0QvKF_ickjmp9HcAmms0qP5aAdhfvJws';
 const UNSUB_EMAIL_HEADER = 'Email Address';
 
 // Any extra addresses/groups always included regardless of signup, e.g. ['staff@yourschool.guhsd.net']:
