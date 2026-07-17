@@ -550,6 +550,71 @@ table.tool-table td a { font-weight: 600; }
   color: var(--text-secondary);
 }
 
+/* ---------- Compact callout row (homepage: signup + suggest) ---------- */
+.callout-row {
+  max-width: var(--max-narrow);
+  margin: 32px auto 0;
+  padding: 0 22px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.callout-card {
+  display: block;
+  background: var(--gray-bg);
+  border: 1px solid var(--divider);
+  border-radius: 14px;
+  padding: 20px;
+  text-align: left;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.callout-card:hover {
+  text-decoration: none;
+  border-color: var(--navy);
+  transform: translateY(-1px);
+}
+
+.callout-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.callout-icon svg { width: 17px; height: 17px; }
+
+.callout-title {
+  font-weight: 600;
+  font-size: 0.98rem;
+  color: var(--text);
+  margin: 0 0 4px;
+  letter-spacing: -0.01em;
+}
+
+.callout-text {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  margin: 0 0 12px;
+  line-height: 1.4;
+}
+
+.callout-cta {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+@media (max-width: 560px) {
+  .callout-row { grid-template-columns: 1fr; }
+}
+
 /* ---------- Gem callout ---------- */
 .gem-callout {
   background: var(--gray-bg);
