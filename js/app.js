@@ -67,7 +67,7 @@ function tipTeaserMarkup(tip, data) {
   const tool = data.tools[tip.tool];
   return `
   <article class="tip-teaser" id="${tip.id}">
-    <p class="tip-teaser-meta"><span class="tip-teaser-tool">${escapeHtml(tool.name)}</span> · Issue No. ${tip.issueNumber} · ${formatWeekOf(tip.weekOf)}</p>
+    <p class="tip-teaser-meta"><span class="tip-teaser-tool">${escapeHtml(tool.name)}</span> · Tip #${tip.issueNumber} · ${formatWeekOf(tip.weekOf)}</p>
     <h3><a href="tip.html?id=${encodeURIComponent(tip.id)}">${escapeHtml(tip.title)}</a></h3>
     <p class="teaser-copy">${escapeHtml(tip.teaser || tip.whyItMatters)}</p>
     <div class="tip-teaser-links">
@@ -108,7 +108,7 @@ function tipPipelineRowMarkup(tip, data) {
   return `
   <article class="tip-teaser" id="${tip.id}">
     <p class="tip-teaser-meta">
-      <span class="tip-teaser-tool">${escapeHtml(tool.name)}</span> · Issue No. ${tip.issueNumber} · ${formatWeekOf(tip.weekOf)} · ${badge}
+      <span class="tip-teaser-tool">${escapeHtml(tool.name)}</span> · Tip #${tip.issueNumber} · ${formatWeekOf(tip.weekOf)} · ${badge}
     </p>
     <h3><a href="tip.html?id=${encodeURIComponent(tip.id)}">${escapeHtml(tip.title)}</a></h3>
     <p class="teaser-copy">${escapeHtml(tip.teaser || tip.whyItMatters)}</p>
@@ -127,7 +127,7 @@ function tipDetailMarkup(tip, data) {
   return `
   <section class="tip">
     <div class="tip-inner">
-      <p class="tip-meta"><span class="tip-tool">${escapeHtml(tool.name)}</span> · Issue No. ${tip.issueNumber} · Week of ${formatWeekOf(tip.weekOf)}</p>
+      <p class="tip-meta"><span class="tip-tool">${escapeHtml(tool.name)}</span> · Tip #${tip.issueNumber} · Week of ${formatWeekOf(tip.weekOf)}</p>
       <h2>${escapeHtml(tip.title)}</h2>
 
       <a class="video-card" href="${tip.video.url}" target="_blank" rel="noopener">
@@ -279,7 +279,7 @@ async function renderPipeline() {
 
     const summary = document.getElementById('pipeline-summary');
     if (summary) {
-      summary.textContent = `${ordered.length} issue(s) built total — ${sentCount} already sent, ` +
+      summary.textContent = `${ordered.length} tip(s) built total — ${sentCount} already sent, ` +
         `${ordered.length - sentCount} scheduled for later.`;
     }
 
