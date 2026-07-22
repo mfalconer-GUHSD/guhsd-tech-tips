@@ -62,6 +62,57 @@
   },
   "tips": [
     {
+      "id": "2026-10-12-notebooklm-flashcards",
+      "issueNumber": 9,
+      "weekOf": "2026-10-12",
+      "title": "Turn Any Unit Into Self-Grading Flashcards and Quizzes with NotebookLM",
+      "teaser": "Progress now saves between sessions, so students can pick up a review deck right where they left off.",
+      "tool": "notebooklm",
+      "video": {
+        "url": "https://www.youtube.com/shorts/yV6PD7l7xgs",
+        "title": "NotebookLM: flashcard and quizzes #hourofai #edtech",
+        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
+        "description": "A quick vertical demo of generating a flashcard deck and quiz directly from uploaded sources in NotebookLM's Studio panel — every card and question grounded only in the material you gave it."
+      },
+      "whyItMatters": "Point NotebookLM at your unit's readings and it builds a flashcard deck and a quiz in seconds, grounded only in what you uploaded — no generic test-prep filler. A recent update means students can now mark cards \"Got it\" or \"Missed it,\" shuffle the deck, and pick up their progress in a later session instead of starting over. It's a fast way to hand students a review tool that can't drift from your actual material.",
+      "pogTags": ["GP1", "GP7", "AP2", "SP7"],
+      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Keep student-identifying records out of any uploaded source."
+    },
+    {
+      "id": "2026-10-05-notebooklm-interactive-mode",
+      "issueNumber": 8,
+      "weekOf": "2026-10-05",
+      "title": "Let Students Interrupt the Podcast: NotebookLM's Interactive Mode",
+      "teaser": "Students can now raise their hand mid-podcast and ask the AI hosts a follow-up question, live.",
+      "tool": "notebooklm",
+      "video": {
+        "url": "https://www.youtube.com/shorts/wqbgI9TlWbw",
+        "title": "The new interactive mode in NotebookLM is blowing my mind as a teacher",
+        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
+        "description": "A teacher's quick reaction demo to NotebookLM's Interactive Mode: while a two-host Audio Overview is playing, a student can hit Join and ask a spoken question — the hosts answer from the uploaded sources, then pick the discussion back up."
+      },
+      "whyItMatters": "The Audio Overview podcast feature was already a hit for auditory review — Interactive Mode takes it further by letting a student jump in with a question mid-conversation instead of just listening passively. The hosts answer using only the sources you uploaded, then resume where they left off, which turns a one-way summary into something closer to a Socratic study session.",
+      "pogTags": ["GP1", "GP7", "AP7", "SP7"],
+      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Interactive Mode's spoken Q&A is English-only for now; the audio overview itself is available in 80+ languages."
+    },
+    {
+      "id": "2026-09-28-gemini-study-notebooks",
+      "issueNumber": 7,
+      "weekOf": "2026-09-28",
+      "title": "Turn Gemini Into a Personal Tutor with Study Notebooks",
+      "teaser": "Upload your unit materials and Gemini builds a diagnostic quiz, bite-sized lessons, and a live progress dashboard — automatically.",
+      "tool": "gemini",
+      "video": {
+        "url": "https://www.youtube.com/shorts/d4FUtbfF0vk",
+        "title": "New Study Notebooks in Google Gemini",
+        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
+        "description": "A quick vertical demo of Gemini's new study notebooks feature: upload course materials, take a short diagnostic quiz, and watch Gemini build a personalized set of bite-sized lessons around exactly what needs the most work."
+      },
+      "whyItMatters": "Study notebooks turn Gemini from a one-off chatbot into an adaptive study partner: a student uploads their own notes or a unit packet, takes a short diagnostic quiz, and gets a lesson plan built around their actual gaps — not a generic review sheet. Progress updates automatically as they complete follow-up quizzes, so both of you can see what's mastered and what still needs work. This feature is still expanding to school-issued accounts for students under 18, so confirm it's visible for your class before assigning it.",
+      "pogTags": ["GP1", "GP7", "AP7", "SP7"],
+      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Study notebooks are still rolling out to under-18 school accounts — check availability before assigning."
+    },
+    {
       "id": "2026-09-21-brisk-translate",
       "issueNumber": 6,
       "weekOf": "2026-09-21",
