@@ -62,6 +62,40 @@
   },
   "tips": [
     {
+      "id": "2026-10-26-notebooklm-mindmap",
+      "issueNumber": 11,
+      "weekOf": "2026-10-26",
+      "title": "Turn a Messy Unit Into One Clear Map with NotebookLM's Mind Map",
+      "teaser": "One click turns your uploaded sources into an interactive, branching mind map students can click through to ask questions.",
+      "tool": "notebooklm",
+      "video": {
+        "url": "https://www.youtube.com/shorts/WnHC9Mj-Gzc",
+        "title": "NotebookLM's New Mind Map Feature: Game-Changer for...",
+        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
+        "description": "A quick vertical demo of NotebookLM's Mind Map tool: upload your sources and get an interactive branching diagram showing how the ideas connect, with each node opening a source-grounded chat about that specific topic."
+      },
+      "whyItMatters": "Some units don't fail because the content is too hard — they fail because students can't see how the pieces connect. Upload your unit's readings and NotebookLM builds an interactive mind map with the core topic in the center and every major concept branching outward, grounded only in what you gave it. Click any branch and it opens a focused, source-grounded conversation about just that piece — a fast way to help a student see the big picture before diving into the details.",
+      "pogTags": ["GP1", "GP3", "AP2", "SP7"],
+      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Mind Maps currently only work in the desktop browser, not the NotebookLM mobile app."
+    },
+    {
+      "id": "2026-10-19-gemini-classroom-app",
+      "issueNumber": 10,
+      "weekOf": "2026-10-19",
+      "title": "Let Gemini Peek Into Your Classroom: The New @Classroom Connection",
+      "teaser": "Ask Gemini about assignments, drafts, and student progress — grounded in your real Google Classroom data.",
+      "tool": "gemini",
+      "video": {
+        "url": "https://www.youtube.com/shorts/n0YV2Gtgacc",
+        "title": "Supercharge Lesson Planning with Gemini and Google Classroom",
+        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
+        "description": "A quick ISTE recap demo of the new Classroom app connection in Gemini, showing how a teacher can safely pull real class context — assignments, submissions, progress — into a Gemini conversation to speed up planning and communication."
+      },
+      "whyItMatters": "Instead of describing your class to Gemini from scratch every time, type @Classroom in a prompt and Gemini pulls in real context from your actual Google Classroom — which assignments are missing, how a student did on the last quiz, what's due this week — to help draft communications, differentiated plans, or progress summaries. Gemini can't post, grade, or delete anything on its own; every draft still waits for you to review and publish. It's a genuine shortcut for the \"let me check my gradebook first\" step that eats into planning time.",
+      "pogTags": ["AP2", "AP7", "SP7"],
+      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. The Classroom app in Gemini is limited to users 18 and older; it can only draft — you review and publish everything yourself."
+    },
+    {
       "id": "2026-10-12-notebooklm-flashcards",
       "issueNumber": 9,
       "weekOf": "2026-10-12",
