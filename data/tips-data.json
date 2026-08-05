@@ -62,6 +62,23 @@
   },
   "tips": [
     {
+      "id": "2026-11-02-notebooklm-rename",
+      "issueNumber": 12,
+      "weekOf": "2026-11-02",
+      "title": "Heads Up: NotebookLM Just Became Gemini Notebook",
+      "teaser": "Same free, source-grounded tool you already use — Google just gave it a new name and folded it into the Gemini app family.",
+      "tool": "notebooklm",
+      "video": {
+        "url": "https://www.youtube.com/shorts/iQl36mR_cK0",
+        "title": "NotebookLM Is Now Gemini Notebook",
+        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
+        "description": "A quick vertical explainer on Google's July 2026 rebrand: NotebookLM is now officially called Gemini Notebook. The underlying tool — a source-grounded AI assistant that only answers from what you upload — hasn't changed, just the name and its tighter integration with the wider Gemini app ecosystem."
+      },
+      "whyItMatters": "If you open the tool this week and see \"Gemini Notebook\" instead of \"NotebookLM,\" you haven't been sent to the wrong place — Google renamed it in July as part of folding it more tightly into the Gemini app family. Every feature we've covered in past tips (audio overviews, interactive mode, flashcards, mind maps) still works exactly the same way, at the same notebooklm.google web address, under your same guhsd.net account. Just don't be surprised if screenshots in older tutorials look slightly out of date.",
+      "pogTags": ["AP1", "AP8", "SP7"],
+      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account — the rename doesn't change any approval status. Same tool, same data protections, new name."
+    },
+    {
       "id": "2026-10-26-notebooklm-mindmap",
       "issueNumber": 11,
       "weekOf": "2026-10-26",
