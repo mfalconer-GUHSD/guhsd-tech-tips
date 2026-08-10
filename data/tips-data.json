@@ -52,12 +52,12 @@
       "studentNote": "Staff use only — not approved for direct student use"
     },
     "notebooklm": {
-      "name": "NotebookLM",
-      "loginUrl": "https://notebooklm.google.com/",
+      "name": "Gemini Notebook",
+      "loginUrl": "https://notebook.google.com/",
       "piiSecure": true,
       "staffUse": true,
       "studentUse": true,
-      "studentNote": "Approved with guhsd.net account"
+      "studentNote": "Approved with guhsd.net account. Formerly called NotebookLM — renamed by Google in July 2026."
     }
   },
   "tips": [
@@ -65,16 +65,16 @@
       "id": "2026-11-16-notebooklm-infographic",
       "issueNumber": 14,
       "weekOf": "2026-11-16",
-      "title": "Turn a Dense Reading Into One Shareable Graphic with NotebookLM",
-      "teaser": "Upload your sources and NotebookLM builds a single visual summary you can drop straight into a slide or handout.",
+      "title": "Turn a Dense Reading Into One Shareable Graphic with Gemini Notebook",
+      "teaser": "Upload your sources and Gemini Notebook builds a single visual summary you can drop straight into a slide or handout.",
       "tool": "notebooklm",
       "video": {
         "url": "https://www.youtube.com/shorts/SgP9o1L0Pas",
         "title": "Infographic Creation with Notebook LM",
         "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
-        "description": "A quick vertical demo of generating an infographic directly from uploaded sources in NotebookLM's Studio panel — a single visual summary built entirely from the material you gave it, ready to download or share."
+        "description": "A quick vertical demo of generating an infographic directly from uploaded sources in Gemini Notebook's Studio panel — a single visual summary built entirely from the material you gave it, ready to download or share."
       },
-      "whyItMatters": "Instead of spending prep time turning a dense reading into a poster or handout by hand, upload it to NotebookLM and generate an infographic that pulls out the key points, numbers, and relationships as one shareable visual. It's grounded only in what you uploaded, so it won't invent statistics, and you can pick a visual style before generating. This feature is currently limited to users 18 and older, so it's best used as a teacher tool for building visual aids rather than something you hand directly to students to generate themselves.",
+      "whyItMatters": "Instead of spending prep time turning a dense reading into a poster or handout by hand, upload it to Gemini Notebook and generate an infographic that pulls out the key points, numbers, and relationships as one shareable visual. It's grounded only in what you uploaded, so it won't invent statistics, and you can pick a visual style before generating. This feature is currently limited to users 18 and older, so it's best used as a teacher tool for building visual aids rather than something you hand directly to students to generate themselves.",
       "pogTags": ["AP1", "AP7", "SP7"],
       "complianceNote": "PII-secure and approved for staff use with your guhsd.net account. Infographic generation is currently limited to users 18 and older — build these yourself rather than assigning students to generate their own."
     },
@@ -108,7 +108,7 @@
         "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
         "description": "A quick vertical explainer on Google's July 2026 rebrand: NotebookLM is now officially called Gemini Notebook. The underlying tool — a source-grounded AI assistant that only answers from what you upload — hasn't changed, just the name and its tighter integration with the wider Gemini app ecosystem."
       },
-      "whyItMatters": "If you open the tool this week and see \"Gemini Notebook\" instead of \"NotebookLM,\" you haven't been sent to the wrong place — Google renamed it in July as part of folding it more tightly into the Gemini app family. Every feature we've covered in past tips (audio overviews, interactive mode, flashcards, mind maps) still works exactly the same way, at the same notebooklm.google web address, under your same guhsd.net account. Just don't be surprised if screenshots in older tutorials look slightly out of date.",
+      "whyItMatters": "If you open the tool and see \"Gemini Notebook\" instead of \"NotebookLM,\" you haven't been sent to the wrong place — Google renamed it in July 2026 as part of folding it more tightly into the Gemini app family. Every feature we've covered in past tips (audio overviews, interactive mode, flashcards, mind maps) still works exactly the same way, at notebook.google.com, under your same guhsd.net account. Just don't be surprised if screenshots in older tutorials look slightly out of date.",
       "pogTags": ["AP1", "AP8", "SP7"],
       "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account — the rename doesn't change any approval status. Same tool, same data protections, new name."
     },
@@ -116,18 +116,18 @@
       "id": "2026-10-26-notebooklm-mindmap",
       "issueNumber": 11,
       "weekOf": "2026-10-26",
-      "title": "Turn a Messy Unit Into One Clear Map with NotebookLM's Mind Map",
+      "title": "Turn a Messy Unit Into One Clear Map with Gemini Notebook's Mind Map",
       "teaser": "One click turns your uploaded sources into an interactive, branching mind map students can click through to ask questions.",
       "tool": "notebooklm",
       "video": {
         "url": "https://www.youtube.com/shorts/WnHC9Mj-Gzc",
         "title": "NotebookLM's New Mind Map Feature: Game-Changer for...",
         "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
-        "description": "A quick vertical demo of NotebookLM's Mind Map tool: upload your sources and get an interactive branching diagram showing how the ideas connect, with each node opening a source-grounded chat about that specific topic."
+        "description": "A quick vertical demo of Gemini Notebook's Mind Map tool: upload your sources and get an interactive branching diagram showing how the ideas connect, with each node opening a source-grounded chat about that specific topic."
       },
-      "whyItMatters": "Some units don't fail because the content is too hard — they fail because students can't see how the pieces connect. Upload your unit's readings and NotebookLM builds an interactive mind map with the core topic in the center and every major concept branching outward, grounded only in what you gave it. Click any branch and it opens a focused, source-grounded conversation about just that piece — a fast way to help a student see the big picture before diving into the details.",
+      "whyItMatters": "Some units don't fail because the content is too hard — they fail because students can't see how the pieces connect. Upload your unit's readings and Gemini Notebook builds an interactive mind map with the core topic in the center and every major concept branching outward, grounded only in what you gave it. Click any branch and it opens a focused, source-grounded conversation about just that piece — a fast way to help a student see the big picture before diving into the details.",
       "pogTags": ["GP1", "GP3", "AP2", "SP7"],
-      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Mind Maps currently only work in the desktop browser, not the NotebookLM mobile app."
+      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Mind Maps currently only work in the desktop browser, not the Gemini Notebook mobile app."
     },
     {
       "id": "2026-10-19-gemini-classroom-app",
@@ -150,16 +150,16 @@
       "id": "2026-10-12-notebooklm-flashcards",
       "issueNumber": 9,
       "weekOf": "2026-10-12",
-      "title": "Turn Any Unit Into Self-Grading Flashcards and Quizzes with NotebookLM",
+      "title": "Turn Any Unit Into Self-Grading Flashcards and Quizzes with Gemini Notebook",
       "teaser": "Progress now saves between sessions, so students can pick up a review deck right where they left off.",
       "tool": "notebooklm",
       "video": {
         "url": "https://www.youtube.com/shorts/yV6PD7l7xgs",
         "title": "NotebookLM: flashcard and quizzes #hourofai #edtech",
         "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
-        "description": "A quick vertical demo of generating a flashcard deck and quiz directly from uploaded sources in NotebookLM's Studio panel — every card and question grounded only in the material you gave it."
+        "description": "A quick vertical demo of generating a flashcard deck and quiz directly from uploaded sources in Gemini Notebook's Studio panel — every card and question grounded only in the material you gave it."
       },
-      "whyItMatters": "Point NotebookLM at your unit's readings and it builds a flashcard deck and a quiz in seconds, grounded only in what you uploaded — no generic test-prep filler. A recent update means students can now mark cards \"Got it\" or \"Missed it,\" shuffle the deck, and pick up their progress in a later session instead of starting over. It's a fast way to hand students a review tool that can't drift from your actual material.",
+      "whyItMatters": "Point Gemini Notebook at your unit's readings and it builds a flashcard deck and a quiz in seconds, grounded only in what you uploaded — no generic test-prep filler. A recent update means students can now mark cards \"Got it\" or \"Missed it,\" shuffle the deck, and pick up their progress in a later session instead of starting over. It's a fast way to hand students a review tool that can't drift from your actual material.",
       "pogTags": ["GP1", "GP7", "AP2", "SP7"],
       "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Keep student-identifying records out of any uploaded source."
     },
@@ -167,14 +167,14 @@
       "id": "2026-10-05-notebooklm-interactive-mode",
       "issueNumber": 8,
       "weekOf": "2026-10-05",
-      "title": "Let Students Interrupt the Podcast: NotebookLM's Interactive Mode",
+      "title": "Let Students Interrupt the Podcast: Gemini Notebook's Interactive Mode",
       "teaser": "Students can now raise their hand mid-podcast and ask the AI hosts a follow-up question, live.",
       "tool": "notebooklm",
       "video": {
         "url": "https://www.youtube.com/shorts/wqbgI9TlWbw",
         "title": "The new interactive mode in NotebookLM is blowing my mind as a teacher",
         "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
-        "description": "A teacher's quick reaction demo to NotebookLM's Interactive Mode: while a two-host Audio Overview is playing, a student can hit Join and ask a spoken question — the hosts answer from the uploaded sources, then pick the discussion back up."
+        "description": "A teacher's quick reaction demo to Gemini Notebook's Interactive Mode: while a two-host Audio Overview is playing, a student can hit Join and ask a spoken question — the hosts answer from the uploaded sources, then pick the discussion back up."
       },
       "whyItMatters": "The Audio Overview podcast feature was already a hit for auditory review — Interactive Mode takes it further by letting a student jump in with a question mid-conversation instead of just listening passively. The hosts answer using only the sources you uploaded, then resume where they left off, which turns a one-way summary into something closer to a Socratic study session.",
       "pogTags": ["GP1", "GP7", "AP7", "SP7"],
@@ -225,9 +225,9 @@
         "url": "https://www.youtube.com/shorts/19dnzM5VeiU",
         "title": "NotebookLM audio overviews! #notebookLM",
         "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
-        "description": "A quick vertical demo of NotebookLM's Audio Overview feature: upload your sources and NotebookLM generates a podcast-style conversation between two AI hosts summarizing the material, grounded only in what you gave it."
+        "description": "A quick vertical demo of Gemini Notebook's Audio Overview feature: upload your sources and Gemini Notebook generates a podcast-style conversation between two AI hosts summarizing the material, grounded only in what you gave it."
       },
-      "whyItMatters": "Some students retain material better by listening than reading — this is especially true for multilingual learners and students who find dense text overwhelming. Upload your unit's readings and NotebookLM generates a podcast-style discussion of the content, which can now be generated in 80+ languages. Great for flipped-classroom pre-reading, a review before a test, or an alternate way into a tough text.",
+      "whyItMatters": "Some students retain material better by listening than reading — this is especially true for multilingual learners and students who find dense text overwhelming. Upload your unit's readings and Gemini Notebook generates a podcast-style discussion of the content, which can now be generated in 80+ languages. Great for flipped-classroom pre-reading, a review before a test, or an alternate way into a tough text.",
       "pogTags": ["GP1", "GP5", "AP7", "SP7"],
       "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Keep student-identifying records out of any uploaded source."
     },
@@ -286,16 +286,16 @@
       "id": "2026-08-17-notebooklm-studyguide",
       "issueNumber": 1,
       "weekOf": "2026-08-17",
-      "title": "Turn Any Unit Packet into a Study Partner with NotebookLM",
+      "title": "Turn Any Unit Packet into a Study Partner with Gemini Notebook",
       "teaser": "A study partner grounded only in the sources you upload — it can't wander off-topic.",
       "tool": "notebooklm",
       "video": {
         "url": "https://www.youtube.com/watch?v=S32G0w8YFlg",
         "title": "An Introduction to Google NotebookLM",
         "channel": "Higher education instructional technology channel",
-        "description": "A short demonstration of uploading course materials into NotebookLM and using its source-grounded chat to generate summaries and answer questions — with every answer citing back to the exact page it came from."
+        "description": "A short demonstration of uploading course materials into what was then called NotebookLM (now Gemini Notebook) and using its source-grounded chat to generate summaries and answer questions — with every answer citing back to the exact page it came from."
       },
-      "whyItMatters": "Upload your unit's readings, slides, and notes, and NotebookLM only answers from what you gave it — no outside internet content, no invented facts. Students can ask it to quiz them or explain a confusing paragraph, and every answer links back to the source. It's a study partner that can't wander off-topic.",
+      "whyItMatters": "Upload your unit's readings, slides, and notes, and Gemini Notebook only answers from what you gave it — no outside internet content, no invented facts. Students can ask it to quiz them or explain a confusing paragraph, and every answer links back to the source. It's a study partner that can't wander off-topic.",
       "pogTags": ["GP1", "GP3", "AP2", "SP7"],
       "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Keep student-identifying records (IEPs, grades, behavior notes) out of any uploaded source."
     }
@@ -531,9 +531,9 @@
       "dateLabel": "Apr 6, 2026",
       "toolKey": "other",
       "toolName": "Google Workspace Studio",
-      "title": "Google Workspace Studio",
       "description": "Automate repetitive administrative tasks — like summarizing unread emails or setting up custom notifications — to reclaim time for lesson planning and student engagement.",
       "videoUrl": "https://youtu.be/Xy0r5fKwlVo",
+      "title": "Google Workspace Studio",
       "videoLabel": "Watch on YouTube",
       "moreInfoUrl": "https://youtu.be/ZOAszesMBGc",
       "getStartedUrl": "https://studio.workspace.google.com/",
