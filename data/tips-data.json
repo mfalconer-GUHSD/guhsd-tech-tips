@@ -62,6 +62,23 @@
   },
   "tips": [
     {
+      "id": "2026-12-07-brisk-podcast",
+      "issueNumber": 16,
+      "weekOf": "2026-12-07",
+      "title": "Turn Any Lesson Into a Podcast Your Students Can Follow Along To",
+      "teaser": "Brisk's Podcast Generator turns a lesson, article, or your own notes into a short, listenable track with a synced transcript.",
+      "tool": "brisk",
+      "video": {
+        "url": "https://www.youtube.com/shorts/vbYzBJFHfTo",
+        "title": "Brisk Teaching can now generate podcasts from many types of learning resources! #briskteaching #ai",
+        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
+        "description": "A quick vertical demo of Brisk's Podcast Generator — turning a lesson, article, or set of notes into a short audio track with narration and an on-screen transcript, ready to share with students."
+      },
+      "whyItMatters": "Not every student learns best by reading a page of notes. Brisk's Podcast Generator takes a lesson you've already written, a reading you assigned, or a set of class notes and turns it into a short narrated audio track with a synced transcript, supporting more than 40 languages. It's a fast way to give auditory learners and multilingual students another entry point into the same material, without recording anything yourself.",
+      "pogTags": ["AP4", "AP7", "SP7"],
+      "complianceNote": "PII-secure and approved for staff use. Brisk is not currently approved for direct student use in GUHSD — you create the podcast, and students only listen to what you generate and share."
+    },
+    {
       "id": "2026-11-30-gemini-classroom-rubrics",
       "issueNumber": 15,
       "weekOf": "2026-11-30",
@@ -574,12 +591,12 @@
     {
       "id": "legacy-2026-04-20-edugems",
       "date": "2026-04-20",
-      "dateLabel": "Apr 20, 2026",
       "toolKey": "other",
       "toolName": "EduGems",
       "title": "EduGems",
       "description": "Create custom, shareable AI assistants that automate time-consuming tasks — from standards-aligned lesson plans to personalized student accommodations.",
       "videoUrl": "https://youtu.be/Z_l6_Uyn_Ac",
+      "dateLabel": "Apr 20, 2026",
       "videoLabel": "Watch on YouTube",
       "moreInfoUrl": "https://www.edugems.ai/",
       "getStartedUrl": "https://www.edugems.ai/",
