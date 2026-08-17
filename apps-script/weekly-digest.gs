@@ -1,5 +1,5 @@
 /**
- * GUHSD Weekly Tech Tips — Staff Email Digest (v6.0: reset-safe numbering)
+ * GUHSD Weekly Tech Tips — Staff Email Digest (v6.1: ordered catch-up)
  *
  * Runs on a DAILY timer. Each day it checks whether a scheduled send date
  * has arrived (or already passed without sending) and whether new content
@@ -30,12 +30,14 @@
  * needing a manual fix each time.
  *
  * REDUNDANCY #1 — CATCH-UP LOGIC:
- * The script tracks the last FULFILLED send-date (lastSentDateKey) rather
- * than just an issue number. Each day it finds the most recent scheduled
- * date that is <= today. If that date hasn't been fulfilled yet AND a tip
- * exists whose weekOf matches it, it sends — on time or a few days late.
- * It keeps checking every day until it catches up, so a missed date is
- * never permanent.
+ * The script tracks the last FULFILLED send-date (lastSentDateKey). Each
+ * day it finds the EARLIEST scheduled date that is <= today and still
+ * unfulfilled (after lastSentDateKey). If a tip exists whose weekOf
+ * matches it, it sends that one — on time, or a few days late if it was
+ * missed. Processing oldest-unsent-first (not "whatever's most recent")
+ * means a missed week is delayed, never silently skipped, even if several
+ * dates in a row were missed — it works through them one per run until
+ * caught up.
  *
  * REDUNDANCY #2 — MISSED-CONTENT REMINDER:
  * If a scheduled date arrives (or has passed) with no matching tip ready,
@@ -126,15 +128,10 @@ const SEND_DATES = [
 function checkAndSendDigest() {
   const today = Utilities.formatDate(new Date(), TIMEZONE, 'yyyy-MM-dd');
 
-  const dueDate = getMostRecentDueDate(today);
-  if (!dueDate) {
-    Logger.log('No scheduled send date has arrived yet, or the school year is over. Skipping.');
-    return;
-  }
-
   const lastSentDateKey = PropertiesService.getScriptProperties().getProperty('lastSentDateKey') || '';
-  if (dueDate <= lastSentDateKey) {
-    Logger.log('Most recent due date (' + dueDate + ') already fulfilled. Skipping.');
+  const dueDate = getNextUnsentDueDate(today, lastSentDateKey);
+  if (!dueDate) {
+    Logger.log('No unfulfilled scheduled date has arrived yet. Skipping.');
     return;
   }
 
@@ -221,17 +218,17 @@ function weeklyResearchReminder() {
   Logger.log('Sent weekly research reminder to ' + me + '.');
 }
 
-// Finds the latest SEND_DATES entry that is <= today. Returns null if none yet.
-function getMostRecentDueDate(todayStr) {
-  let mostRecent = null;
+// Finds the EARLIEST SEND_DATES entry that is <= today AND still unfulfilled
+// (i.e. strictly after lastSentDateKey). This is the key fix that makes catch-up
+// work through missed weeks in order, one per run, instead of jumping straight
+// to the most recent due date and silently skipping any earlier missed ones.
+function getNextUnsentDueDate(todayStr, lastSentDateKey) {
   for (let i = 0; i < SEND_DATES.length; i++) {
-    if (SEND_DATES[i] <= todayStr) {
-      mostRecent = SEND_DATES[i];
-    } else {
-      break;
+    if (SEND_DATES[i] > lastSentDateKey && SEND_DATES[i] <= todayStr) {
+      return SEND_DATES[i];
     }
   }
-  return mostRecent;
+  return null;
 }
 
 function daysBetween(earlierStr, laterStr) {
