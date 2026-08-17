@@ -1,5 +1,5 @@
 /**
- * GUHSD Weekly Tech Tips — Staff Email Digest (v5.1: full research prompt)
+ * GUHSD Weekly Tech Tips — Staff Email Digest (v6.0: reset-safe numbering)
  *
  * Runs on a DAILY timer. Each day it checks whether a scheduled send date
  * has arrived (or already passed without sending) and whether new content
@@ -19,21 +19,32 @@
  * Staff suggestions for tech tips are handled separately via Google Form
  * notifications directly — not pulled into this script. Keep it simple.
  *
+ * ISSUE NUMBERING POLICY (changed Dec 2026): issueNumber resets to 1 at the
+ * start of every new school year, and is DISPLAY-ONLY ("Tip #3" in the email
+ * subject and on the site). It is never used here to detect new content or
+ * to order tips — a fresh year's #1 is chronologically newer than last
+ * year's #37, so any check based on issueNumber magnitude would get that
+ * backwards the moment numbers reset. Every check below instead keys off
+ * weekOf (or, for "which tip is most recent," the max weekOf date). This
+ * makes the whole script safe across any number of future resets without
+ * needing a manual fix each time.
+ *
  * REDUNDANCY #1 — CATCH-UP LOGIC:
  * The script tracks the last FULFILLED send-date (lastSentDateKey) rather
  * than just an issue number. Each day it finds the most recent scheduled
- * date that is <= today. If that date hasn't been fulfilled yet AND a new
- * issue exists, it sends — on time or a few days late. It keeps checking
- * every day until it catches up, so a missed date is never permanent.
+ * date that is <= today. If that date hasn't been fulfilled yet AND a tip
+ * exists whose weekOf matches it, it sends — on time or a few days late.
+ * It keeps checking every day until it catches up, so a missed date is
+ * never permanent.
  *
  * REDUNDANCY #2 — MISSED-CONTENT REMINDER:
- * If a scheduled date arrives (or has passed) with no new issue ready, the
- * script emails YOU (not staff) a one-time reminder per due-date. Won't
- * repeat daily for the same date, but reminds again if a new date also
- * passes unfulfilled.
+ * If a scheduled date arrives (or has passed) with no matching tip ready,
+ * the script emails YOU (not staff) a one-time reminder per due-date.
+ * Won't repeat daily for the same date, but reminds again if a new date
+ * also passes unfulfilled.
  *
  * REDUNDANCY #3 — MANUAL OVERRIDE:
- * Run `forceSendNow()` anytime to immediately send the latest issue to
+ * Run `forceSendNow()` anytime to immediately send the most recent tip to
  * real recipients, bypassing the date check entirely.
  *
  * REDUNDANCY #4 — WEEKLY RESEARCH NUDGE:
@@ -41,7 +52,7 @@
  * status snapshot plus the full prompt to paste into Claude.
  *
  * SEND_DATES for 2026-27 (verified against GUHSD's adopted calendar):
- * - First Monday in session: Aug 17, 2026 (this is Issue #1)
+ * - First Monday in session: Aug 17, 2026 (this was Issue #1 of 2026-27)
  * - Labor Day (Mon Sep 7) -> shifted to Tue Sep 8
  * - Thanksgiving week (Nov 23-27) -> skipped entirely
  * - Winter break (Dec 21 - Jan 1) -> both weeks skipped
@@ -51,7 +62,10 @@
  * - Spring break (Mar 22 - Apr 2, 2027) -> both weeks skipped
  * - Memorial Day (Mon May 31, 2027) -> shifted to Tue Jun 1
  * - Last day of student attendance: Thu Jun 3, 2027
- * Update this list once GUHSD adopts the 2027-28 calendar.
+ * Update this list once GUHSD adopts the 2027-28 calendar. When you do,
+ * that first new-year date is also where issueNumber resets back to 1 in
+ * tips-data.json — move that year's finished run into legacyTips at the
+ * same time (see js/app.js header comment for the full policy).
  *
  * IMPORTANT — sendTestEmail is safe to run anytime: it ONLY ever sends to
  * your own account, never STATIC_RECIPIENTS or the signup list, and
@@ -127,15 +141,10 @@ function checkAndSendDigest() {
   const data = fetchData();
   if (!data) return;
 
-  const latest = getLatestTip(data);
-  if (!latest) {
-    Logger.log('No tips found in the data file at all. Skipping.');
-    return;
-  }
-
-  const lastIssueSent = Number(PropertiesService.getScriptProperties().getProperty('lastIssueSent') || 0);
-  if (latest.issueNumber <= lastIssueSent) {
-    Logger.log('Due date ' + dueDate + ' has arrived but no new issue is published yet.');
+  // Match by date, not by issueNumber magnitude — safe across school-year resets.
+  const tipForDueDate = data.tips.find(t => t.weekOf === dueDate);
+  if (!tipForDueDate) {
+    Logger.log('Due date ' + dueDate + ' has arrived but no tip with that weekOf is published yet.');
     maybeSendMissedContentReminder(dueDate, today);
     return;
   }
@@ -146,12 +155,11 @@ function checkAndSendDigest() {
     return;
   }
 
-  sendDigestEmail(latest, data, recipients);
+  sendDigestEmail(tipForDueDate, data, recipients);
   const props = PropertiesService.getScriptProperties();
-  props.setProperty('lastIssueSent', String(latest.issueNumber));
   props.setProperty('lastSentDateKey', dueDate);
   const daysLate = daysBetween(dueDate, today);
-  Logger.log('Sent issue #' + latest.issueNumber + ' to ' + recipients.length + ' recipient(s). ' +
+  Logger.log('Sent Tip #' + tipForDueDate.issueNumber + ' to ' + recipients.length + ' recipient(s). ' +
     'Due date was ' + dueDate + (daysLate > 0 ? ' (' + daysLate + ' day(s) late — caught up)' : ' (on time)') + '.');
 }
 
@@ -167,7 +175,7 @@ function weeklyResearchReminder() {
   let statusLine;
   let upcomingLine;
   if (latest) {
-    statusLine = 'Content is currently published through Issue #' + latest.issueNumber +
+    statusLine = 'Content is currently published through Tip #' + latest.issueNumber +
       ' (week of ' + latest.weekOf + ').';
     const upcoming = SEND_DATES.filter(d => d > latest.weekOf).slice(0, 4);
     upcomingLine = upcoming.length
@@ -193,8 +201,9 @@ function weeklyResearchReminder() {
     '3. VERIFY: Double check the video is still live, still short enough, and that the ' +
     'tool\'s PII/staff/student approval status in tools.html still matches the real district list.\n\n' +
     '4. PUBLISH: Add the new issue(s) to data/tips-data.json in the GitHub repo (issueNumber ' +
-    'continuing from the last one, weekOf matching the scheduled date below), keeping the ' +
-    'existing issues intact.\n\n' +
+    'continuing from the last one — unless this is the first send of a new school year, in ' +
+    'which case it resets to 1 and last year\'s tips move into legacyTips — weekOf matching ' +
+    'the scheduled date below), keeping the existing issues intact.\n\n' +
     'Current status: ' + statusLine + ' ' + upcomingLine;
 
   const subject = 'Weekly check-in: research updates for upcoming Tech Tips';
@@ -244,8 +253,8 @@ function maybeSendMissedContentReminder(dueDate, today) {
     ? 'Reminder: today is a scheduled Tech Tips send date'
     : 'Reminder: Tech Tips send date (' + dueDate + ') has passed with no new issue';
   const body = 'Scheduled send date ' + dueDate + (daysLate > 0 ? ' (' + daysLate + ' day(s) ago)' : ' (today)') +
-    ' has no new issue in tips-data.json yet.\n\n' +
-    'Nothing has gone out to staff. As soon as you publish a new issue (increase issueNumber), ' +
+    ' has no tip in tips-data.json with a matching weekOf yet.\n\n' +
+    'Nothing has gone out to staff. As soon as you publish a tip with weekOf = ' + dueDate + ', ' +
     'the next daily check will send it automatically — even if that\'s a few days from now.\n\n' +
     'Site: ' + SITE_URL;
   GmailApp.sendEmail(me, subject, body, { name: FROM_NAME });
@@ -264,9 +273,8 @@ function forceSendNow() {
   if (!recipients.length) { Logger.log('No recipients found — nothing to send to.'); return; }
   sendDigestEmail(latest, data, recipients);
   const props = PropertiesService.getScriptProperties();
-  props.setProperty('lastIssueSent', String(latest.issueNumber));
   props.setProperty('lastSentDateKey', Utilities.formatDate(new Date(), TIMEZONE, 'yyyy-MM-dd'));
-  Logger.log('Force-sent issue #' + latest.issueNumber + ' to ' + recipients.length + ' recipient(s).');
+  Logger.log('Force-sent Tip #' + latest.issueNumber + ' to ' + recipients.length + ' recipient(s).');
 }
 
 // Manually run this anytime to check formatting/authorization. ALWAYS sends only to your
@@ -277,7 +285,7 @@ function sendTestEmail() {
   const latest = getLatestTip(data);
   if (!latest) { Logger.log('No tips found in the data file.'); return; }
   sendDigestEmail(latest, data, [Session.getActiveUser().getEmail()]);
-  Logger.log('Test email sent to ' + Session.getActiveUser().getEmail() + ' only, for issue #' + latest.issueNumber);
+  Logger.log('Test email sent to ' + Session.getActiveUser().getEmail() + ' only, for Tip #' + latest.issueNumber);
 }
 
 function fetchData() {
@@ -294,9 +302,11 @@ function fetchData() {
   }
 }
 
+// "Latest" = most recent weekOf date, NOT highest issueNumber — issueNumber resets each
+// school year, so after a reset the new #1 would otherwise lose to last year's #37.
 function getLatestTip(data) {
   if (!data.tips || !data.tips.length) return null;
-  return data.tips.reduce((a, b) => (b.issueNumber > a.issueNumber ? b : a));
+  return data.tips.reduce((a, b) => (b.weekOf > a.weekOf ? b : a));
 }
 
 function readEmailColumn(sheetId, headerName) {
@@ -336,7 +346,7 @@ function sendDigestEmail(tip, data, recipients) {
   const htmlBody =
     '<div style="font-family:-apple-system,Segoe UI,Arial,sans-serif;max-width:560px;margin:0 auto;">' +
       '<p style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#00897B;font-weight:600;margin:0 0 6px;">' +
-        tool.name + ' &middot; Issue No. ' + tip.issueNumber +
+        tool.name + ' &middot; Tip #' + tip.issueNumber +
       '</p>' +
       '<h2 style="margin:0 0 14px;font-size:22px;color:#1D1D1F;">' + tip.title + '</h2>' +
       '<p style="font-size:15px;color:#444;margin:0 0 18px;">' + (tip.teaser || '') + '</p>' +
