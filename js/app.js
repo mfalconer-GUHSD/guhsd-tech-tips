@@ -4,7 +4,7 @@
 
    Pages:
    - index.html: every PUBLISHED tip, newest first, with tool/search filters (#archive-issues),
-     plus the 2025-26 legacy archive below it (#legacy-issues) — same search/tool filters apply
+     plus the legacy archive below it (#legacy-issues) — same search/tool filters apply
      to both sections.
    - tip.html?id=...: full detail for a single published tip (#tip-detail). Legacy tips don't
      get a detail page — they link straight out to the video/more-info/get-started URLs.
@@ -16,7 +16,16 @@
    IMPORTANT: a current-year tip only appears on index.html/tip.html once its weekOf date has
    arrived. This lets you draft and save future issues in tips-data.json ahead of time without
    them leaking on the public site before the scheduled email actually goes out. Legacy tips
-   (data.legacyTips) are already all in the past, so they always show. */
+   (data.legacyTips) are already all in the past, so they always show.
+
+   ISSUE NUMBERING POLICY (as of Dec 2026): issueNumber resets to 1 at the start of each new
+   school year and is for DISPLAY ONLY ("Tip #3"). It must never be used to determine ordering,
+   recency, or "is this new content" — a fresh year's #1 is chronologically newer than the
+   previous year's #37, so anything comparing issueNumber magnitude would get that backwards.
+   All ordering and "already sent" checks (here and in the Apps Script) key off weekOf / date
+   instead, which is safe across any number of resets. When a tip's run in the current-year
+   "tips" array ends (school year over, or superseded by a renumbering), move it into
+   legacyTips — that's what keeps the numbering clean without breaking history. */
 
 const DATA_URL = 'data/tips-data.json';
 
@@ -77,7 +86,7 @@ function tipTeaserMarkup(tip, data) {
   </article>`;
 }
 
-// ---------- Legacy tip card (2025-26 archive: shown on index.html search AND the standalone archive page) ----------
+// ---------- Legacy tip card (archive: shown on index.html search AND the standalone archive page) ----------
 function legacyTeaserMarkup(tip, data) {
   const pogTagsHtml = pogChipsMarkup(tip.pogTags, data.pogElements);
   const coreNote = tip.notCoreToolNote
@@ -85,7 +94,7 @@ function legacyTeaserMarkup(tip, data) {
     : '';
   return `
   <article class="tip-teaser" id="${tip.id}">
-    <p class="tip-teaser-meta"><span class="tip-teaser-tool">${escapeHtml(tip.toolName)}</span> · ${escapeHtml(tip.dateLabel)} · <span class="tag-parent">2025–26 archive</span></p>
+    <p class="tip-teaser-meta"><span class="tip-teaser-tool">${escapeHtml(tip.toolName)}</span> · ${escapeHtml(tip.dateLabel)} · <span class="tag-parent">Archive</span></p>
     <h3>${escapeHtml(tip.title)}</h3>
     <p class="teaser-copy">${escapeHtml(tip.description)}</p>
     ${coreNote}
@@ -169,14 +178,13 @@ async function loadData() {
   return res.json();
 }
 
-function sortByIssueDesc(tips) {
-  return [...tips].sort((a, b) => b.issueNumber - a.issueNumber);
+// Date-based sort (safe across issueNumber resets) — used for the current-year "tips" array.
+// weekOf is a plain YYYY-MM-DD string, so lexical comparison is correct chronological comparison.
+function sortByWeekOfDesc(tips) {
+  return [...tips].sort((a, b) => (a.weekOf < b.weekOf ? 1 : a.weekOf > b.weekOf ? -1 : 0));
 }
 
-function sortByIssueAsc(tips) {
-  return [...tips].sort((a, b) => a.issueNumber - b.issueNumber);
-}
-
+// Same idea for legacyTips, which key off `date` instead of `weekOf`.
 function sortByDateDesc(tips) {
   return [...tips].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
 }
@@ -202,7 +210,7 @@ function applyFilters() {
   const searchVal = document.getElementById('filter-search').value.trim().toLowerCase();
 
   const published = ALL_TIPS_DATA.tips.filter(isPublished);
-  const filteredCurrent = sortByIssueDesc(published).filter(tip => {
+  const filteredCurrent = sortByWeekOfDesc(published).filter(tip => {
     if (toolVal && tip.tool !== toolVal) return false;
     if (searchVal && !tip.title.toLowerCase().includes(searchVal) &&
         !tip.whyItMatters.toLowerCase().includes(searchVal)) return false;
@@ -227,7 +235,7 @@ function applyFilters() {
     });
     legacyMount.innerHTML = filteredLegacy.length
       ? filteredLegacy.map(t => legacyTeaserMarkup(t, ALL_TIPS_DATA)).join('')
-      : `<p class="empty-state">No 2025–26 archive tips match those filters.</p>`;
+      : `<p class="empty-state">No archive tips match those filters.</p>`;
 
     const legacySection = document.getElementById('legacy-section');
     if (legacySection) {
@@ -274,7 +282,7 @@ async function renderPipeline() {
   if (!mount) return;
   try {
     const data = await loadData();
-    const ordered = sortByIssueDesc(data.tips);
+    const ordered = sortByWeekOfDesc(data.tips);
     const sentCount = ordered.filter(isPublished).length;
 
     const summary = document.getElementById('pipeline-summary');
