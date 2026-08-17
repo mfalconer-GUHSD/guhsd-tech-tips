@@ -63,7 +63,7 @@
   "tips": [
     {
       "id": "2026-12-07-brisk-podcast",
-      "issueNumber": 16,
+      "issueNumber": 1,
       "weekOf": "2026-12-07",
       "title": "Turn Any Lesson Into a Podcast Your Students Can Follow Along To",
       "teaser": "Brisk's Podcast Generator turns a lesson, article, or your own notes into a short, listenable track with a synced transcript.",
@@ -77,264 +77,219 @@
       "whyItMatters": "Not every student learns best by reading a page of notes. Brisk's Podcast Generator takes a lesson you've already written, a reading you assigned, or a set of class notes and turns it into a short narrated audio track with a synced transcript, supporting more than 40 languages. It's a fast way to give auditory learners and multilingual students another entry point into the same material, without recording anything yourself.",
       "pogTags": ["AP4", "AP7", "SP7"],
       "complianceNote": "PII-secure and approved for staff use. Brisk is not currently approved for direct student use in GUHSD — you create the podcast, and students only listen to what you generate and share."
-    },
-    {
-      "id": "2026-11-30-gemini-classroom-rubrics",
-      "issueNumber": 15,
-      "weekOf": "2026-11-30",
-      "title": "Google Just Made Rubrics One Click Faster in Classroom",
-      "teaser": "Gemini can now draft a Classroom-ready rubric right from the assignment-creation screen — no separate tab required.",
-      "tool": "gemini",
-      "video": {
-        "url": "https://www.youtube.com/shorts/9YIRhKv47vk",
-        "title": "Create a Rubric Using Gemini AI (Google)",
-        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
-        "description": "A quick vertical demo of the underlying capability behind this update: asking Gemini to draft a rubric. As of August 5, 2026, that same rubric generation now lives directly inside the Rubrics section of the Classroom assignment-creation screen, so the exact button layout in your Classroom may look slightly different from this older clip."
-      },
-      "whyItMatters": "Until now, building a rubric with Gemini meant leaving the assignment you were setting up, working in a separate Gemini tab, then copying the result back in. As of August 5, 2026, Google moved that capability directly into the Rubrics section of the assignment-creation screen — describe the skills you're grading, pick a point scale, and Gemini drafts the criteria without you ever leaving the page. You still review and edit every criterion before attaching it, and the same screen also lets you convert an existing rubric file or even a photo of a paper rubric.",
-      "pogTags": ["AP2", "AP7", "SP7"],
-      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Rubric generation in the assignment screen is limited to users 18 and older — build these yourself rather than having students generate their own."
-    },
-    {
-      "id": "2026-11-16-notebooklm-infographic",
-      "issueNumber": 14,
-      "weekOf": "2026-11-16",
-      "title": "Turn a Dense Reading Into One Shareable Graphic with Gemini Notebook",
-      "teaser": "Upload your sources and Gemini Notebook builds a single visual summary you can drop straight into a slide or handout.",
-      "tool": "notebooklm",
-      "video": {
-        "url": "https://www.youtube.com/shorts/SgP9o1L0Pas",
-        "title": "Infographic Creation with Notebook LM",
-        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
-        "description": "A quick vertical demo of generating an infographic directly from uploaded sources in Gemini Notebook's Studio panel — a single visual summary built entirely from the material you gave it, ready to download or share."
-      },
-      "whyItMatters": "Instead of spending prep time turning a dense reading into a poster or handout by hand, upload it to Gemini Notebook and generate an infographic that pulls out the key points, numbers, and relationships as one shareable visual. It's grounded only in what you uploaded, so it won't invent statistics, and you can pick a visual style before generating. This feature is currently limited to users 18 and older, so it's best used as a teacher tool for building visual aids rather than something you hand directly to students to generate themselves.",
-      "pogTags": ["AP1", "AP7", "SP7"],
-      "complianceNote": "PII-secure and approved for staff use with your guhsd.net account. Infographic generation is currently limited to users 18 and older — build these yourself rather than assigning students to generate their own."
-    },
-    {
-      "id": "2026-11-09-brisk-grader",
-      "issueNumber": 13,
-      "weekOf": "2026-11-09",
-      "title": "Skip the Copy-Paste: Brisk Grader Puts Rubric Scores Right in Classroom",
-      "teaser": "Rubric-based grades and comments now sync straight into your Google Classroom gradebook — no copy-pasting required.",
-      "tool": "brisk",
-      "video": {
-        "url": "https://www.youtube.com/shorts/o2Z-NkWN6Wg",
-        "title": "Grading writing is tough. Let Brisk help you for FREE!",
-        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
-        "description": "A quick vertical demo of Brisk's grading assistance for student writing — generating rubric-aligned comments and grade suggestions you review before anything gets posted to a student."
-      },
-      "whyItMatters": "Brisk Grader takes rubric-based feedback further than the basic feedback tool we covered earlier this year: instead of just drafting comments in a doc, it can suggest a grade against your rubric and sync that suggestion straight into your Google Classroom gradebook, cutting out the copy-paste step between grading and posting. You still review and approve every grade and comment before a student sees it — Brisk drafts, you decide.",
-      "pogTags": ["AP2", "AP6", "SP7"],
-      "complianceNote": "PII-secure and approved for staff use. Brisk is not currently approved for direct student use in GUHSD — you remain the one reviewing and posting every grade."
-    },
-    {
-      "id": "2026-11-02-notebooklm-rename",
-      "issueNumber": 12,
-      "weekOf": "2026-11-02",
-      "title": "Heads Up: NotebookLM Just Became Gemini Notebook",
-      "teaser": "Same free, source-grounded tool you already use — Google just gave it a new name and folded it into the Gemini app family.",
-      "tool": "notebooklm",
-      "video": {
-        "url": "https://www.youtube.com/shorts/iQl36mR_cK0",
-        "title": "NotebookLM Is Now Gemini Notebook",
-        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
-        "description": "A quick vertical explainer on Google's July 2026 rebrand: NotebookLM is now officially called Gemini Notebook. The underlying tool — a source-grounded AI assistant that only answers from what you upload — hasn't changed, just the name and its tighter integration with the wider Gemini app ecosystem."
-      },
-      "whyItMatters": "If you open the tool and see \"Gemini Notebook\" instead of \"NotebookLM,\" you haven't been sent to the wrong place — Google renamed it in July 2026 as part of folding it more tightly into the Gemini app family. Every feature we've covered in past tips (audio overviews, interactive mode, flashcards, mind maps) still works exactly the same way, at notebook.google.com, under your same guhsd.net account. Just don't be surprised if screenshots in older tutorials look slightly out of date.",
-      "pogTags": ["AP1", "AP8", "SP7"],
-      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account — the rename doesn't change any approval status. Same tool, same data protections, new name."
-    },
-    {
-      "id": "2026-10-26-notebooklm-mindmap",
-      "issueNumber": 11,
-      "weekOf": "2026-10-26",
-      "title": "Turn a Messy Unit Into One Clear Map with Gemini Notebook's Mind Map",
-      "teaser": "One click turns your uploaded sources into an interactive, branching mind map students can click through to ask questions.",
-      "tool": "notebooklm",
-      "video": {
-        "url": "https://www.youtube.com/shorts/WnHC9Mj-Gzc",
-        "title": "NotebookLM's New Mind Map Feature: Game-Changer for...",
-        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
-        "description": "A quick vertical demo of Gemini Notebook's Mind Map tool: upload your sources and get an interactive branching diagram showing how the ideas connect, with each node opening a source-grounded chat about that specific topic."
-      },
-      "whyItMatters": "Some units don't fail because the content is too hard — they fail because students can't see how the pieces connect. Upload your unit's readings and Gemini Notebook builds an interactive mind map with the core topic in the center and every major concept branching outward, grounded only in what you gave it. Click any branch and it opens a focused, source-grounded conversation about just that piece — a fast way to help a student see the big picture before diving into the details.",
-      "pogTags": ["GP1", "GP3", "AP2", "SP7"],
-      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Mind Maps currently only work in the desktop browser, not the Gemini Notebook mobile app."
-    },
-    {
-      "id": "2026-10-19-gemini-classroom-app",
-      "issueNumber": 10,
-      "weekOf": "2026-10-19",
-      "title": "Let Gemini Peek Into Your Classroom: The New @Classroom Connection",
-      "teaser": "Ask Gemini about assignments, drafts, and student progress — grounded in your real Google Classroom data.",
-      "tool": "gemini",
-      "video": {
-        "url": "https://www.youtube.com/shorts/n0YV2Gtgacc",
-        "title": "Supercharge Lesson Planning with Gemini and Google Classroom",
-        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
-        "description": "A quick ISTE recap demo of the new Classroom app connection in Gemini, showing how a teacher can safely pull real class context — assignments, submissions, progress — into a Gemini conversation to speed up planning and communication."
-      },
-      "whyItMatters": "Instead of describing your class to Gemini from scratch every time, type @Classroom in a prompt and Gemini pulls in real context from your actual Google Classroom — which assignments are missing, how a student did on the last quiz, what's due this week — to help draft communications, differentiated plans, or progress summaries. Gemini can't post, grade, or delete anything on its own; every draft still waits for you to review and publish. It's a genuine shortcut for the \"let me check my gradebook first\" step that eats into planning time.",
-      "pogTags": ["AP2", "AP7", "SP7"],
-      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. The Classroom app in Gemini is limited to users 18 and older; it can only draft — you review and publish everything yourself."
-    },
-    {
-      "id": "2026-10-12-notebooklm-flashcards",
-      "issueNumber": 9,
-      "weekOf": "2026-10-12",
-      "title": "Turn Any Unit Into Self-Grading Flashcards and Quizzes with Gemini Notebook",
-      "teaser": "Progress now saves between sessions, so students can pick up a review deck right where they left off.",
-      "tool": "notebooklm",
-      "video": {
-        "url": "https://www.youtube.com/shorts/yV6PD7l7xgs",
-        "title": "NotebookLM: flashcard and quizzes #hourofai #edtech",
-        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
-        "description": "A quick vertical demo of generating a flashcard deck and quiz directly from uploaded sources in Gemini Notebook's Studio panel — every card and question grounded only in the material you gave it."
-      },
-      "whyItMatters": "Point Gemini Notebook at your unit's readings and it builds a flashcard deck and a quiz in seconds, grounded only in what you uploaded — no generic test-prep filler. A recent update means students can now mark cards \"Got it\" or \"Missed it,\" shuffle the deck, and pick up their progress in a later session instead of starting over. It's a fast way to hand students a review tool that can't drift from your actual material.",
-      "pogTags": ["GP1", "GP7", "AP2", "SP7"],
-      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Keep student-identifying records out of any uploaded source."
-    },
-    {
-      "id": "2026-10-05-notebooklm-interactive-mode",
-      "issueNumber": 8,
-      "weekOf": "2026-10-05",
-      "title": "Let Students Interrupt the Podcast: Gemini Notebook's Interactive Mode",
-      "teaser": "Students can now raise their hand mid-podcast and ask the AI hosts a follow-up question, live.",
-      "tool": "notebooklm",
-      "video": {
-        "url": "https://www.youtube.com/shorts/wqbgI9TlWbw",
-        "title": "The new interactive mode in NotebookLM is blowing my mind as a teacher",
-        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
-        "description": "A teacher's quick reaction demo to Gemini Notebook's Interactive Mode: while a two-host Audio Overview is playing, a student can hit Join and ask a spoken question — the hosts answer from the uploaded sources, then pick the discussion back up."
-      },
-      "whyItMatters": "The Audio Overview podcast feature was already a hit for auditory review — Interactive Mode takes it further by letting a student jump in with a question mid-conversation instead of just listening passively. The hosts answer using only the sources you uploaded, then resume where they left off, which turns a one-way summary into something closer to a Socratic study session.",
-      "pogTags": ["GP1", "GP7", "AP7", "SP7"],
-      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Interactive Mode's spoken Q&A is English-only for now; the audio overview itself is available in 80+ languages."
-    },
-    {
-      "id": "2026-09-28-gemini-study-notebooks",
-      "issueNumber": 7,
-      "weekOf": "2026-09-28",
-      "title": "Turn Gemini Into a Personal Tutor with Study Notebooks",
-      "teaser": "Upload your unit materials and Gemini builds a diagnostic quiz, bite-sized lessons, and a live progress dashboard — automatically.",
-      "tool": "gemini",
-      "video": {
-        "url": "https://www.youtube.com/shorts/d4FUtbfF0vk",
-        "title": "New Study Notebooks in Google Gemini",
-        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
-        "description": "A quick vertical demo of Gemini's new study notebooks feature: upload course materials, take a short diagnostic quiz, and watch Gemini build a personalized set of bite-sized lessons around exactly what needs the most work."
-      },
-      "whyItMatters": "Study notebooks turn Gemini from a one-off chatbot into an adaptive study partner: a student uploads their own notes or a unit packet, takes a short diagnostic quiz, and gets a lesson plan built around their actual gaps — not a generic review sheet. Progress updates automatically as they complete follow-up quizzes, so both of you can see what's mastered and what still needs work. This feature is still expanding to school-issued accounts for students under 18, so confirm it's visible for your class before assigning it.",
-      "pogTags": ["GP1", "GP7", "AP7", "SP7"],
-      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Study notebooks are still rolling out to under-18 school accounts — check availability before assigning."
-    },
-    {
-      "id": "2026-09-21-brisk-translate",
-      "issueNumber": 6,
-      "weekOf": "2026-09-21",
-      "title": "Talk to Every Family in Their Own Language with Brisk",
-      "teaser": "Translate a note home, a newsletter, or feedback into a family's home language in one click.",
-      "tool": "brisk",
-      "video": {
-        "url": "https://www.youtube.com/watch?v=gB9-KJKaFy0",
-        "title": "Brisk Bites 29 — Translate Text Tool",
-        "channel": "Brisk Teaching",
-        "description": "A short Brisk Bites walkthrough of the Translate Text tool — select any text in a Google Doc, Slide, or webpage and get an instant translation into a family's home language, without leaving the page."
-      },
-      "whyItMatters": "A permission slip, a progress note, or written feedback lands very differently for a family who doesn't read English fluently. Brisk's translate tool turns any selected text into another language in seconds, right where you're already working — no separate app, no copy-pasting into a translator and losing formatting.",
-      "pogTags": ["GP2", "AP3", "AP5", "SP1", "SP7"],
-      "complianceNote": "PII-secure and approved for staff use. Brisk is not currently approved for direct student use in GUHSD."
-    },
-    {
-      "id": "2026-09-14-notebooklm-audio",
-      "issueNumber": 5,
-      "weekOf": "2026-09-14",
-      "title": "Turn Dense Reading Into a Podcast Your Students Will Actually Listen To",
-      "teaser": "Upload a unit's readings and get a two-host podcast discussion of the material — auditory review, on autopilot.",
-      "tool": "notebooklm",
-      "video": {
-        "url": "https://www.youtube.com/shorts/19dnzM5VeiU",
-        "title": "NotebookLM audio overviews! #notebookLM",
-        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
-        "description": "A quick vertical demo of Gemini Notebook's Audio Overview feature: upload your sources and Gemini Notebook generates a podcast-style conversation between two AI hosts summarizing the material, grounded only in what you gave it."
-      },
-      "whyItMatters": "Some students retain material better by listening than reading — this is especially true for multilingual learners and students who find dense text overwhelming. Upload your unit's readings and Gemini Notebook generates a podcast-style discussion of the content, which can now be generated in 80+ languages. Great for flipped-classroom pre-reading, a review before a test, or an alternate way into a tough text.",
-      "pogTags": ["GP1", "GP5", "AP7", "SP7"],
-      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Keep student-identifying records out of any uploaded source."
-    },
-    {
-      "id": "2026-09-08-brisk-quiz",
-      "issueNumber": 4,
-      "weekOf": "2026-09-08",
-      "title": "Turn Any YouTube Video Into an Instant Quiz with Brisk",
-      "teaser": "Point Brisk at a video or article and get a ready-to-grade quiz in under a minute.",
-      "tool": "brisk",
-      "video": {
-        "url": "https://www.youtube.com/watch?v=I2JOuJJxBSU",
-        "title": "Brisk Bites 3 — AI Quiz Generator",
-        "channel": "Brisk Teaching",
-        "description": "A bite-sized Brisk Teaching PD video walking through the AI Quiz Generator — point the Brisk extension at a webpage, PDF, or YouTube video and generate a standards-aligned quiz with an answer key already built in."
-      },
-      "whyItMatters": "Skip writing a comprehension check from scratch. Point Brisk at the video or article you already assigned and get a ready-to-grade quiz — multiple choice, short answer, or open-ended, delivered to a Google Form or Doc — in under a minute. Handy for flipped-classroom check-ins, exit tickets, or catch-up work for an absent student.",
-      "pogTags": ["GP1", "AP7", "SP7"],
-      "complianceNote": "PII-secure and approved for staff use. Brisk is not currently approved for direct student use in GUHSD — assign the generated quiz through your own Google Form or Doc."
-    },
-    {
-      "id": "2026-08-31-gemini-differentiate",
-      "issueNumber": 3,
-      "weekOf": "2026-08-31",
-      "title": "Differentiate Any Reading in Three Prompts, Not Three Prep Periods",
-      "teaser": "One passage in, three reading levels out — in the time it took to rewrite one paragraph.",
-      "tool": "gemini",
-      "video": {
-        "url": "https://www.youtube.com/watch?v=uq8FdkApuLk",
-        "title": "Using Gemini for Google Workspace as an Educator",
-        "channel": "Google for Education",
-        "description": "A Google for Education walkthrough of how teachers use Gemini inside the Workspace tools they already have open — drafting materials, adjusting reading levels, and building differentiated versions of an assignment without leaving Docs or Slides."
-      },
-      "whyItMatters": "Every class has a range of readers. Ask Gemini to take one passage and generate a below-level, on-level, and extension version — same content, three entry points — in the time it used to take to rewrite one paragraph by hand. Students get material they can actually access; you get your prep period back.",
-      "pogTags": ["GP7", "AP1", "AP7", "SP7"],
-      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Keep prompts free of student names or identifying details."
-    },
-    {
-      "id": "2026-08-24-brisk-feedback",
-      "issueNumber": 2,
-      "weekOf": "2026-08-24",
-      "title": "Feedback That Lands: Skip the Generic 'Good Job' with Brisk",
-      "teaser": "Draft specific, rubric-aligned comments in seconds instead of retyping the same note all period.",
-      "tool": "brisk",
-      "video": {
-        "url": "https://www.youtube.com/watch?v=RxGCOyuXsPA",
-        "title": "How to Use Brisk: Brisk Teaching Overview",
-        "channel": "Brisk Teaching",
-        "description": "A guided tour of the Brisk Chrome extension inside a student's Google Doc — choosing a feedback style (Glows & Grows, rubric-based, or next-steps) and generating specific, actionable comments in place of a rubric score alone."
-      },
-      "whyItMatters": "Targeted feedback is one of the highest-leverage moves a teacher can make — and one of the most time-consuming to do well for 150 students. Brisk drafts specific, rubric-aligned comments in seconds so you can spend your energy on the students who need a real conversation, not retyping the same note for the fifth time.",
-      "pogTags": ["GP4", "AP6", "AP5", "SP7"],
-      "complianceNote": "PII-secure and approved for staff use. Brisk is not currently approved for direct student use in GUHSD — the teacher remains the one giving feedback."
-    },
-    {
-      "id": "2026-08-17-notebooklm-studyguide",
-      "issueNumber": 1,
-      "weekOf": "2026-08-17",
-      "title": "Turn Any Unit Packet into a Study Partner with Gemini Notebook",
-      "teaser": "A study partner grounded only in the sources you upload — it can't wander off-topic.",
-      "tool": "notebooklm",
-      "video": {
-        "url": "https://www.youtube.com/watch?v=S32G0w8YFlg",
-        "title": "An Introduction to Google NotebookLM",
-        "channel": "Higher education instructional technology channel",
-        "description": "A short demonstration of uploading course materials into what was then called NotebookLM (now Gemini Notebook) and using its source-grounded chat to generate summaries and answer questions — with every answer citing back to the exact page it came from."
-      },
-      "whyItMatters": "Upload your unit's readings, slides, and notes, and Gemini Notebook only answers from what you gave it — no outside internet content, no invented facts. Students can ask it to quiz them or explain a confusing paragraph, and every answer links back to the source. It's a study partner that can't wander off-topic.",
-      "pogTags": ["GP1", "GP3", "AP2", "SP7"],
-      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Keep student-identifying records (IEPs, grades, behavior notes) out of any uploaded source."
     }
   ],
   "legacyTips": [
+    {
+      "id": "2026-11-30-gemini-classroom-rubrics",
+      "date": "2026-11-30",
+      "dateLabel": "Nov 30, 2026",
+      "toolKey": "gemini",
+      "toolName": "Google Gemini",
+      "title": "Google Just Made Rubrics One Click Faster in Classroom",
+      "description": "Gemini can now draft a Classroom-ready rubric right from the assignment-creation screen — no separate tab required.",
+      "videoUrl": "https://www.youtube.com/shorts/9YIRhKv47vk",
+      "videoLabel": "Watch on YouTube",
+      "moreInfoUrl": "https://support.google.com/gemini",
+      "getStartedUrl": "https://gemini.google.com/app",
+      "pogTags": ["AP2", "AP7", "SP7"]
+    },
+    {
+      "id": "2026-11-16-notebooklm-infographic",
+      "date": "2026-11-16",
+      "dateLabel": "Nov 16, 2026",
+      "toolKey": "notebooklm",
+      "toolName": "Gemini Notebook",
+      "title": "Turn a Dense Reading Into One Shareable Graphic with Gemini Notebook",
+      "description": "Upload your sources and Gemini Notebook builds a single visual summary you can drop straight into a slide or handout.",
+      "videoUrl": "https://www.youtube.com/shorts/SgP9o1L0Pas",
+      "videoLabel": "Watch on YouTube",
+      "moreInfoUrl": "https://notebooklm.google/",
+      "getStartedUrl": "https://notebook.google.com/",
+      "pogTags": ["AP1", "AP7", "SP7"]
+    },
+    {
+      "id": "2026-11-09-brisk-grader",
+      "date": "2026-11-09",
+      "dateLabel": "Nov 9, 2026",
+      "toolKey": "brisk",
+      "toolName": "Brisk Teaching",
+      "title": "Skip the Copy-Paste: Brisk Grader Puts Rubric Scores Right in Classroom",
+      "description": "Rubric-based grades and comments now sync straight into your Google Classroom gradebook — no copy-pasting required.",
+      "videoUrl": "https://www.youtube.com/shorts/o2Z-NkWN6Wg",
+      "videoLabel": "Watch on YouTube",
+      "moreInfoUrl": "https://www.briskteaching.com/",
+      "getStartedUrl": "https://www.briskteaching.com/ai-tools-for-teachers",
+      "pogTags": ["AP2", "AP6", "SP7"]
+    },
+    {
+      "id": "2026-11-02-notebooklm-rename",
+      "date": "2026-11-02",
+      "dateLabel": "Nov 2, 2026",
+      "toolKey": "notebooklm",
+      "toolName": "Gemini Notebook",
+      "title": "Heads Up: NotebookLM Just Became Gemini Notebook",
+      "description": "Same free, source-grounded tool you already use — Google just gave it a new name and folded it into the Gemini app family.",
+      "videoUrl": "https://www.youtube.com/shorts/iQl36mR_cK0",
+      "videoLabel": "Watch on YouTube",
+      "moreInfoUrl": "https://notebooklm.google/",
+      "getStartedUrl": "https://notebook.google.com/",
+      "pogTags": ["AP1", "AP8", "SP7"]
+    },
+    {
+      "id": "2026-10-26-notebooklm-mindmap",
+      "date": "2026-10-26",
+      "dateLabel": "Oct 26, 2026",
+      "toolKey": "notebooklm",
+      "toolName": "Gemini Notebook",
+      "title": "Turn a Messy Unit Into One Clear Map with Gemini Notebook's Mind Map",
+      "description": "One click turns your uploaded sources into an interactive, branching mind map students can click through to ask questions.",
+      "videoUrl": "https://www.youtube.com/shorts/WnHC9Mj-Gzc",
+      "videoLabel": "Watch on YouTube",
+      "moreInfoUrl": "https://notebooklm.google/",
+      "getStartedUrl": "https://notebook.google.com/",
+      "pogTags": ["GP1", "GP3", "AP2", "SP7"]
+    },
+    {
+      "id": "2026-10-19-gemini-classroom-app",
+      "date": "2026-10-19",
+      "dateLabel": "Oct 19, 2026",
+      "toolKey": "gemini",
+      "toolName": "Google Gemini",
+      "title": "Let Gemini Peek Into Your Classroom: The New @Classroom Connection",
+      "description": "Ask Gemini about assignments, drafts, and student progress — grounded in your real Google Classroom data.",
+      "videoUrl": "https://www.youtube.com/shorts/n0YV2Gtgacc",
+      "videoLabel": "Watch on YouTube",
+      "moreInfoUrl": "https://support.google.com/gemini",
+      "getStartedUrl": "https://gemini.google.com/app",
+      "pogTags": ["AP2", "AP7", "SP7"]
+    },
+    {
+      "id": "2026-10-12-notebooklm-flashcards",
+      "date": "2026-10-12",
+      "dateLabel": "Oct 12, 2026",
+      "toolKey": "notebooklm",
+      "toolName": "Gemini Notebook",
+      "title": "Turn Any Unit Into Self-Grading Flashcards and Quizzes with Gemini Notebook",
+      "description": "Progress now saves between sessions, so students can pick up a review deck right where they left off.",
+      "videoUrl": "https://www.youtube.com/shorts/yV6PD7l7xgs",
+      "videoLabel": "Watch on YouTube",
+      "moreInfoUrl": "https://notebooklm.google/",
+      "getStartedUrl": "https://notebook.google.com/",
+      "pogTags": ["GP1", "GP7", "AP2", "SP7"]
+    },
+    {
+      "id": "2026-10-05-notebooklm-interactive-mode",
+      "date": "2026-10-05",
+      "dateLabel": "Oct 5, 2026",
+      "toolKey": "notebooklm",
+      "toolName": "Gemini Notebook",
+      "title": "Let Students Interrupt the Podcast: Gemini Notebook's Interactive Mode",
+      "description": "Students can now raise their hand mid-podcast and ask the AI hosts a follow-up question, live.",
+      "videoUrl": "https://www.youtube.com/shorts/wqbgI9TlWbw",
+      "videoLabel": "Watch on YouTube",
+      "moreInfoUrl": "https://notebooklm.google/",
+      "getStartedUrl": "https://notebook.google.com/",
+      "pogTags": ["GP1", "GP7", "AP7", "SP7"]
+    },
+    {
+      "id": "2026-09-28-gemini-study-notebooks",
+      "date": "2026-09-28",
+      "dateLabel": "Sep 28, 2026",
+      "toolKey": "gemini",
+      "toolName": "Google Gemini",
+      "title": "Turn Gemini Into a Personal Tutor with Study Notebooks",
+      "description": "Upload your unit materials and Gemini builds a diagnostic quiz, bite-sized lessons, and a live progress dashboard — automatically.",
+      "videoUrl": "https://www.youtube.com/shorts/d4FUtbfF0vk",
+      "videoLabel": "Watch on YouTube",
+      "moreInfoUrl": "https://support.google.com/gemini",
+      "getStartedUrl": "https://gemini.google.com/app",
+      "pogTags": ["GP1", "GP7", "AP7", "SP7"]
+    },
+    {
+      "id": "2026-09-21-brisk-translate",
+      "date": "2026-09-21",
+      "dateLabel": "Sep 21, 2026",
+      "toolKey": "brisk",
+      "toolName": "Brisk Teaching",
+      "title": "Talk to Every Family in Their Own Language with Brisk",
+      "description": "Translate a note home, a newsletter, or feedback into a family's home language in one click.",
+      "videoUrl": "https://www.youtube.com/watch?v=gB9-KJKaFy0",
+      "videoLabel": "Watch on YouTube",
+      "moreInfoUrl": "https://www.briskteaching.com/",
+      "getStartedUrl": "https://www.briskteaching.com/ai-tools-for-teachers",
+      "pogTags": ["GP2", "AP3", "AP5", "SP1", "SP7"]
+    },
+    {
+      "id": "2026-09-14-notebooklm-audio",
+      "date": "2026-09-14",
+      "dateLabel": "Sep 14, 2026",
+      "toolKey": "notebooklm",
+      "toolName": "Gemini Notebook",
+      "title": "Turn Dense Reading Into a Podcast Your Students Will Actually Listen To",
+      "description": "Upload a unit's readings and get a two-host podcast discussion of the material — auditory review, on autopilot.",
+      "videoUrl": "https://www.youtube.com/shorts/19dnzM5VeiU",
+      "videoLabel": "Watch on YouTube",
+      "moreInfoUrl": "https://notebooklm.google/",
+      "getStartedUrl": "https://notebook.google.com/",
+      "pogTags": ["GP1", "GP5", "AP7", "SP7"]
+    },
+    {
+      "id": "2026-09-08-brisk-quiz",
+      "date": "2026-09-08",
+      "dateLabel": "Sep 8, 2026",
+      "toolKey": "brisk",
+      "toolName": "Brisk Teaching",
+      "title": "Turn Any YouTube Video Into an Instant Quiz with Brisk",
+      "description": "Point Brisk at a video or article and get a ready-to-grade quiz in under a minute.",
+      "videoUrl": "https://www.youtube.com/watch?v=I2JOuJJxBSU",
+      "videoLabel": "Watch on YouTube",
+      "moreInfoUrl": "https://www.briskteaching.com/",
+      "getStartedUrl": "https://www.briskteaching.com/ai-tools-for-teachers",
+      "pogTags": ["GP1", "AP7", "SP7"]
+    },
+    {
+      "id": "2026-08-31-gemini-differentiate",
+      "date": "2026-08-31",
+      "dateLabel": "Aug 31, 2026",
+      "toolKey": "gemini",
+      "toolName": "Google Gemini",
+      "title": "Differentiate Any Reading in Three Prompts, Not Three Prep Periods",
+      "description": "One passage in, three reading levels out — in the time it took to rewrite one paragraph.",
+      "videoUrl": "https://www.youtube.com/watch?v=uq8FdkApuLk",
+      "videoLabel": "Watch on YouTube",
+      "moreInfoUrl": "https://support.google.com/gemini",
+      "getStartedUrl": "https://gemini.google.com/app",
+      "pogTags": ["GP7", "AP1", "AP7", "SP7"]
+    },
+    {
+      "id": "2026-08-24-brisk-feedback",
+      "date": "2026-08-24",
+      "dateLabel": "Aug 24, 2026",
+      "toolKey": "brisk",
+      "toolName": "Brisk Teaching",
+      "title": "Feedback That Lands: Skip the Generic 'Good Job' with Brisk",
+      "description": "Draft specific, rubric-aligned comments in seconds instead of retyping the same note all period.",
+      "videoUrl": "https://www.youtube.com/watch?v=RxGCOyuXsPA",
+      "videoLabel": "Watch on YouTube",
+      "moreInfoUrl": "https://www.briskteaching.com/",
+      "getStartedUrl": "https://www.briskteaching.com/ai-tools-for-teachers",
+      "pogTags": ["GP4", "AP6", "AP5", "SP7"]
+    },
+    {
+      "id": "2026-08-17-notebooklm-studyguide",
+      "date": "2026-08-17",
+      "dateLabel": "Aug 17, 2026",
+      "toolKey": "notebooklm",
+      "toolName": "Gemini Notebook",
+      "title": "Turn Any Unit Packet into a Study Partner with Gemini Notebook",
+      "description": "A study partner grounded only in the sources you upload — it can't wander off-topic.",
+      "videoUrl": "https://www.youtube.com/watch?v=S32G0w8YFlg",
+      "videoLabel": "Watch on YouTube",
+      "moreInfoUrl": "https://notebooklm.google/",
+      "getStartedUrl": "https://notebook.google.com/",
+      "pogTags": ["GP1", "GP3", "AP2", "SP7"]
+    },
     {
       "id": "legacy-2025-11-12-brisk-what-is",
       "date": "2025-11-12",
@@ -565,9 +520,9 @@
       "dateLabel": "Apr 6, 2026",
       "toolKey": "other",
       "toolName": "Google Workspace Studio",
+      "title": "Google Workspace Studio",
       "description": "Automate repetitive administrative tasks — like summarizing unread emails or setting up custom notifications — to reclaim time for lesson planning and student engagement.",
       "videoUrl": "https://youtu.be/Xy0r5fKwlVo",
-      "title": "Google Workspace Studio",
       "videoLabel": "Watch on YouTube",
       "moreInfoUrl": "https://youtu.be/ZOAszesMBGc",
       "getStartedUrl": "https://studio.workspace.google.com/",
@@ -591,12 +546,12 @@
     {
       "id": "legacy-2026-04-20-edugems",
       "date": "2026-04-20",
+      "dateLabel": "Apr 20, 2026",
       "toolKey": "other",
       "toolName": "EduGems",
       "title": "EduGems",
       "description": "Create custom, shareable AI assistants that automate time-consuming tasks — from standards-aligned lesson plans to personalized student accommodations.",
       "videoUrl": "https://youtu.be/Z_l6_Uyn_Ac",
-      "dateLabel": "Apr 20, 2026",
       "videoLabel": "Watch on YouTube",
       "moreInfoUrl": "https://www.edugems.ai/",
       "getStartedUrl": "https://www.edugems.ai/",
