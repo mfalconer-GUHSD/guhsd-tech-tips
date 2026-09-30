@@ -62,6 +62,125 @@
   },
   "tips": [
     {
+      "id": "2027-03-01-gemini-docs-personalization",
+      "issueNumber": 26,
+      "weekOf": "2027-03-01",
+      "title": "Stop Re-Explaining Your Style to Gemini Every Time",
+      "teaser": "A hidden personalization setting lets Gemini remember your writing rules permanently in Google Docs, instead of you re-typing them every session.",
+      "tool": "gemini",
+      "video": {
+        "url": "https://www.youtube.com/shorts/PP_V1JYe_YQ",
+        "title": "Teach Gemini how you write in Google Docs (hidden setting) #googledocs #gemini #googleworkspace",
+        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
+        "description": "A quick vertical demo of a personalization setting in Google Docs that saves your writing preferences (tone, style rules, formatting habits) permanently, so Gemini applies them automatically every time you use Help Me Write without you having to restate them."
+      },
+      "whyItMatters": "If you've ever typed out the same instructions to Gemini every time you open a new Doc — \"keep it warm but professional,\" \"avoid exclamation points,\" \"match this format\" — there's a personalization setting that saves those rules permanently. Set it once and Gemini applies your style automatically from then on in Help Me Write, whether you're drafting a newsletter, a recommendation letter, or feedback comments. It's a small setup step that saves real time across every doc you touch afterward.",
+      "pogTags": ["AP7", "AP8", "SP7"],
+      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. This is a personal account setting — it only affects your own Gemini/Docs experience, not anyone else's."
+    },
+    {
+      "id": "2027-02-22-brisk-inspect-writing",
+      "issueNumber": 25,
+      "weekOf": "2027-02-22",
+      "title": "See How a Paper Was Actually Written: Brisk's Inspect Writing Replay",
+      "teaser": "Watch a step-by-step replay of a student's revision history in Google Docs — every draft, paste, and edit, in order.",
+      "tool": "brisk",
+      "video": {
+        "url": "https://www.youtube.com/shorts/GAzasuhN-oY",
+        "title": "Inspect Writing with Brisk AI",
+        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
+        "description": "A quick vertical demo of Brisk's Inspect Writing tool: open a student's Google Doc and watch a video-style replay of their entire writing process, from first draft to final version, including any pasted-in text."
+      },
+      "whyItMatters": "Inspect Writing gives you a factual, video-style replay of how a Google Doc was actually written — every draft, every paste, every edit, in the order it happened. It doesn't produce an accuracy score or accuse anyone of anything; it just shows you the process, which makes it a starting point for a conversation rather than a verdict. It's also genuinely useful beyond academic integrity questions — watching where a student got stuck or rewrote something entirely can point you toward exactly where they need support.",
+      "pogTags": ["AP2", "AP6", "SP7"],
+      "complianceNote": "PII-secure and approved for staff use. Brisk is not currently approved for direct student use in GUHSD — this tool is for your own review of a student's existing document, not something students interact with directly."
+    },
+    {
+      "id": "2027-02-16-gemini-canvas",
+      "issueNumber": 24,
+      "weekOf": "2027-02-16",
+      "title": "Turn an Idea Into a Working App or Quiz: Gemini Canvas",
+      "teaser": "Describe what you want and Canvas builds it as a real, working page — an interactive quiz, a game, a visualized algorithm, or a shareable app.",
+      "tool": "gemini",
+      "video": {
+        "url": "https://www.youtube.com/shorts/VH-B59UBGHM",
+        "title": "What is Gemini Canvas? Google's New AI Creation Space Explained",
+        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
+        "description": "A quick vertical overview of Gemini Canvas, a creation space inside Gemini that turns a prompt into an actual working output — a document, a slide deck, an interactive quiz, a small app or game, or a visualization — instead of just a chat reply."
+      },
+      "whyItMatters": "Canvas turns Gemini from \"answer my question\" into \"build this thing.\" Upload a study guide and ask for a custom quiz students can click through, or ask it to visualize how an algorithm works step by step for a CS class, and Canvas generates a real, working, shareable page — not just a description of one. It's available to every Gemini user at no extra cost, which makes it a low-barrier way to turn a lesson idea into something interactive without needing to know any code.",
+      "pogTags": ["GP1", "GP3", "AP7", "SP7"],
+      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Keep any uploaded source material free of student names or other identifying details."
+    },
+    {
+      "id": "2027-02-09-brisk-handwritten-feedback",
+      "issueNumber": 23,
+      "weekOf": "2027-02-09",
+      "title": "Brisk Can Now Read Handwritten Student Work Too",
+      "teaser": "Snap a photo of a handwritten assignment and Brisk generates feedback on it — no typing required first.",
+      "tool": "brisk",
+      "video": {
+        "url": "https://www.youtube.com/shorts/0zcBHcHHNVg",
+        "title": "HOLD THE PHONE 📞 YOU CAN NOW GET FEEDBACK ON HANDWRITTEN WRITING WITH @briskteaching",
+        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
+        "description": "A quick vertical reaction demo showing Brisk generating feedback directly from a photo of a student's handwritten assignment — no need to retype it into a doc first."
+      },
+      "whyItMatters": "Not every assignment starts digital — a handwritten lab notebook, an annotated worksheet, a math problem set on paper. Brisk can now generate feedback directly from a photo of that handwritten work, so you don't have to retype it into a document first just to get AI-assisted comments. Upload the image, and Brisk gives you the same rubric-aligned, specific feedback it would generate from typed text — you still review everything before it goes to a student.",
+      "pogTags": ["AP6", "AP7", "SP7"],
+      "complianceNote": "PII-secure and approved for staff use. Brisk is not currently approved for direct student use in GUHSD — upload the photo and review the feedback yourself before sharing it with the student."
+    },
+    {
+      "id": "2027-02-01-gemini-classroom-all-ages",
+      "issueNumber": 22,
+      "weekOf": "2027-02-01",
+      "title": "Gemini in Classroom Is Now Open to Every Student — Not Just Seniors",
+      "teaser": "Age restrictions are gone: every student, not just those 18 and older, can now use the Gemini tab in Google Classroom to build flashcards, quizzes, and study guides from their own class materials.",
+      "tool": "gemini",
+      "video": {
+        "url": "https://www.youtube.com/shorts/rLmMar3j8nk",
+        "title": "No-cost Gemini tools now available in Google Classroom",
+        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
+        "description": "A quick vertical demo of the Gemini tab inside Google Classroom, going from an idea to instructional materials at no extra cost. As of August 2026, this same Gemini tab — including student-facing tools like flashcards and practice quizzes — expanded to students of every age, not just those 18 and older, and its starter prompts now pull context directly from a student's actual coursework."
+      },
+      "whyItMatters": "For most of this school year, several Gemini features inside Google Classroom — including the student-facing Gemini tab — were limited to students 18 and older. As of August 2026, that age restriction is gone: any student with a guhsd.net account can now open the Gemini tab in Classroom and turn their own course materials into flashcards, practice quizzes, or (if they also have Gemini Notebook access) a full interactive study guide. The starter prompts also got smarter — they now pull context from the student's actual assignments, instead of showing the same generic suggestions to everyone.",
+      "pogTags": ["GP1", "GP7", "AP7", "SP7"],
+      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. This is controlled by your Workspace admin's settings for Gemini and Gemini Notebook in Classroom — if students don't see the Gemini tab, check with IT."
+    },
+    {
+      "id": "2027-01-25-gemini-gmail-drafting",
+      "issueNumber": 21,
+      "weekOf": "2027-01-25",
+      "title": "Let Gemini Draft That Parent Email for You",
+      "teaser": "Type a few bullet points and Gemini writes a full, polished email draft right inside Gmail — you just review and send.",
+      "tool": "gemini",
+      "video": {
+        "url": "https://www.youtube.com/shorts/rYVSC7AzfvI",
+        "title": "How to Draft Email with Google Gemini in Gmail",
+        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
+        "description": "A quick vertical demo of Gemini's \"Help me write\" feature in Gmail: describe what you want to say, and Gemini drafts a full email you can refine with one-click options like Formalize, Elaborate, or Shorten before sending."
+      },
+      "whyItMatters": "That fifteen-message-deep parent thread doesn't have to eat your prep period. Click Help me write in any new email or reply, describe what you need to say, and Gemini drafts a complete response — pulling context from the thread itself so it doesn't start from nothing. Options to Formalize, Elaborate, Shorten, or Polish let you adjust the tone in one click before you send. Gemini never sends anything on its own; you review and approve every draft.",
+      "pogTags": ["AP5", "AP7", "SP7"],
+      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Keep specific student details (grades, behavior, IEP specifics) out of the prompt itself — draft generally, then add sensitive specifics yourself before sending."
+    },
+    {
+      "id": "2027-01-19-gemini-guided-learning",
+      "issueNumber": 20,
+      "weekOf": "2027-01-19",
+      "title": "Why Your Students' Gemini Won't Just Give Them the Answer",
+      "teaser": "Guided Learning is the default mode for every student account under 18 — it walks them through a problem instead of solving it for them.",
+      "tool": "gemini",
+      "video": {
+        "url": "https://www.youtube.com/shorts/189S90NwG0U",
+        "title": "Teachers: 'guided learning' for Gemini won't complete homework assignments for students. #googleedu",
+        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
+        "description": "A quick vertical explainer on Guided Learning, the default Gemini experience for any user under 18 with school-issued access: instead of answering a question directly, Gemini asks guiding questions and breaks the problem into steps."
+      },
+      "whyItMatters": "If a student on a guhsd.net account asks Gemini to just solve their homework, they won't get a straight answer — Guided Learning is the default mode for anyone under 18, and it's built to walk them through the reasoning instead of doing the work for them. It's worth knowing this exists so you can explain it to students who are surprised Gemini is \"being difficult,\" and so you can point families toward it when they ask how the district is guarding against AI doing the work. Teachers and any student 18 or older can still get direct answers when they need them.",
+      "pogTags": ["GP7", "AP4", "SP7"],
+      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Guided Learning applies automatically to student accounts under 18 — no setup needed on your end."
+    },
+    {
       "id": "2027-01-11-gemini-meet-notes-sharing",
       "issueNumber": 19,
       "weekOf": "2027-01-11",
