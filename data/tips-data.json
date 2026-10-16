@@ -62,9 +62,9 @@
   },
   "tips": [
     {
-      "id": "2027-03-01-gemini-docs-personalization",
-      "issueNumber": 26,
-      "weekOf": "2027-03-01",
+      "id": "2027-05-10-gemini-docs-personalization",
+      "issueNumber": 34,
+      "weekOf": "2027-05-10",
       "title": "Stop Re-Explaining Your Style to Gemini Every Time",
       "teaser": "A hidden personalization setting lets Gemini remember your writing rules permanently in Google Docs, instead of you re-typing them every session.",
       "tool": "gemini",
@@ -79,9 +79,9 @@
       "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. This is a personal account setting — it only affects your own Gemini/Docs experience, not anyone else's."
     },
     {
-      "id": "2027-02-22-brisk-inspect-writing",
-      "issueNumber": 25,
-      "weekOf": "2027-02-22",
+      "id": "2027-05-03-brisk-inspect-writing",
+      "issueNumber": 33,
+      "weekOf": "2027-05-03",
       "title": "See How a Paper Was Actually Written: Brisk's Inspect Writing Replay",
       "teaser": "Watch a step-by-step replay of a student's revision history in Google Docs — every draft, paste, and edit, in order.",
       "tool": "brisk",
@@ -96,9 +96,9 @@
       "complianceNote": "PII-secure and approved for staff use. Brisk is not currently approved for direct student use in GUHSD — this tool is for your own review of a student's existing document, not something students interact with directly."
     },
     {
-      "id": "2027-02-16-gemini-canvas",
-      "issueNumber": 24,
-      "weekOf": "2027-02-16",
+      "id": "2027-04-26-gemini-canvas",
+      "issueNumber": 32,
+      "weekOf": "2027-04-26",
       "title": "Turn an Idea Into a Working App or Quiz: Gemini Canvas",
       "teaser": "Describe what you want and Canvas builds it as a real, working page — an interactive quiz, a game, a visualized algorithm, or a shareable app.",
       "tool": "gemini",
@@ -113,9 +113,9 @@
       "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Keep any uploaded source material free of student names or other identifying details."
     },
     {
-      "id": "2027-02-09-brisk-handwritten-feedback",
-      "issueNumber": 23,
-      "weekOf": "2027-02-09",
+      "id": "2027-04-19-brisk-handwritten-feedback",
+      "issueNumber": 31,
+      "weekOf": "2027-04-19",
       "title": "Brisk Can Now Read Handwritten Student Work Too",
       "teaser": "Snap a photo of a handwritten assignment and Brisk generates feedback on it — no typing required first.",
       "tool": "brisk",
@@ -130,9 +130,9 @@
       "complianceNote": "PII-secure and approved for staff use. Brisk is not currently approved for direct student use in GUHSD — upload the photo and review the feedback yourself before sharing it with the student."
     },
     {
-      "id": "2027-02-01-gemini-classroom-all-ages",
-      "issueNumber": 22,
-      "weekOf": "2027-02-01",
+      "id": "2027-04-12-gemini-classroom-all-ages",
+      "issueNumber": 30,
+      "weekOf": "2027-04-12",
       "title": "Gemini in Classroom Is Now Open to Every Student — Not Just Seniors",
       "teaser": "Age restrictions are gone: every student, not just those 18 and older, can now use the Gemini tab in Google Classroom to build flashcards, quizzes, and study guides from their own class materials.",
       "tool": "gemini",
@@ -147,9 +147,9 @@
       "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. This is controlled by your Workspace admin's settings for Gemini and Gemini Notebook in Classroom — if students don't see the Gemini tab, check with IT."
     },
     {
-      "id": "2027-01-25-gemini-gmail-drafting",
-      "issueNumber": 21,
-      "weekOf": "2027-01-25",
+      "id": "2027-04-05-gemini-gmail-drafting",
+      "issueNumber": 29,
+      "weekOf": "2027-04-05",
       "title": "Let Gemini Draft That Parent Email for You",
       "teaser": "Type a few bullet points and Gemini writes a full, polished email draft right inside Gmail — you just review and send.",
       "tool": "gemini",
@@ -164,9 +164,9 @@
       "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Keep specific student details (grades, behavior, IEP specifics) out of the prompt itself — draft generally, then add sensitive specifics yourself before sending."
     },
     {
-      "id": "2027-01-19-gemini-guided-learning",
-      "issueNumber": 20,
-      "weekOf": "2027-01-19",
+      "id": "2027-03-15-gemini-guided-learning",
+      "issueNumber": 28,
+      "weekOf": "2027-03-15",
       "title": "Why Your Students' Gemini Won't Just Give Them the Answer",
       "teaser": "Guided Learning is the default mode for every student account under 18 — it walks them through a problem instead of solving it for them.",
       "tool": "gemini",
@@ -181,9 +181,9 @@
       "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Guided Learning applies automatically to student accounts under 18 — no setup needed on your end."
     },
     {
-      "id": "2027-01-11-gemini-meet-notes-sharing",
-      "issueNumber": 19,
-      "weekOf": "2027-01-11",
+      "id": "2027-03-08-gemini-meet-notes-sharing",
+      "issueNumber": 27,
+      "weekOf": "2027-03-08",
       "title": "New Privacy Control: Choose Who Gets Your Meeting Notes",
       "teaser": "Gemini's meeting notes no longer have to go to everyone on the invite — hosts can now limit them to just internal staff, or just the host and co-hosts.",
       "tool": "gemini",
@@ -193,14 +193,14 @@
         "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
         "description": "A quick vertical demo of the core \"Take notes for me\" workflow in Google Meet. As of September 2026, hosts also get a new setting controlling exactly who receives the generated notes — all invited guests, just internal staff, or only the host and co-hosts — instead of it defaulting to every invitee automatically."
       },
-      "whyItMatters": "We covered Gemini's meeting notes feature back in December, but there's an important update worth knowing: hosts can now control exactly who receives the generated notes document, instead of it going to every invited guest by default. Before starting notes, choose from three options — all invited guests, only internal staff, or just the host and co-hosts. This matters most for meetings that touch anything sensitive: a discipline conversation, a personnel matter, or a discussion that references specific students. Restricting the notes to just the people who need them is a simple extra layer of protection worth building into your habit.",
+      "whyItMatters": "We covered Gemini's meeting notes feature a few weeks ago, but there's an important update worth knowing: hosts can now control exactly who receives the generated notes document, instead of it going to every invited guest by default. Before starting notes, choose from three options — all invited guests, only internal staff, or just the host and co-hosts. This matters most for meetings that touch anything sensitive: a discipline conversation, a personnel matter, or a discussion that references specific students. Restricting the notes to just the people who need them is a simple extra layer of protection worth building into your habit.",
       "pogTags": ["AP8", "SP7"],
       "complianceNote": "PII-secure and approved for staff use with your guhsd.net account. This requires Take Notes for Me to already be enabled by your Workspace admin — the new sharing controls appear automatically once notes are turned on for your account."
     },
     {
-      "id": "2027-01-04-gemini-nano-banana-precision-edit",
-      "issueNumber": 18,
-      "weekOf": "2027-01-04",
+      "id": "2027-03-01-gemini-nano-banana-precision-edit",
+      "issueNumber": 26,
+      "weekOf": "2027-03-01",
       "title": "Draw Right on the Image: Gemini's Precise Way to Edit Classroom Visuals",
       "teaser": "Sketch or write directly over a generated image and Gemini edits exactly the part you marked — perfect for fine-tuning a diagram or worksheet.",
       "tool": "gemini",
@@ -215,9 +215,9 @@
       "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Keep prompts and generated images free of real student likenesses or identifying details — use generic characters and scenes."
     },
     {
-      "id": "2026-12-14-gemini-meet-notes",
-      "issueNumber": 17,
-      "weekOf": "2026-12-14",
+      "id": "2027-02-22-gemini-meet-notes",
+      "issueNumber": 25,
+      "weekOf": "2027-02-22",
       "title": "Let Gemini Take the Notes at Your Next Staff Meeting",
       "teaser": "Gemini can now transcribe and summarize in-person meetings too — not just video calls — straight into a shareable Google Doc.",
       "tool": "gemini",
@@ -232,9 +232,9 @@
       "complianceNote": "PII-secure and approved for staff use with your guhsd.net account. This feature is controlled by your Workspace admin's Meet settings — if you don't see it, check with IT. Avoid using it for meetings that discuss specific student records or IEP details, since it creates a written transcript."
     },
     {
-      "id": "2026-12-07-brisk-podcast",
-      "issueNumber": 16,
-      "weekOf": "2026-12-07",
+      "id": "2027-02-16-brisk-podcast",
+      "issueNumber": 24,
+      "weekOf": "2027-02-16",
       "title": "Turn Any Lesson Into a Podcast Your Students Can Follow Along To",
       "teaser": "Brisk's Podcast Generator turns a lesson, article, or your own notes into a short, listenable track with a synced transcript.",
       "tool": "brisk",
@@ -249,9 +249,9 @@
       "complianceNote": "PII-secure and approved for staff use. Brisk is not currently approved for direct student use in GUHSD — you create the podcast, and students only listen to what you generate and share."
     },
     {
-      "id": "2026-11-30-gemini-classroom-rubrics",
-      "issueNumber": 15,
-      "weekOf": "2026-11-30",
+      "id": "2027-02-09-gemini-classroom-rubrics",
+      "issueNumber": 23,
+      "weekOf": "2027-02-09",
       "title": "Google Just Made Rubrics One Click Faster in Classroom",
       "teaser": "Gemini can now draft a Classroom-ready rubric right from the assignment-creation screen — no separate tab required.",
       "tool": "gemini",
@@ -266,9 +266,9 @@
       "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Rubric generation in the assignment screen is limited to users 18 and older — build these yourself rather than having students generate their own."
     },
     {
-      "id": "2026-11-16-notebooklm-infographic",
-      "issueNumber": 14,
-      "weekOf": "2026-11-16",
+      "id": "2027-02-01-notebooklm-infographic",
+      "issueNumber": 22,
+      "weekOf": "2027-02-01",
       "title": "Turn a Dense Reading Into One Shareable Graphic with Gemini Notebook",
       "teaser": "Upload your sources and Gemini Notebook builds a single visual summary you can drop straight into a slide or handout.",
       "tool": "notebooklm",
@@ -283,9 +283,9 @@
       "complianceNote": "PII-secure and approved for staff use with your guhsd.net account. Infographic generation is currently limited to users 18 and older — build these yourself rather than assigning students to generate their own."
     },
     {
-      "id": "2026-11-09-brisk-grader",
-      "issueNumber": 13,
-      "weekOf": "2026-11-09",
+      "id": "2027-01-25-brisk-grader",
+      "issueNumber": 21,
+      "weekOf": "2027-01-25",
       "title": "Skip the Copy-Paste: Brisk Grader Puts Rubric Scores Right in Classroom",
       "teaser": "Rubric-based grades and comments now sync straight into your Google Classroom gradebook — no copy-pasting required.",
       "tool": "brisk",
@@ -300,9 +300,9 @@
       "complianceNote": "PII-secure and approved for staff use. Brisk is not currently approved for direct student use in GUHSD — you remain the one reviewing and posting every grade."
     },
     {
-      "id": "2026-11-02-notebooklm-rename",
-      "issueNumber": 12,
-      "weekOf": "2026-11-02",
+      "id": "2027-01-19-notebooklm-rename",
+      "issueNumber": 20,
+      "weekOf": "2027-01-19",
       "title": "Heads Up: NotebookLM Just Became Gemini Notebook",
       "teaser": "Same free, source-grounded tool you already use — Google just gave it a new name and folded it into the Gemini app family.",
       "tool": "notebooklm",
@@ -317,9 +317,9 @@
       "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account — the rename doesn't change any approval status. Same tool, same data protections, new name."
     },
     {
-      "id": "2026-10-26-notebooklm-mindmap",
-      "issueNumber": 11,
-      "weekOf": "2026-10-26",
+      "id": "2027-01-11-notebooklm-mindmap",
+      "issueNumber": 19,
+      "weekOf": "2027-01-11",
       "title": "Turn a Messy Unit Into One Clear Map with Gemini Notebook's Mind Map",
       "teaser": "One click turns your uploaded sources into an interactive, branching mind map students can click through to ask questions.",
       "tool": "notebooklm",
@@ -334,9 +334,9 @@
       "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Mind Maps currently only work in the desktop browser, not the Gemini Notebook mobile app."
     },
     {
-      "id": "2026-10-19-gemini-classroom-app",
-      "issueNumber": 10,
-      "weekOf": "2026-10-19",
+      "id": "2027-01-04-gemini-classroom-app",
+      "issueNumber": 18,
+      "weekOf": "2027-01-04",
       "title": "Let Gemini Peek Into Your Classroom: The New @Classroom Connection",
       "teaser": "Ask Gemini about assignments, drafts, and student progress — grounded in your real Google Classroom data.",
       "tool": "gemini",
@@ -349,6 +349,142 @@
       "whyItMatters": "Instead of describing your class to Gemini from scratch every time, type @Classroom in a prompt and Gemini pulls in real context from your actual Google Classroom — which assignments are missing, how a student did on the last quiz, what's due this week — to help draft communications, differentiated plans, or progress summaries. Gemini can't post, grade, or delete anything on its own; every draft still waits for you to review and publish. It's a genuine shortcut for the \"let me check my gradebook first\" step that eats into planning time.",
       "pogTags": ["AP2", "AP7", "SP7"],
       "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. The Classroom app in Gemini is limited to users 18 and older; it can only draft — you review and publish everything yourself."
+    },
+    {
+      "id": "2026-12-14-gemini-classroom-objectives",
+      "issueNumber": 17,
+      "weekOf": "2026-12-14",
+      "title": "Start Your Next Assignment with the Learning Goal Already Written",
+      "teaser": "Gemini in Google Classroom can draft learning objectives right where you build the assignment, so the goal is on the page before the task is.",
+      "tool": "gemini",
+      "video": {
+        "url": "https://www.youtube.com/shorts/12bgblTPPO8",
+        "title": "Google Classroom x Gemini Glow-Up",
+        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
+        "description": "A short clip on the broader Gemini-in-Google-Classroom experience (the clip is titled \"Google Classroom x Gemini Glow-Up\"). It does not walk through the learning-objectives tool specifically; that capability is described in Google's Classroom Help under \"Outline a lesson plan,\" which lists generating learning objectives and lesson plans."
+      },
+      "whyItMatters": "Granite's December target is that the learning goal is visible in 80% of classrooms, and the easiest place to make it visible is the assignment itself. When you create an assignment in Classroom, ask Gemini to draft learning objectives for your topic and grade level, then rewrite the first one so it names what students will learn instead of what they will do. Paste the goal and two or three \"I can\" statements at the top of the instructions, and students can find the goal without asking for it. Features vary by edition and admin settings, so if you don't see the Gemini options, ask IT.",
+      "pogTags": ["GP7", "AP2", "AP7", "SP7"],
+      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. These are educator-side drafting tools — review and edit everything before it reaches students, and keep student names out of your prompts."
+    },
+    {
+      "id": "2026-12-07-gemini-plc-shared-format",
+      "issueNumber": 16,
+      "weekOf": "2026-12-07",
+      "title": "Give Your PLC One Shared Way to Write Goals",
+      "teaser": "Put your Goal Coach instructions in a shared Doc so every teammate drafts goals and success criteria the same way, then compare notes.",
+      "tool": "gemini",
+      "video": {
+        "url": "https://www.youtube.com/shorts/Y9Hr1jXRwCQ",
+        "title": "How to Build a Custom AI Assistant in 30s (Gemini Gems)",
+        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
+        "description": "A quick vertical walkthrough of creating a custom Gemini Gem — a saved assistant with its own instructions — without writing any code. Use the same steps to build the Goal Coach from the October 19 tip."
+      },
+      "whyItMatters": "A PLC conversation about student work goes further when everyone started from the same goal format. Save your Goal Coach instructions in a shared Google Doc, have each teammate paste them into their own Gem, and bring the goals and success criteria each person wrote for the same standard to PLC Collaboration Day. Comparing them surfaces the real questions: Is the verb observable? Would students recognize the goal in their own words? The point is a sharper team conversation, not identical wording.",
+      "pogTags": ["GP8", "AP2", "AP7", "SP7"],
+      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Sharing Gems across the district is not turned on yet, which is why this tip shares the instructions through a Doc. Keep student names and work samples out of the shared Doc."
+    },
+    {
+      "id": "2026-11-30-brisk-exit-tickets",
+      "issueNumber": 15,
+      "weekOf": "2026-11-30",
+      "title": "Exit Tickets That Measure the Goal, Not the Lesson",
+      "teaser": "Give Brisk your success criteria and get a quick quiz with one question per \"I can\" statement.",
+      "tool": "brisk",
+      "video": {
+        "url": "https://www.youtube.com/shorts/1KsTePl7ofE",
+        "title": "Як створити тест за 10 секунд (How to create a quiz in 10 seconds)",
+        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
+        "description": "A quick vertical demo (narrated in Ukrainian, but the visual workflow needs no translation) of generating a quiz with Brisk in seconds."
+      },
+      "whyItMatters": "If the success criteria say students can analyze how an author builds an argument, the exit ticket should ask them to do that, not recall the plot. Paste your \"I can\" statements into Brisk's quiz tool and ask for one question per statement, delivered to a Google Form with an answer key. The results tell you which criteria students have and which to reteach, which is the evidence Granite's clear-goals work is meant to produce. Read the questions critically first; AI quizzes lean toward recall, so rewrite any that don't match the verb in your criterion.",
+      "pogTags": ["AP2", "AP7", "SP7"],
+      "complianceNote": "PII-secure and approved for staff use. Brisk is not currently approved for direct student use in GUHSD — students take the quiz in your own Google Form, never inside Brisk."
+    },
+    {
+      "id": "2026-11-16-gemini-canvas-self-check",
+      "issueNumber": 14,
+      "weekOf": "2026-11-16",
+      "title": "Build a Student Self-Check from Your Success Criteria",
+      "teaser": "Paste your \"I can\" statements into Gemini Canvas and get a simple interactive checklist students use to rate where they are.",
+      "tool": "gemini",
+      "video": {
+        "url": "https://www.youtube.com/shorts/dydBhXdCIcg",
+        "title": "Gemini Canvas | Build Interactive Apps & Games FREE – No Code in Minutes!",
+        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
+        "description": "A quick vertical look at Gemini Canvas, which turns a plain-language request into a working interactive page without writing code. This tip uses it to build a self-rating checklist."
+      },
+      "whyItMatters": "Granite's second December target is that 70% of students can communicate the goal, and students who rate themselves against the criteria are practicing exactly that. Ask Canvas for a one-page checklist that lists each \"I can\" statement with Not yet, Getting there, and Got it buttons and a one-line next step for each. Open it at the start or end of a lesson and let students tap through it. Test it yourself first, and if link sharing isn't available on your account, project it and have students respond on paper or with hand signals.",
+      "pogTags": ["GP5", "GP7", "AP7", "SP7"],
+      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Build it yourself with no student names in the prompt; the page should not collect names or responses."
+    },
+    {
+      "id": "2026-11-09-brisk-feedback-on-criteria",
+      "issueNumber": 13,
+      "weekOf": "2026-11-09",
+      "title": "Give Feedback on the Goal, Not Just the Grammar",
+      "teaser": "Paste your success criteria into Brisk as the rubric so every comment points back to what students were supposed to learn.",
+      "tool": "brisk",
+      "video": {
+        "url": "https://www.youtube.com/shorts/Bt8x1mEXJPk",
+        "title": "Upload a Photo of Student Writing- Generate AI Feedback",
+        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
+        "description": "A quick vertical demo from Brisk Teaching of generating AI feedback from an uploaded photo of student writing. The same feedback tool can work from a rubric or criteria you supply, as described on Brisk's site."
+      },
+      "whyItMatters": "Feedback lands harder when it uses the same language as the goal. Brisk's Give Feedback tool can work from a rubric you provide, so paste your \"I can\" statements as the criteria and choose Rubric Criteria or Next Steps. Students then read comments like \"You can identify the claim; next, connect your evidence to it,\" which reinforces the goal they should already be able to state. Review the drafts before they go out; Brisk drafts, you decide.",
+      "pogTags": ["AP5", "AP6", "SP7"],
+      "complianceNote": "PII-secure and approved for staff use. Brisk is not currently approved for direct student use in GUHSD — you review all feedback and share it with students yourself."
+    },
+    {
+      "id": "2026-11-02-gemini-guided-learning-goal-practice",
+      "issueNumber": 12,
+      "weekOf": "2026-11-02",
+      "title": "Have Students Explain the Goal to Gemini First",
+      "teaser": "A five-minute routine where students rehearse the learning goal in their own words before you ask them in class.",
+      "tool": "gemini",
+      "video": {
+        "url": "https://www.youtube.com/shorts/lQ2zYgK2KwE",
+        "title": "Guided Learning in Gemini: Build Real Understanding With AI Step-by-Step",
+        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
+        "description": "A quick vertical explainer of Guided Learning in Gemini, which moves beyond quick answers to help learners build understanding with step-by-step help and interactive questions."
+      },
+      "whyItMatters": "Granite's target is that 70% of students can communicate the goal when asked, and that takes practice saying it. Have students paste the goal and success criteria into Gemini and type: \"Quiz me. Ask me to explain each I can statement in my own words, one at a time.\" Guided Learning is the default for students under 18, so Gemini asks follow-up questions rather than handing over answers. Run it as a warm-up or exit routine, then ask the same question aloud and notice the difference.",
+      "pogTags": ["GP5", "GP7", "AP4", "SP7"],
+      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Students should paste only the goal and criteria, never names or personal details."
+    },
+    {
+      "id": "2026-10-26-brisk-single-point-rubric",
+      "issueNumber": 11,
+      "weekOf": "2026-10-26",
+      "title": "Success Criteria on One Page: Single-Point Rubrics with Brisk",
+      "teaser": "Turn your learning goal into a short list of observable \"I can\" statements students can read at a glance.",
+      "tool": "brisk",
+      "video": {
+        "url": "https://www.youtube.com/shorts/xWX48wfeQ0M",
+        "title": "Single Point Rubrics with Brisk AI #teachers #teacher #education #ai",
+        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
+        "description": "A quick vertical demo of creating a single-point rubric with Brisk, a format that lists one level of proficiency per criterion with room for feedback on either side."
+      },
+      "whyItMatters": "The learning goal is the why; success criteria are the how, written as observable \"I can\" statements. A single-point rubric is a clean container for them: one column of criteria with space on either side for \"not yet\" and \"beyond.\" Give Brisk the goal and the task, ask for a single-point rubric, then edit until every line starts with \"I can\" and describes something you could see in student work. Post the same criteria for students, so the goal, the evidence, and the feedback all use one language.",
+      "pogTags": ["GP3", "AP2", "AP7", "SP7"],
+      "complianceNote": "PII-secure and approved for staff use. Brisk is not currently approved for direct student use in GUHSD — students see only the finished rubric you share."
+    },
+    {
+      "id": "2026-10-19-gemini-goal-coach-gem",
+      "issueNumber": 10,
+      "weekOf": "2026-10-19",
+      "title": "Turn Any Task Into a Learning Goal with a \"Goal Coach\" Gem",
+      "teaser": "A saved Gemini assistant that rewrites \"write a paper\" into \"analyze how an author builds an argument\" in seconds.",
+      "tool": "gemini",
+      "video": {
+        "url": "https://www.youtube.com/shorts/dLKvVMlUc78",
+        "title": "Meet Gemini Gems: Your AI Assistant, Your Way",
+        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
+        "description": "A quick vertical introduction to Gemini Gems: saved, reusable AI assistants you set up once with your own instructions, so Gemini builds lessons your way each time."
+      },
+      "whyItMatters": "Granite's clear-goals work rests on one shift: describing what students will learn, not what they will do. Create a Gem with instructions like: \"I'll paste a task or assignment. Rewrite it as a learning goal that names the transferable skill or concept, then draft three student-facing I can statements.\" Now every lesson starts from the same coach, and you can sanity-check your own drafts in seconds. You stay the expert; treat the output as a first draft and keep the wording that sounds like your classroom.",
+      "pogTags": ["GP3", "AP2", "AP7", "SP7"],
+      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. A Gem lives in your own account; sharing Gems across the district isn't turned on yet, so share the instructions through a Google Doc instead. Keep student names out of anything you paste."
     },
     {
       "id": "2026-10-12-notebooklm-flashcards",
