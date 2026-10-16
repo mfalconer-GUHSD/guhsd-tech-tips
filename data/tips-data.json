@@ -62,6 +62,57 @@
   },
   "tips": [
     {
+      "id": "2027-06-01-gemini-goal-library-gem",
+      "issueNumber": 37,
+      "weekOf": "2027-06-01",
+      "title": "Save Your Best Goals for August: Build a Goal Library Gem",
+      "teaser": "Capture the learning goals and success criteria that worked this year, so next year's Goal Coach writes in your voice.",
+      "tool": "gemini",
+      "video": {
+        "url": "https://www.youtube.com/shorts/rujJa5NXEac",
+        "title": "Gemini Gems Quick Tutorial (Google AI)",
+        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
+        "description": "A quick vertical walkthrough of setting up a custom Gemini Gem with your own instructions and prompts, the same steps used to build and update the Goal Coach from our October tip."
+      },
+      "whyItMatters": "Before summer, collect the learning goals and \"I can\" statements that actually worked, the ones students could explain without looking. Paste three or four of them into your Goal Coach Gem's instructions as examples of the wording you want, so next August's drafts sound like your classroom and not like generic AI. Gems live in your own account, so also save the instructions in a Google Doc; that keeps them safe and lets a teammate or a new colleague copy them. A ten-minute step now saves a rough first week of planning in the fall.",
+      "pogTags": ["GP7", "AP1", "AP7", "SP7"],
+      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Use goals and criteria only, with no student names or work samples. Sharing Gems across the district may not be enabled, so share through a Doc."
+    },
+    {
+      "id": "2027-05-24-brisk-unit-plan-from-goal",
+      "issueNumber": 36,
+      "weekOf": "2027-05-24",
+      "title": "Plan Next Year's Unit Starting from the Goal",
+      "teaser": "Pick one unit that didn't land this year and have Brisk rebuild the plan from the learning goal outward.",
+      "tool": "brisk",
+      "video": {
+        "url": "https://www.youtube.com/shorts/OUhCeUsBX70",
+        "title": "Brisk Teaching Extension",
+        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
+        "description": "A short overview clip of the Brisk Teaching extension. It does not walk through the Unit Plan tool specifically; Brisk's Help Center describes that tool as taking a topic, grade level, and standards and laying out objectives, lessons, and assessments."
+      },
+      "whyItMatters": "A unit plan built backward from the goal keeps every lesson honest. Give Brisk's Unit Plan tool the standard and your learning goal, let it draft objectives, lessons, and assessments, then check each lesson against your success criteria: if it doesn't help students show an \"I can\" statement, cut it or rewrite it. Choose one unit that struggled this year, and save the revised plan in Drive so August starts with a head start.",
+      "pogTags": ["GP3", "AP2", "AP7", "SP7"],
+      "complianceNote": "PII-secure and approved for staff use. Brisk is not currently approved for direct student use in GUHSD — this is a planning tool for you, and no student information belongs in the prompt."
+    },
+    {
+      "id": "2027-05-17-gemini-finals-goal-review",
+      "issueNumber": 35,
+      "weekOf": "2027-05-17",
+      "title": "Finals Prep: Turn the Year's Learning Goals into a Study Plan",
+      "teaser": "Students paste the semester's goals into Gemini and let Guided Learning quiz them on the ones they're least sure about.",
+      "tool": "gemini",
+      "video": {
+        "url": "https://www.youtube.com/shorts/fwCdxXDaRpo",
+        "title": "Guided Learning using Google Gemini",
+        "channel": "Not independently confirmed — this is a YouTube Short, which guarantees a runtime under 60 seconds regardless of channel",
+        "description": "A quick vertical look at Guided Learning in Gemini, a mode students can select so the AI guides them through learning a topic instead of just telling them everything about it."
+      },
+      "whyItMatters": "By May the learning goals have been posted all year, and finals are where students show they can explain and use them. Share one Doc with the semester's goals and success criteria, and have students paste it into Gemini with: \"Use Guided Learning. Ask me what I'm least sure about, then quiz me on those goals one at a time.\" Because Guided Learning asks questions instead of giving answers, the practice stays with the student, and you can ask the same questions aloud in class to see what stuck.",
+      "pogTags": ["GP5", "GP7", "AP4", "SP7"],
+      "complianceNote": "PII-secure and approved for staff and student use with your guhsd.net account. Students paste only the goals, never personal details. Guided Learning is the default for accounts under 18."
+    },
+    {
       "id": "2027-05-10-gemini-docs-personalization",
       "issueNumber": 34,
       "weekOf": "2027-05-10",
