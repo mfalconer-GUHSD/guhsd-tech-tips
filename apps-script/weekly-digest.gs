@@ -1,5 +1,5 @@
 /**
- * GUHSD Weekly Tech Tips — Staff Email Digest (v6.2: self-checking prompt)
+ * GUHSD Weekly Tech Tips — Staff Email Digest (v6.3: learning-goals focus)
  *
  * Runs on a DAILY timer. Each day it checks whether a scheduled send date
  * has arrived (or already passed without sending) and whether new content
@@ -12,8 +12,8 @@
  * human (or a paid API) in the loop. What it DOES do: emails you every week
  * with (a) what's currently published, (b) which upcoming scheduled dates
  * still need content, and (c) a complete, ready-to-paste prompt for a
- * Claude conversation that covers the entire workflow — research, drafting,
- * verification, and publishing. It's a nudge with the whole playbook
+ * Claude conversation that covers the entire workflow — checking status,
+ * drafting, verifying, and publishing. It's a nudge with the whole playbook
  * attached, not a researcher itself.
  *
  * The pasted prompt tells Claude to check the live data file itself before
@@ -21,6 +21,12 @@
  * copy of this email you happen to paste — so it stays correct even if you
  * save an email and use it weeks later, or if the same email gets pasted
  * more than once.
+ *
+ * CONTENT FOCUS (changed Oct 2026): tips still teach staff to use Gemini,
+ * Gemini Notebook, and Brisk, but each one now ties a tool feature to one
+ * step of building strong learning goals, aligned with Granite Hills' clear-
+ * goals work (learning goal = the WHY, success criteria = observable "I can"
+ * statements, task vs. learning). The weekly prompt below encodes that.
  *
  * Staff suggestions for tech tips are handled separately via Google Form
  * notifications directly — not pulled into this script. Keep it simple.
@@ -194,19 +200,34 @@ function weeklyResearchReminder() {
   const fullPrompt =
     'I run the GUHSD Weekly Tech Tips site (repo: mfalconer-GUHSD/guhsd-tech-tips). ' +
     'Please do our full weekly workflow:\n\n' +
+    '0. FOCUS: Tips still teach staff to use Google Gemini, Gemini Notebook, and Brisk Teaching, ' +
+    'but every tip now ties one tool feature to one step of building strong learning goals, ' +
+    'aligned with the clear-goals work at Granite Hills High School. Use Granite\'s language: ' +
+    'a Learning Goal is the WHY (the transferable knowledge or skill students are acquiring); ' +
+    'Success Criteria are the HOW (observable, student-facing "I can..." statements); and the ' +
+    'core shift is task vs. learning (e.g., "analyze how an author builds an argument," not ' +
+    '"write a paper"). Site targets: 80% of classrooms show the learning goal clearly, and 70% ' +
+    'of students can communicate it when asked. Frame tips as best practice that helps students ' +
+    'find and explain their goals, never as compliance. If it helps, check my Gmail and Drive for ' +
+    'the latest Granite PLC Collaboration Day messages and any goal examples teachers are using.\n\n' +
     '1. CHECK STATUS: First, pull data/tips-data.json from the repo yourself and see what\'s ' +
     'actually there — don\'t rely on any dates I may have pasted below, since time may have ' +
     'passed since this email was generated. Compare the tips already published against the ' +
-    'SEND_DATES list in apps-script/weekly-digest.gs to find the real next unfilled date(s).\n\n' +
-    '2. RESEARCH: Check for recent updates to Google Gemini, Brisk Teaching, and NotebookLM ' +
-    '(new features, changed workflows). Also check whether GUHSD has approved any new AI ' +
-    'tools since we last covered the compliance table (see tools.html and the AI@GUHSD page).\n\n' +
-    '3. DRAFT: Based on what you find, draft the next tip issue(s) needed to fill whatever ' +
-    'dates are genuinely still unfilled. Each issue needs: a captivating title, a one-sentence ' +
-    'teaser, a real YouTube video (search and verify it is genuinely 5 minutes or under — ' +
-    'do not guess), a short video description, a 2-4 sentence "why it matters," Portrait of ' +
-    'a Graduate tags (GP/AP/SP codes — only tag what genuinely fits, SP7 usually applies), ' +
-    'and a compliance note matching that tool\'s current approval status.\n\n' +
+    'SEND_DATES list in apps-script/weekly-digest.gs to find the real next unfilled date(s). ' +
+    'Also confirm the tips already scheduled still make sense (no tip should reference an older ' +
+    'tip that now comes later).\n\n' +
+    '2. RESEARCH (lighter than before): Check whether Gemini, Gemini Notebook, or Brisk shipped a ' +
+    'feature that supports a goal-building step, and whether GUHSD has approved any new AI tools ' +
+    'since we last covered the compliance table (see tools.html and the AI@GUHSD page). Skip ' +
+    'features that need a paid plan or that students may not use under GUHSD\'s approval status.\n\n' +
+    '3. DRAFT: Draft the next tip issue(s) needed to fill whatever dates are genuinely still ' +
+    'unfilled. Each issue needs: a captivating title, a one-sentence teaser, a real YouTube video ' +
+    '(search and verify it is genuinely 5 minutes or under — do not guess; YouTube Shorts count as ' +
+    'verified), a short video description that is honest about what the video does and does not ' +
+    'show, a 2-4 sentence "why it matters" that names the goal-building step, Portrait of a ' +
+    'Graduate tags (GP/AP/SP codes — only tag what genuinely fits, SP7 usually applies), and a ' +
+    'compliance note matching that tool\'s current approval status. Never ask teachers to put ' +
+    'student names or work samples into a prompt.\n\n' +
     '4. VERIFY: Double check the video is still live, still short enough, and that the ' +
     'tool\'s PII/staff/student approval status in tools.html still matches the real district list.\n\n' +
     '5. PUBLISH: Add the new issue(s) to data/tips-data.json in the GitHub repo (issueNumber ' +
@@ -217,7 +238,7 @@ function weeklyResearchReminder() {
     ' But treat that as a starting point only — always verify against the live file first, ' +
     'since more tips may have been added since.';
 
-  const subject = 'Weekly check-in: research updates for upcoming Tech Tips';
+  const subject = 'Weekly check-in: learning-goals tips for upcoming Tech Tips';
   const body =
     statusLine + '\n' + upcomingLine + '\n\n' +
     '=== PASTE THIS ENTIRE PROMPT INTO A CLAUDE CONVERSATION ===\n\n' +
