@@ -2,6 +2,8 @@
 
 Last updated Oct 2026. Written so someone new can keep this running without the original author.
 
+**Current owner:** Mike Falconer, Director II, Instructional Technology (continuing to run it from his new role as of Oct 2026).
+
 ## What this is
 A weekly AI tip for GUHSD staff about three district-approved tools (Google Gemini, Gemini Notebook, Brisk Teaching).
 - **Public site:** https://mfalconer-guhsd.github.io/guhsd-tech-tips/ (GitHub Pages, repo `mfalconer-GUHSD/guhsd-tech-tips`, branch `main`)
@@ -12,7 +14,7 @@ A weekly AI tip for GUHSD staff about three district-approved tools (Google Gemi
 | Piece | Location | Notes |
 |---|---|---|
 | All tip content | `data/tips-data.json` | **The only file you normally edit.** |
-| Site pages | `index.html`, `tools.html`, `tip.html`, `pipeline.html`, `portrait-of-a-graduate.html` | Render from the JSON; rarely need edits |
+| Site pages | `index.html`, `tools.html`, `tip.html`, `pipeline.html`, `portrait-of-a-graduate.html`, `2025-26-archive.html` | Render from the JSON; rarely need edits |
 | Email automation | `apps-script/weekly-digest.gs` | The repo copy is a backup; the **live** copy runs in Google Apps Script (see below) |
 | Staff signup / unsubscribe / suggestion | Three Google Forms with response sheets | IDs are constants at the top of the script |
 
@@ -26,12 +28,12 @@ A weekly AI tip for GUHSD staff about three district-approved tools (Google Gemi
 **Status as of Oct 2026:** all 37 scheduled dates (Aug 17, 2026 through Jun 1, 2027) have a tip. Nothing is required weekly unless you want to change content.
 
 ## Things tied to one person's account (the real handoff risks)
-These are the items that can silently stop if the original owner's account changes:
+These are the items that can silently stop if the owner's account changes:
 1. **The Apps Script project and its triggers** run under the account that created them (guhsd.net). Triggers do not transfer when you share a script. To hand off: the new owner opens the script, makes a copy (or is added as editor), then re-creates the two triggers (`checkAndSendDigest` daily; `weeklyResearchReminder` weekly) and runs `sendTestEmail` once to authorize. Then the old owner deletes their triggers, so emails don't send twice.
 2. **Script Properties** (`lastSentDateKey`) live in that project. A new copy starts empty, so it would try to "catch up" from the first date. After copying, set `lastSentDateKey` to the last date already sent (Project Settings > Script Properties) before enabling the daily trigger.
 3. **The three Google Forms and their response sheets** are owned by one account. Transfer ownership in Drive (Share > change owner), or the signup list can be lost.
-4. **The GitHub repo** is owned by one GitHub user. Add the successor as a collaborator (Settings > Collaborators), or transfer the repo.
-5. **Attribution text**: the site footer and every email footer say "Curated by Mike Falconer, Assistant Principal." Update the name and title in `index.html`, `tools.html`, `tip.html`, `pipeline.html`, `portrait-of-a-graduate.html`, and in `sendDigestEmail` / `FROM_NAME` in the script. Also update `STATIC_RECIPIENTS` and the "Questions?" email.
+4. **The GitHub repo** is owned by one GitHub user. Add a second collaborator (Settings > Collaborators) so it isn't a single point of failure.
+5. **Attribution text**: pages and emails currently say "Curated by Mike Falconer, Director II, Instructional Technology." If the owner changes, update the footer in `index.html`, `tools.html`, `tip.html`, `portrait-of-a-graduate.html`, and `2025-26-archive.html`, and the `SIGNATURE` and `FROM_NAME` constants at the top of the script. Also update `STATIC_RECIPIENTS` and the "Questions?" email address in the script and page footers.
 
 ## The weekly routine (about 15 minutes, only if content needs changing)
 A weekly check-in email goes to the script owner with a ready-made prompt. Paste it into a Claude conversation. The prompt tells Claude to read the live `tips-data.json`, find unfilled dates, draft tips in the house format, verify videos, and publish to GitHub.
