@@ -1,5 +1,5 @@
 /**
- * GUHSD Weekly Tech Tips — Staff Email Digest (v6.3: learning-goals focus)
+ * GUHSD Weekly Tech Tips — Staff Email Digest (v6.4: updated attribution)
  *
  * Runs on a DAILY timer. Each day it checks whether a scheduled send date
  * has arrived (or already passed without sending) and whether new content
@@ -27,6 +27,9 @@
  * step of building strong learning goals, aligned with Granite Hills' clear-
  * goals work (learning goal = the WHY, success criteria = observable "I can"
  * statements, task vs. learning). The weekly prompt below encodes that.
+ *
+ * HANDOFF: see docs/HANDOFF.md in the repo. The live script and its triggers
+ * belong to whichever account created them.
  *
  * Staff suggestions for tech tips are handled separately via Google Form
  * notifications directly — not pulled into this script. Keep it simple.
@@ -103,6 +106,7 @@
 const DATA_URL = 'https://raw.githubusercontent.com/mfalconer-GUHSD/guhsd-tech-tips/main/data/tips-data.json';
 const SITE_URL = 'https://mfalconer-guhsd.github.io/guhsd-tech-tips/';
 const FROM_NAME = 'Mike Falconer — AI Tech Tips';
+const SIGNATURE = 'Mike Falconer, Director II, Instructional Technology';
 const TIMEZONE = 'America/Los_Angeles';
 
 const SIGNUP_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSflh2l3PXs2NGAHv6u-hGjKtv7XPMycD4LKFdD82O3FxRU_Rg/viewform?usp=publish-editor';
@@ -389,7 +393,7 @@ function sendDigestEmail(tip, data, recipients) {
         '<a href="' + tipUrl + '" style="color:#00897B;font-weight:600;text-decoration:none;">Read the full tip</a>' +
       '</p>' +
       '<p style="font-size:13px;color:#888;border-top:1px solid #ddd;padding-top:14px;">' +
-        'Curated by Mike Falconer, Assistant Principal &middot; Grossmont Union High School District<br>' +
+        'Curated by ' + SIGNATURE + ' &middot; Grossmont Union High School District<br>' +
         'Questions? <a href="mailto:mfalconer@guhsd.net">mfalconer@guhsd.net</a> &middot; ' +
         '<a href="' + SITE_URL + '">See all previous tips</a> &middot; ' +
         '<a href="' + UNSUBSCRIBE_FORM_URL + '">Unsubscribe</a>' +
@@ -416,7 +420,7 @@ function onSignupSubmit(e) {
       'You\'ll get a short email whenever a new weekly tip is published. ' +
       'See past tips anytime at ' + SITE_URL + '\n' +
       'Want to stop? ' + UNSUBSCRIBE_FORM_URL + '\n\n' +
-      '— Mike Falconer, Assistant Principal',
+      '— ' + SIGNATURE,
       { name: FROM_NAME }
     );
   } catch (err) {
