@@ -1,5 +1,5 @@
 /**
- * GUHSD Weekly Tech Tips — Staff Email Digest (v6.4: updated attribution)
+ * GUHSD Weekly Tech Tips — Staff Email Digest (v6.5: manual tools use the CURRENT tip)
  *
  * Runs on a DAILY timer. Each day it checks whether a scheduled send date
  * has arrived (or already passed without sending) and whether new content
@@ -61,8 +61,10 @@
  * also passes unfulfilled.
  *
  * REDUNDANCY #3 — MANUAL OVERRIDE:
- * Run `forceSendNow()` anytime to immediately send the most recent tip to
- * real recipients, bypassing the date check entirely.
+ * Run `forceSendNow()` anytime to immediately send the CURRENT tip (the one
+ * whose date is the most recent on or before today) to real recipients,
+ * bypassing the date check entirely. It never sends a future-dated tip,
+ * even though tips are queued up to a year ahead.
  *
  * REDUNDANCY #4 — WEEKLY RESEARCH NUDGE:
  * `weeklyResearchReminder()`, on its own weekly trigger, emails you a
@@ -299,19 +301,21 @@ function maybeSendMissedContentReminder(dueDate, today) {
   Logger.log('Sent missed-content reminder to ' + me + ' for due date ' + dueDate + '.');
 }
 
-// Manual override: sends the latest issue to REAL recipients right now, ignoring the
-// date/catch-up logic entirely.
+// Manual override: sends the CURRENT tip to REAL recipients right now, ignoring the
+// date/catch-up logic. "Current" = the tip with the latest weekOf on or before today,
+// so it can never send a tip that is queued for a future date.
 function forceSendNow() {
   const data = fetchData();
   if (!data) return;
-  const latest = getLatestTip(data);
-  if (!latest) { Logger.log('No tips found in the data file.'); return; }
+  const current = getCurrentTip(data);
+  if (!current) { Logger.log('No tips found in the data file.'); return; }
   const recipients = getRecipientList();
   if (!recipients.length) { Logger.log('No recipients found — nothing to send to.'); return; }
-  sendDigestEmail(latest, data, recipients);
+  sendDigestEmail(current, data, recipients);
   const props = PropertiesService.getScriptProperties();
-  props.setProperty('lastSentDateKey', Utilities.formatDate(new Date(), TIMEZONE, 'yyyy-MM-dd'));
-  Logger.log('Force-sent Tip #' + latest.issueNumber + ' to ' + recipients.length + ' recipient(s).');
+  props.setProperty('lastSentDateKey', current.weekOf);
+  Logger.log('Force-sent Tip #' + current.issueNumber + ' (week of ' + current.weekOf + ') to ' +
+    recipients.length + ' recipient(s).');
 }
 
 // Manually run this anytime to check formatting/authorization. ALWAYS sends only to your
@@ -319,10 +323,10 @@ function forceSendNow() {
 function sendTestEmail() {
   const data = fetchData();
   if (!data) return;
-  const latest = getLatestTip(data);
-  if (!latest) { Logger.log('No tips found in the data file.'); return; }
-  sendDigestEmail(latest, data, [Session.getActiveUser().getEmail()]);
-  Logger.log('Test email sent to ' + Session.getActiveUser().getEmail() + ' only, for Tip #' + latest.issueNumber);
+  const current = getCurrentTip(data);
+  if (!current) { Logger.log('No tips found in the data file.'); return; }
+  sendDigestEmail(current, data, [Session.getActiveUser().getEmail()]);
+  Logger.log('Test email sent to ' + Session.getActiveUser().getEmail() + ' only, for Tip #' + current.issueNumber);
 }
 
 function fetchData() {
@@ -339,11 +343,23 @@ function fetchData() {
   }
 }
 
-// "Latest" = most recent weekOf date, NOT highest issueNumber — issueNumber resets each
-// school year, so after a reset the new #1 would otherwise lose to last year's #37.
+// "Latest" = the tip furthest in the future (max weekOf). Used only for the weekly status
+// line ("content is published through ..."). NOT used to decide what to send.
 function getLatestTip(data) {
   if (!data.tips || !data.tips.length) return null;
   return data.tips.reduce((a, b) => (b.weekOf > a.weekOf ? b : a));
+}
+
+// "Current" = the tip with the latest weekOf that is on or before today. Falls back to the
+// earliest tip if none has arrived yet. Used by the manual tools (forceSendNow, sendTestEmail).
+function getCurrentTip(data) {
+  if (!data.tips || !data.tips.length) return null;
+  const today = Utilities.formatDate(new Date(), TIMEZONE, 'yyyy-MM-dd');
+  const arrived = data.tips.filter(t => t.weekOf <= today);
+  if (arrived.length) {
+    return arrived.reduce((a, b) => (b.weekOf > a.weekOf ? b : a));
+  }
+  return data.tips.reduce((a, b) => (b.weekOf < a.weekOf ? b : a));
 }
 
 function readEmailColumn(sheetId, headerName) {
