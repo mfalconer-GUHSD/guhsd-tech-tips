@@ -1,5 +1,5 @@
 /**
- * GUHSD Weekly Tech Tips — Staff Email Digest (v6.5: manual tools use the CURRENT tip)
+ * GUHSD Weekly Tech Tips — Staff Email Digest (v6.6: smarter weekly prompt)
  *
  * Runs on a DAILY timer. Each day it checks whether a scheduled send date
  * has arrived (or already passed without sending) and whether new content
@@ -12,9 +12,10 @@
  * human (or a paid API) in the loop. What it DOES do: emails you every week
  * with (a) what's currently published, (b) which upcoming scheduled dates
  * still need content, and (c) a complete, ready-to-paste prompt for a
- * Claude conversation that covers the entire workflow — checking status,
- * drafting, verifying, and publishing. It's a nudge with the whole playbook
- * attached, not a researcher itself.
+ * Claude conversation. If dates need content, the prompt is a DRAFTING
+ * prompt. If every date is filled, it is a shorter MAINTENANCE prompt
+ * (check compliance, scan for news that affects queued tips, upgrade weak
+ * spots) so you aren't asked to draft tips that already exist.
  *
  * The pasted prompt tells Claude to check the live data file itself before
  * doing anything else, rather than trusting the dates baked into whichever
@@ -181,83 +182,112 @@ function checkAndSendDigest() {
 // ---------- The weekly research nudge (this is what Trigger #2 runs) ----------
 // Honest limitation: this does NOT do research itself. It emails you a status
 // snapshot plus a complete, ready-to-paste prompt for an actual Claude
-// conversation that covers the whole workflow end to end. The prompt tells
-// Claude to re-verify status against the live file rather than trust the
-// dates in this email, so it stays useful no matter when you actually paste it.
+// conversation. The prompt tells Claude to re-verify status against the live
+// file rather than trust the dates in this email, so it stays useful no matter
+// when you actually paste it. Two modes: DRAFTING (some scheduled dates have no
+// tip) and MAINTENANCE (every date is filled).
 function weeklyResearchReminder() {
   const data = fetchData();
   const me = Session.getActiveUser().getEmail();
+  const today = Utilities.formatDate(new Date(), TIMEZONE, 'yyyy-MM-dd');
   const latest = data ? getLatestTip(data) : null;
 
-  let statusLine;
-  let upcomingLine;
-  if (latest) {
-    statusLine = 'Content is currently published through Tip #' + latest.issueNumber +
-      ' (week of ' + latest.weekOf + ').';
-    const upcoming = SEND_DATES.filter(d => d > latest.weekOf).slice(0, 4);
-    upcomingLine = upcoming.length
-      ? 'Next scheduled dates without content yet: ' + upcoming.join(', ') + '.'
-      : 'All remaining scheduled dates for this year have content — nice work.';
-  } else {
-    statusLine = 'No tips are published in tips-data.json yet.';
-    upcomingLine = 'Upcoming scheduled dates: ' + SEND_DATES.slice(0, 4).join(', ') + '.';
-  }
+  // A date is "unfilled" if it is today or later and no tip has that exact weekOf.
+  // (Checking each date individually also catches a gap in the middle of the queue,
+  // which a simple "after the latest tip" check would miss.)
+  const have = new Set(data && data.tips ? data.tips.map(t => t.weekOf) : []);
+  const unfilled = SEND_DATES.filter(d => d >= today && !have.has(d));
+  const nextSend = SEND_DATES.find(d => d >= today) || 'none left this school year';
 
-  const fullPrompt =
+  const statusLine = latest
+    ? 'Content is currently queued through Tip #' + latest.issueNumber + ' (week of ' + latest.weekOf + '). Next send date: ' + nextSend + '.'
+    : 'No tips are published in tips-data.json yet. Next send date: ' + nextSend + '.';
+  const upcomingLine = unfilled.length
+    ? 'Scheduled dates still without a tip: ' + unfilled.slice(0, 6).join(', ') +
+      (unfilled.length > 6 ? ' (and ' + (unfilled.length - 6) + ' more)' : '') + '.'
+    : 'Every remaining scheduled date has a tip.';
+
+  const intro =
     'I run the GUHSD Weekly Tech Tips site (repo: mfalconer-GUHSD/guhsd-tech-tips). ' +
-    'Please do our full weekly workflow:\n\n' +
-    '0. FOCUS: Tips still teach staff to use Google Gemini, Gemini Notebook, and Brisk Teaching, ' +
-    'but every tip now ties one tool feature to one step of building strong learning goals, ' +
+    'Please do our weekly workflow.\n\n';
+
+  const focus =
+    'FOCUS: Tips teach staff to use Google Gemini, Gemini Notebook (formerly NotebookLM), and Brisk Teaching, ' +
+    'and every tip ties one tool feature to one step of building strong learning goals, ' +
     'aligned with the clear-goals work at Granite Hills High School. Use Granite\'s language: ' +
     'a Learning Goal is the WHY (the transferable knowledge or skill students are acquiring); ' +
     'Success Criteria are the HOW (observable, student-facing "I can..." statements); and the ' +
     'core shift is task vs. learning (e.g., "analyze how an author builds an argument," not ' +
     '"write a paper"). Site targets: 80% of classrooms show the learning goal clearly, and 70% ' +
     'of students can communicate it when asked. Frame tips as best practice that helps students ' +
-    'find and explain their goals, never as compliance. If it helps, check my Gmail and Drive for ' +
-    'the latest Granite PLC Collaboration Day messages and any goal examples teachers are using.\n\n' +
-    '1. CHECK STATUS: First, pull data/tips-data.json from the repo yourself and see what\'s ' +
-    'actually there — don\'t rely on any dates I may have pasted below, since time may have ' +
-    'passed since this email was generated. Compare the tips already published against the ' +
-    'SEND_DATES list in apps-script/weekly-digest.gs to find the real next unfilled date(s). ' +
-    'Also confirm the tips already scheduled still make sense (no tip should reference an older ' +
-    'tip that now comes later).\n\n' +
-    '2. RESEARCH (lighter than before): Check whether Gemini, Gemini Notebook, or Brisk shipped a ' +
-    'feature that supports a goal-building step, and whether GUHSD has approved any new AI tools ' +
-    'since we last covered the compliance table (see tools.html and the AI@GUHSD page). Skip ' +
-    'features that need a paid plan or that students may not use under GUHSD\'s approval status.\n\n' +
-    '3. DRAFT: Draft the next tip issue(s) needed to fill whatever dates are genuinely still ' +
-    'unfilled. Each issue needs: a captivating title, a one-sentence teaser, a real YouTube video ' +
-    '(search and verify it is genuinely 5 minutes or under — do not guess; YouTube Shorts count as ' +
-    'verified), a short video description that is honest about what the video does and does not ' +
-    'show, a 2-4 sentence "why it matters" that names the goal-building step, Portrait of a ' +
-    'Graduate tags (GP/AP/SP codes — only tag what genuinely fits, SP7 usually applies), and a ' +
-    'compliance note matching that tool\'s current approval status. Never ask teachers to put ' +
-    'student names or work samples into a prompt.\n\n' +
-    '4. VERIFY: Double check the video is still live, still short enough, and that the ' +
-    'tool\'s PII/staff/student approval status in tools.html still matches the real district list.\n\n' +
-    '5. PUBLISH: Add the new issue(s) to data/tips-data.json in the GitHub repo (issueNumber ' +
-    'continuing from the last one — unless this is the first send of a new school year, in ' +
-    'which case it resets to 1 and last year\'s tips move into legacyTips — weekOf matching ' +
-    'the real unfilled date(s) you found in step 1), keeping the existing issues intact.\n\n' +
-    'For reference, as of when this email was sent: ' + statusLine + ' ' + upcomingLine +
-    ' But treat that as a starting point only — always verify against the live file first, ' +
-    'since more tips may have been added since.';
+    'find and explain their goals, never as compliance.\n\n';
 
-  const subject = 'Weekly check-in: learning-goals tips for upcoming Tech Tips';
+  const groundRules =
+    'GROUND RULES: (a) Use today\'s real date (check it; don\'t assume). (b) Never edit a tip whose weekOf ' +
+    'is today or earlier, because it has already been emailed. (c) The source of truth for approval ' +
+    'status inside the repo is the "tools" object in data/tips-data.json (tools.html only links to the ' +
+    'district page); compare it with the live AI@GUHSD page at ' +
+    'https://www.guhsd.net/Departments/Business-Services/Educational-Technology-Services/Application-Support/Artificial-Intelligence-AI/index.html. ' +
+    '(d) Read docs/HANDOFF.md for the house standards before drafting or editing. ' +
+    '(e) If you search my Gmail or Drive, look only for learning-goal materials (Granite PLC messages, ' +
+    'goal examples) and do not open files that contain student names (IEPs, PSAT letters, rosters). ' +
+    '(f) Validate the JSON before and after every commit. (g) Don\'t assume anything I pasted below is ' +
+    'current; pull data/tips-data.json yourself and compare it with SEND_DATES in apps-script/weekly-digest.gs.\n\n';
+
+  let fullPrompt;
+  let subject;
+  if (unfilled.length) {
+    subject = 'Weekly check-in: tips needed for upcoming Tech Tips';
+    fullPrompt = intro + focus + groundRules +
+      '1. CHECK STATUS: Find the real unfilled send date(s) and confirm the already-queued tips still ' +
+      'make sense (no tip should reference an older tip that now comes later).\n\n' +
+      '2. RESEARCH: Check whether Gemini, Gemini Notebook, or Brisk shipped a feature that supports a ' +
+      'goal-building step, and whether GUHSD has approved any new AI tools. Skip features that need a ' +
+      'paid plan, and flag age limits and student-access settings.\n\n' +
+      '3. DRAFT: Draft a tip for each unfilled date. Each needs: a captivating title, a one-sentence ' +
+      'teaser, a real YouTube video (search and verify it is genuinely 5 minutes or under — do not ' +
+      'guess; YouTube Shorts count as verified), a short video description that is honest about what ' +
+      'the video does and does not show, a 2-4 sentence "why it matters" that names the goal-building ' +
+      'step, Portrait of a Graduate tags (only where they genuinely fit; SP7 usually applies), and a ' +
+      'compliance note matching the tool\'s current approval status. Never ask teachers to put student ' +
+      'names or work samples into a prompt.\n\n' +
+      '4. VERIFY: Confirm each video is still live and short enough, and that approval flags match the ' +
+      'live district page.\n\n' +
+      '5. PUBLISH: Add the new tip(s) to data/tips-data.json (issueNumber continuing from the last ' +
+      'one, unless this is the first send of a new school year, in which case it resets to 1 and last ' +
+      'year\'s tips move into legacyTips), keeping existing tips intact. Then tell me what you added.\n\n';
+  } else {
+    subject = 'Weekly check-in: maintenance pass (all dates filled)';
+    fullPrompt = intro +
+      'Every scheduled date currently has a tip, so this is a MAINTENANCE pass, not a drafting pass.\n\n' +
+      focus + groundRules +
+      '1. CHECK STATUS: Confirm each remaining send date has exactly one tip, the JSON is valid, and ' +
+      'list which tips are already sent versus upcoming.\n\n' +
+      '2. COMPLIANCE: Compare the live AI@GUHSD table with the "tools" flags in tips-data.json. Report any ' +
+      'new tools or changed flags.\n\n' +
+      '3. NEWS SCAN: Look for news from Google, Brisk, or Gemini Notebook that affects queued tips, such as ' +
+      'a renamed feature, a move to a paid plan, an age limit, or a change in student-access defaults. ' +
+      'Propose rewording for any affected tip.\n\n' +
+      '4. UPGRADES: Look for a verified short video or a stronger feature for any weak slot, and for new ' +
+      'features that fit the learning-goals focus. Only change tips dated in the future, and ask me ' +
+      'before replacing a tip.\n\n' +
+      '5. REPORT: Summarize what you found and what you changed. Ask before any large edit.\n\n';
+  }
+
+  fullPrompt += 'For reference, as of when this email was sent: ' + statusLine + ' ' + upcomingLine;
+
   const body =
     statusLine + '\n' + upcomingLine + '\n\n' +
     '=== PASTE THIS ENTIRE PROMPT INTO A CLAUDE CONVERSATION ===\n\n' +
     fullPrompt +
     '\n\n=== END PROMPT ===\n\n' +
     'Reminder: this email is just a nudge — it does not do the research itself. ' +
-    'Open a conversation with Claude and paste the prompt above to actually run the check ' +
-    'and draft new issues. The prompt now tells Claude to verify current status itself, so ' +
-    'it\'s safe to paste even if you saved this email a while ago.\n\n' +
+    'Open a conversation with Claude and paste the prompt above. The prompt tells Claude to verify ' +
+    'current status itself, so it\'s safe to paste even if you saved this email a while ago.\n\n' +
     'Site: ' + SITE_URL;
 
   GmailApp.sendEmail(me, subject, body, { name: FROM_NAME });
-  Logger.log('Sent weekly research reminder to ' + me + '.');
+  Logger.log('Sent weekly research reminder (' + (unfilled.length ? 'drafting' : 'maintenance') + ' mode) to ' + me + '.');
 }
 
 // Finds the EARLIEST SEND_DATES entry that is <= today AND still unfulfilled
@@ -344,7 +374,7 @@ function fetchData() {
 }
 
 // "Latest" = the tip furthest in the future (max weekOf). Used only for the weekly status
-// line ("content is published through ..."). NOT used to decide what to send.
+// line ("content is queued through ..."). NOT used to decide what to send.
 function getLatestTip(data) {
   if (!data.tips || !data.tips.length) return null;
   return data.tips.reduce((a, b) => (b.weekOf > a.weekOf ? b : a));
