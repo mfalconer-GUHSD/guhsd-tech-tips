@@ -1,6 +1,6 @@
 # GUHSD Weekly Tech Tips — Handoff Guide
 
-Last updated Oct 2026. Written so someone new can keep this running without the original author.
+Last updated Nov 4, 2026. Written so someone new can keep this running without the original author.
 
 **Current owner:** Mike Falconer, Director II, Instructional Technology (continuing to run it from his new role as of Oct 2026).
 
@@ -25,7 +25,7 @@ A weekly AI tip for GUHSD staff about three district-approved tools (Google Gemi
 4. If a date is missed, it catches up in order, one per run. It never skips a week.
 5. `issueNumber` is display-only ("Tip #12"). It resets to 1 each school year. Ordering and sending use `weekOf`, never the number.
 
-**Status as of Oct 2026:** all 37 scheduled dates (Aug 17, 2026 through Jun 1, 2027) have a tip. Nothing is required weekly unless you want to change content.
+**Status as of Nov 4, 2026:** all 37 scheduled dates (Aug 17, 2026 through Jun 1, 2027) have a tip. Tips #10, #11 and #12 (Oct 19, Oct 26, Nov 2) were confirmed sent on schedule. Nothing is required weekly unless you want to change content.
 
 ## Things tied to one person's account (the real handoff risks)
 These are the items that can silently stop if the owner's account changes:
@@ -52,8 +52,9 @@ Open `data/tips-data.json`. Each tip needs: `id`, `issueNumber`, `weekOf` (a dat
 2. Move the finished year's tips from `tips` into `legacyTips` (reformat to the legacy fields) and restart `issueNumber` at 1.
 3. Paste the updated script into the live Apps Script project.
 
-## Known open items (Oct 2026)
+## Known open items (Nov 2026)
+- **Google changed student defaults on Nov 3, 2026.** Gemini, Gemini Notebook, Gemini in Classroom and Search will be OFF by default for K-12 student accounts until a school admin turns them on, starting early 2027 (Google says details come "in the coming months"). The district's AI page currently lists Gemini and Gemini Notebook as approved for students. **Decision needed from GUHSD Ed Tech** on whether student access stays on. Until then, these scheduled tips assume student access and should get a "check that it's enabled for your students" note or a reworded title once the district decides: Mar 1 (image editing, mentions student use), Mar 15 (Guided Learning default), Apr 12 ("open to every student"), May 17 (finals review with Guided Learning). Nov 2 and Nov 16 are lower risk.
+- **Strong next-tip candidates, blocked only on a verified short video:** (1) Teacher-assigned **Guided Learning in Google Classroom** (launched globally Nov 3; anchored to class materials, with teacher insight summaries; documented at support.google.com/edu/classroom/answer/18866217). (2) **Teacher-led Gemini Notebook in Classroom** with insight summaries (rolled out Oct 2026). Both fit the learning-goals focus and could replace the Dec 14 slot.
 - The Dec 14 tip uses a generic Gemini-in-Classroom video, and Nov 30 uses a Ukrainian-language Short (disclosed in the tip). Swap in better videos when found.
-- A Gemini Notebook "Learning Guide" tutor-mode tip is planned for Dec 14 once a verified short video is found; the content is documented in Google's own announcement.
 - Gem sharing across the district is not enabled yet; tips that mention Gems share instructions through a Google Doc instead.
-- The district's AI page still calls Gemini Notebook "NotebookLM." The tool is approved either way.
+- The district's AI page now lists the tool as "Gemini Notebook," matching our naming.
